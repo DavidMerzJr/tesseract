@@ -102,8 +102,8 @@ protected:
   /** @brief The tesseract kinematics object */
   tesseract_kinematics::ForwardKinematics::ConstPtr kin_;
 
-  /** @brief The continuous contact manager */
-  tesseract_collision::ContinuousContactManager::Ptr continuous_contact_manager_;
+  /** @brief The discrete contact manager */
+  tesseract_collision::DiscreteContactManager::Ptr discrete_contact_manager_;
 };
 
 }  // namespace tesseract_motion_planners

@@ -159,7 +159,7 @@ tesseract_common::StatusCode DescartesMotionPlanner<FloatType>::solve(PlannerRes
 
   // Check and report collisions
   std::vector<tesseract_collision::ContactResultMap> collisions;
-  auto manager = config_->tesseract->getEnvironmentConst()->getContinuousContactManager();
+  auto manager = config_->tesseract->getEnvironmentConst()->getDiscreteContactManager();
   manager->setActiveCollisionObjects(config_->active_link_names);
   manager->setContactDistanceThreshold(0);
   collisions.clear();

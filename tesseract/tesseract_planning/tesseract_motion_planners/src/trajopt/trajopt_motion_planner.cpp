@@ -156,18 +156,18 @@ tesseract_common::StatusCode TrajOptMotionPlanner::solve(PlannerResponse& respon
 
   std::vector<tesseract_collision::ContactResultMap> collisions;
   tesseract_environment::StateSolver::Ptr state_solver = config_->prob->GetEnv()->getStateSolver();
-  tesseract_collision::ContinuousContactManager::Ptr continuous_manager =
-      config_->prob->GetEnv()->getContinuousContactManager();
+  tesseract_collision::DiscreteContactManager::Ptr discrete_manager =
+      config_->prob->GetEnv()->getDiscreteContactManager();
   tesseract_environment::AdjacencyMap::Ptr adjacency_map =
       std::make_shared<tesseract_environment::AdjacencyMap>(config_->prob->GetEnv()->getSceneGraph(),
                                                             config_->prob->GetKin()->getActiveLinkNames(),
                                                             config_->prob->GetEnv()->getCurrentState()->transforms);
 
-  continuous_manager->setActiveCollisionObjects(adjacency_map->getActiveLinkNames());
-  continuous_manager->setContactDistanceThreshold(0);
+  discrete_manager->setActiveCollisionObjects(adjacency_map->getActiveLinkNames());
+  discrete_manager->setContactDistanceThreshold(0);
   collisions.clear();
   bool found = checkTrajectory(collisions,
-                               *continuous_manager,
+                               *discrete_manager,
                                *state_solver,
                                config_->prob->GetKin()->getJointNames(),
                                getTraj(opt.x(), config_->prob->GetVars()),

@@ -147,10 +147,10 @@ tesseract_common::StatusCode OMPLMotionPlanner::solve(PlannerResponse& response,
   // Check and report collisions
   std::vector<tesseract_collision::ContactResultMap> collisions;
   tesseract_environment::StateSolver::Ptr state_solver = config_->tesseract->getEnvironmentConst()->getStateSolver();
-  continuous_contact_manager_->setContactDistanceThreshold(0);
+  discrete_contact_manager_->setContactDistanceThreshold(0);
   collisions.clear();
   bool found = tesseract_environment::checkTrajectory(collisions,
-                                                      *continuous_contact_manager_,
+                                                      *discrete_contact_manager_,
                                                       *state_solver,
                                                       kin_->getJointNames(),
                                                       traj,
@@ -159,7 +159,7 @@ tesseract_common::StatusCode OMPLMotionPlanner::solve(PlannerResponse& response,
                                                       verbose);
 
   // Set the contact distance back to original incase solve was called again.
-  continuous_contact_manager_->setContactDistanceThreshold(config_->collision_safety_margin);
+  discrete_contact_manager_->setContactDistanceThreshold(config_->collision_safety_margin);
 
   // Send response
   response.joint_trajectory.trajectory = traj;
@@ -183,13 +183,13 @@ void OMPLMotionPlanner::clear()
   request_ = PlannerRequest();
   config_ = nullptr;
   kin_ = nullptr;
-  continuous_contact_manager_ = nullptr;
+  discrete_contact_manager_ = nullptr;
   parallel_plan_ = nullptr;
 }
 
 tesseract_common::StatusCode OMPLMotionPlanner::isConfigured() const
 {
-  if (config_ == nullptr || kin_ == nullptr || continuous_contact_manager_ == nullptr || parallel_plan_ == nullptr)
+  if (config_ == nullptr || kin_ == nullptr || discrete_contact_manager_ == nullptr || parallel_plan_ == nullptr)
     return tesseract_common::StatusCode(OMPLMotionPlannerStatusCategory::ErrorIsNotConfigured, status_category_);
 
   return tesseract_common::StatusCode(OMPLMotionPlannerStatusCategory::IsConfigured, status_category_);
@@ -214,9 +214,9 @@ bool OMPLMotionPlanner::setConfiguration(OMPLPlannerConfig::Ptr config)
   auto adj_map = std::make_shared<tesseract_environment::AdjacencyMap>(
       env->getSceneGraph(), kin_->getActiveLinkNames(), env->getCurrentState()->transforms);
 
-  continuous_contact_manager_ = env->getContinuousContactManager();
-  continuous_contact_manager_->setActiveCollisionObjects(adj_map->getActiveLinkNames());
-  continuous_contact_manager_->setContactDistanceThreshold(config_->collision_safety_margin);
+  discrete_contact_manager_ = env->getDiscreteContactManager();
+  discrete_contact_manager_->setActiveCollisionObjects(adj_map->getActiveLinkNames());
+  discrete_contact_manager_->setContactDistanceThreshold(config_->collision_safety_margin);
 
   parallel_plan_ = std::make_shared<ompl::tools::ParallelPlan>(config_->simple_setup->getProblemDefinition());
 
