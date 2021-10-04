@@ -60,7 +60,7 @@ parseCollision(const tinyxml2::XMLElement* xml_element, const tesseract_common::
 
 tinyxml2::XMLElement* writeCollision(const std::shared_ptr<const tesseract_scene_graph::Collision>& collision,
                                      tinyxml2::XMLDocument& doc,
-                                     const std::string& directory,
+                                     const std::string& package_path,
                                      const std::string& link_name,
                                      int id);
 

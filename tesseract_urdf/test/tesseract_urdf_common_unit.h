@@ -3,14 +3,18 @@
 
 #include <tesseract_common/macros.h>
 TESSERACT_COMMON_IGNORE_WARNINGS_PUSH
-#include <gtest/gtest.h>
+#include <fstream>
+#include <iostream>
 #include <vector>
-#include <tinyxml2.h>
+
 #include <console_bridge/console.h>
-#include <tesseract_scene_graph/utils.h>
+#include <gtest/gtest.h>
+#include <tinyxml2.h>
+
 #include <tesseract_common/resource_locator.h>
-#include <tesseract_urdf/urdf_parser.h>
 #include <tesseract_common/utils.h>
+#include <tesseract_scene_graph/utils.h>
+#include <tesseract_urdf/urdf_parser.h>
 TESSERACT_COMMON_IGNORE_WARNINGS_POP
 
 inline std::string locateResource(const std::string& url)
@@ -362,6 +366,14 @@ int writeTest(TessType& type,
     status = 1;
   }
   return status;
+}
+
+inline void writeTextToFile(const std::string& path, const std::string& text)
+{
+  std::ofstream file;
+  file.open(path);
+  file << text;
+  file.close();
 }
 
 #endif  // TESSERACT_URDF_COMMON_UNIT_H

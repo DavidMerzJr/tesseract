@@ -65,7 +65,7 @@ std::vector<std::shared_ptr<tesseract_geometry::SDFMesh>> parseSDFMesh(const tin
 
 tinyxml2::XMLElement* writeSDFMesh(const std::shared_ptr<const tesseract_geometry::SDFMesh>& sdf_mesh,
                                    tinyxml2::XMLDocument& doc,
-                                   const std::string& directory,
+                                   const std::string& package_path,
                                    const std::string& filename);
 
 }  // namespace tesseract_urdf
