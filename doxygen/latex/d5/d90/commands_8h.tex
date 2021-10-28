@@ -1,29 +1,32 @@
-\hypertarget{commands_8h}{}\doxysection{tesseract\+\_\+environment/include/tesseract\+\_\+environment/core/commands.h File Reference}
-\label{commands_8h}\index{tesseract\_environment/include/tesseract\_environment/core/commands.h@{tesseract\_environment/include/tesseract\_environment/core/commands.h}}
+\hypertarget{commands_8h}{}\doxysection{tesseract\+\_\+environment/include/tesseract\+\_\+environment/commands.h File Reference}
+\label{commands_8h}\index{tesseract\_environment/include/tesseract\_environment/commands.h@{tesseract\_environment/include/tesseract\_environment/commands.h}}
 
 
 This contains classes for recording operations applied to the environment for tracking changes. This is mainly support distributed systems to keep multiple instances up-\/to-\/date.  
 
 
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/add\+\_\+allowed\+\_\+collision\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/add\+\_\+link\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/add\+\_\+kinematics\+\_\+information\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/add\+\_\+scene\+\_\+graph\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+joint\+\_\+acceleration\+\_\+limits\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+joint\+\_\+origin\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+joint\+\_\+position\+\_\+limits\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+joint\+\_\+velocity\+\_\+limits\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+link\+\_\+collision\+\_\+enabled\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+link\+\_\+origin\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+link\+\_\+visibility\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/move\+\_\+joint\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/move\+\_\+link\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/remove\+\_\+allowed\+\_\+collision\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/remove\+\_\+allowed\+\_\+collision\+\_\+link\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/remove\+\_\+joint\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/remove\+\_\+link\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/replace\+\_\+joint\+\_\+command.\+h$>$}\newline
-{\ttfamily \#include $<$tesseract\+\_\+environment/core/commands/change\+\_\+collision\+\_\+margins\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/add\+\_\+allowed\+\_\+collision\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/add\+\_\+contact\+\_\+managers\+\_\+plugin\+\_\+info\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/add\+\_\+link\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/add\+\_\+kinematics\+\_\+information\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/add\+\_\+scene\+\_\+graph\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+joint\+\_\+acceleration\+\_\+limits\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+joint\+\_\+origin\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+joint\+\_\+position\+\_\+limits\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+joint\+\_\+velocity\+\_\+limits\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+link\+\_\+collision\+\_\+enabled\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+link\+\_\+origin\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+link\+\_\+visibility\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/move\+\_\+joint\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/move\+\_\+link\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/remove\+\_\+allowed\+\_\+collision\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/remove\+\_\+allowed\+\_\+collision\+\_\+link\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/remove\+\_\+joint\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/remove\+\_\+link\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/replace\+\_\+joint\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/change\+\_\+collision\+\_\+margins\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/set\+\_\+active\+\_\+continuous\+\_\+contact\+\_\+manager\+\_\+command.\+h$>$}\newline
+{\ttfamily \#include $<$tesseract\+\_\+environment/commands/set\+\_\+active\+\_\+discrete\+\_\+contact\+\_\+manager\+\_\+command.\+h$>$}\newline
 Include dependency graph for commands.\+h\+:
 \nopagebreak
 \begin{figure}[H]
@@ -55,7 +58,7 @@ Dec 18, 2017
 TODO 
 \end{DoxyVersion}
 \begin{DoxyRefDesc}{Bug}
-\item[\mbox{\hyperlink{bug__bug000075}{Bug}}]No known bugs\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{bug__bug000090}{Bug}}]No known bugs\end{DoxyRefDesc}
 
 
 \begin{DoxyCopyright}{Copyright}

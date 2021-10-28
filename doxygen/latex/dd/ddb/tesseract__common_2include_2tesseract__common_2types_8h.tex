@@ -13,6 +13,7 @@ Common Tesseract Types.
 {\ttfamily \#include $<$map$>$}\newline
 {\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
 {\ttfamily \#include $<$boost/filesystem.\+hpp$>$}\newline
+{\ttfamily \#include $<$yaml-\/cpp/yaml.\+h$>$}\newline
 {\ttfamily \#include $<$tesseract\+\_\+common/kinematic\+\_\+limits.\+h$>$}\newline
 Include dependency graph for types.\+h\+:
 \nopagebreak
@@ -34,7 +35,15 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structtesseract__common_1_1PairHash}{tesseract\+\_\+common\+::\+Pair\+Hash}}
-\end{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{tesseract\+\_\+common\+::\+Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The Plugin Information struct. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1PluginInfoContainer}{tesseract\+\_\+common\+::\+Plugin\+Info\+Container}}
+\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1KinematicsPluginInfo}{tesseract\+\_\+common\+::\+Kinematics\+Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The kinematics plugin information structure. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1ContactManagersPluginInfo}{tesseract\+\_\+common\+::\+Contact\+Managers\+Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The contact managers plugin information structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,11 +73,13 @@ using \mbox{\hyperlink{namespacetesseract__common_a917718f518f98714fce17e831ec1e
 using \mbox{\hyperlink{namespacetesseract__common_a431ff65777ee0bed71e7671390638244}{tesseract\+\_\+common\+::\+Traj\+Array}} = Eigen\+::\+Matrix$<$ double, Eigen\+::\+Dynamic, Eigen\+::\+Dynamic, Eigen\+::\+Row\+Major $>$
 \item 
 using \mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{tesseract\+\_\+common\+::\+Link\+Names\+Pair}} = std\+::pair$<$ std\+::string, std\+::string $>$
-\end{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacetesseract__common_a43d1f6e0418164a6db0e1c447150340e}{tesseract\+\_\+common\+::\+Plugin\+Info\+Map}} = std\+::map$<$ std\+::string, Plugin\+Info $>$
+\begin{DoxyCompactList}\small\item\em A map of \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}} to user defined name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-static Link\+Names\+Pair \mbox{\hyperlink{namespacetesseract__common_a0569af9dd122b26e12ebdc4bb1de2bda}{tesseract\+\_\+common\+::make\+Ordered\+Link\+Pair}} (const std\+::string \&link\+\_\+name1, const std\+::string \&link\+\_\+name2)
+Link\+Names\+Pair \mbox{\hyperlink{namespacetesseract__common_a11bc9620a27eede3300420410e0b4a7a}{tesseract\+\_\+common\+::make\+Ordered\+Link\+Pair}} (const std\+::string \&link\+\_\+name1, const std\+::string \&link\+\_\+name2)
 \begin{DoxyCompactList}\small\item\em Create a pair of strings, where the pair.\+first is always $<$= pair.\+second. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -85,7 +96,7 @@ January 18, 2018
 TODO 
 \end{DoxyVersion}
 \begin{DoxyRefDesc}{Bug}
-\item[\mbox{\hyperlink{bug__bug000044}{Bug}}]No known bugs\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{bug__bug000053}{Bug}}]No known bugs\end{DoxyRefDesc}
 
 
 \begin{DoxyCopyright}{Copyright}

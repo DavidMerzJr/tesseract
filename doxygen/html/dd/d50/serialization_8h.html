@@ -80,6 +80,7 @@ $(function() {
 <p>Additional Boost serialization wrappers.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="../../de/d3c/macros_8h_source.html">tesseract_common/macros.h</a>&gt;</code><br />
+<code>#include &lt;variant&gt;</code><br />
 <code>#include &lt;Eigen/Dense&gt;</code><br />
 <code>#include &lt;boost/serialization/tracking.hpp&gt;</code><br />
 <code>#include &lt;boost/serialization/tracking_enum.hpp&gt;</code><br />
@@ -88,11 +89,12 @@ Include dependency graph for serialization.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dd/d91/serialization_8h__incl.png" border="0" usemap="#atesseract__common_2include_2tesseract__common_2serialization_8h" alt=""/></div>
 <map name="atesseract__common_2include_2tesseract__common_2serialization_8h" id="atesseract__common_2include_2tesseract__common_2serialization_8h">
-<area shape="rect" title="Additional Boost serialization wrappers." alt="" coords="225,5,443,47"/>
+<area shape="rect" title="Additional Boost serialization wrappers." alt="" coords="245,5,463,47"/>
 <area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="5,102,196,129"/>
-<area shape="rect" title=" " alt="" coords="220,102,315,129"/>
-<area shape="rect" title=" " alt="" coords="339,95,465,136"/>
-<area shape="rect" title=" " alt="" coords="489,95,624,136"/>
+<area shape="rect" title=" " alt="" coords="221,102,282,129"/>
+<area shape="rect" title=" " alt="" coords="307,102,401,129"/>
+<area shape="rect" title=" " alt="" coords="425,95,552,136"/>
+<area shape="rect" title=" " alt="" coords="576,95,711,136"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -147,6 +149,15 @@ Functions</h2></td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#acc2c87e6f21f9f87a5ef38ef10d38d8d">boost::serialization::serialize</a> (Archive &amp;ar, Eigen::MatrixX2d &amp;g, const unsigned int version)</td></tr>
 <tr class="separator:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a5cedb22a9f3074c8826d852064662178">boost::serialization::save</a> (Archive &amp;ar, const std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a5cedb22a9f3074c8826d852064662178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a70b58a18bac429a856c7f6e7bcb527f7">boost::serialization::load</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a101eccbce7d00cf44575ef3e5e43e745">boost::serialization::serialize</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a101eccbce7d00cf44575ef3e5e43e745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ce327d54a408162d753adb9cc40e1cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d50/serialization_8h.html#a6ce327d54a408162d753adb9cc40e1cd">BOOST_CLASS_TRACKING</a> (Eigen::VectorXd, boost::serialization::track_never)</td></tr>
 <tr class="separator:a6ce327d54a408162d753adb9cc40e1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa77c59b509467002de669b90fb0205c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d50/serialization_8h.html#aa77c59b509467002de669b90fb0205c7">BOOST_CLASS_TRACKING</a> (Eigen::Isometry3d, boost::serialization::track_never)</td></tr>
@@ -164,7 +175,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Levi Armstrong </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>February 21, 2021 </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>TODO </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000041">Bug:</a></b></dt><dd>No known bugs</dd></dl>
+<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000050">Bug:</a></b></dt><dd>No known bugs</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2021, Southwest Research Institute</dd></dl>
 <dl class="section user"><dt>License</dt><dd>Software License Agreement (Apache License) </dd></dl>
 <dl class="section user"><dt></dt><dd>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> </dd></dl>
@@ -257,7 +268,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:24 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:17 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

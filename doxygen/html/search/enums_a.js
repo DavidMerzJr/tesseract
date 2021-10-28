@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['subtype_5677',['SubType',['../d3/d4b/classtesseract__geometry_1_1Octree.html#a50b534fbd4a871cd257ac52d6009af00',1,'tesseract_geometry::Octree']]]
+  ['subtype_5980',['SubType',['../d3/d4b/classtesseract__geometry_1_1Octree.html#a50b534fbd4a871cd257ac52d6009af00',1,'tesseract_geometry::Octree']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tesseract: tesseract_collision/src/bullet/bullet_utils.cpp File Reference</title>
+<title>Tesseract: tesseract_collision/bullet/src/bullet_utils.cpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_10d374c56a837e7f10014d66610d1e74.html">tesseract_collision</a></li><li class="navelem"><a class="el" href="../../dir_4d640d490387bc96edaa54c486c377a2.html">src</a></li><li class="navelem"><a class="el" href="../../dir_d9392c373b86447ea4c78a164cc95296.html">bullet</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_10d374c56a837e7f10014d66610d1e74.html">tesseract_collision</a></li><li class="navelem"><a class="el" href="../../dir_06345f2e0a93a8c3d7765a82cd4266e2.html">bullet</a></li><li class="navelem"><a class="el" href="../../dir_dae38e78ebebf6b516a3680faf41bba4.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,6 +80,7 @@ $(function() {
 <p>Tesseract ROS Bullet environment utility function.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d6/d91/bullet__utils_8h_source.html">tesseract_collision/bullet/bullet_utils.h</a>&quot;</code><br />
+<code>#include &lt;LinearMath/btConvexHullComputer.h&gt;</code><br />
 <code>#include &lt;BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h&gt;</code><br />
 <code>#include &lt;BulletCollision/CollisionShapes/btShapeHull.h&gt;</code><br />
 <code>#include &lt;BulletCollision/Gimpact/btTriangleShapeEx.h&gt;</code><br />
@@ -89,58 +90,58 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for bullet_utils.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d4/d24/bullet__utils_8cpp__incl.png" border="0" usemap="#atesseract__collision_2src_2bullet_2bullet__utils_8cpp" alt=""/></div>
-<map name="atesseract__collision_2src_2bullet_2bullet__utils_8cpp" id="atesseract__collision_2src_2bullet_2bullet__utils_8cpp">
-<area shape="rect" title="Tesseract ROS Bullet environment utility function." alt="" coords="3538,5,3708,47"/>
-<area shape="rect" href="../../d6/d91/bullet__utils_8h.html" title="Tesseract ROS Bullet environment utility function." alt="" coords="1536,95,1670,136"/>
-<area shape="rect" title=" " alt="" coords="2438,727,2506,754"/>
-<area shape="rect" title=" " alt="" coords="3343,727,3479,754"/>
-<area shape="rect" title=" " alt="" coords="3504,95,3742,136"/>
-<area shape="rect" title=" " alt="" coords="3767,95,3924,136"/>
-<area shape="rect" title=" " alt="" coords="3948,95,4106,136"/>
-<area shape="rect" title=" " alt="" coords="4130,102,4287,129"/>
-<area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="2036,809,2226,836"/>
-<area shape="rect" title=" " alt="" coords="1450,184,1628,225"/>
-<area shape="rect" title=" " alt="" coords="1703,184,1887,225"/>
-<area shape="rect" title=" " alt="" coords="729,191,906,218"/>
-<area shape="rect" title=" " alt="" coords="1623,281,1791,307"/>
-<area shape="rect" href="../../d3/d0c/tesseract__collision_2include_2tesseract__collision_2core_2types_8h.html" title="Tesseracts Collision Common Types." alt="" coords="1304,273,1435,315"/>
-<area shape="rect" href="../../dc/d54/common_8h.html" title="This is a collection of common methods." alt="" coords="931,184,1062,225"/>
-<area shape="rect" title=" " alt="" coords="648,809,734,836"/>
-<area shape="rect" title=" " alt="" coords="1071,809,1186,836"/>
-<area shape="rect" title=" " alt="" coords="644,727,703,754"/>
-<area shape="rect" title=" " alt="" coords="1552,727,1598,754"/>
-<area shape="rect" title=" " alt="" coords="1282,370,1332,397"/>
-<area shape="rect" title=" " alt="" coords="728,727,838,754"/>
-<area shape="rect" title=" " alt="" coords="2712,370,2790,397"/>
-<area shape="rect" title=" " alt="" coords="2815,370,2922,397"/>
-<area shape="rect" href="../../d4/ddb/geometries_8h.html" title="Tesseract Geometries." alt="" coords="2359,363,2495,404"/>
-<area shape="rect" href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html" title="Common Tesseract Types." alt="" coords="1268,638,1447,665"/>
-<area shape="rect" href="../../d4/da8/collision__margin__data_8h.html" title="This is used to store collision margin information." alt="" coords="1023,452,1207,493"/>
-<area shape="rect" href="../../df/d9e/tesseract__geometry_2include_2tesseract__geometry_2impl_2box_8h.html" title="Tesseract Box Geometry." alt="" coords="2290,631,2426,672"/>
-<area shape="rect" href="../../d8/d2b/tesseract__geometry_2include_2tesseract__geometry_2impl_2capsule_8h.html" title="Tesseract Capsule Geometry." alt="" coords="2500,631,2636,672"/>
-<area shape="rect" href="../../dc/df2/tesseract__geometry_2include_2tesseract__geometry_2impl_2cone_8h.html" title="Tesseract Cone Geometry." alt="" coords="2871,631,3007,672"/>
-<area shape="rect" href="../../de/dd2/tesseract__geometry_2include_2tesseract__geometry_2impl_2convex__mesh_8h.html" title="Tesseract Convex Mesh Geometry." alt="" coords="2080,452,2224,493"/>
-<area shape="rect" href="../../d2/deb/polygon__mesh_8h.html" title="Tesseract Polygon Mesh Geometry." alt="" coords="1876,541,2023,583"/>
-<area shape="rect" href="../../d8/d3b/tesseract__geometry_2include_2tesseract__geometry_2impl_2cylinder_8h.html" title="Tesseract Cylinder Geometry." alt="" coords="2711,631,2847,672"/>
-<area shape="rect" href="../../d5/d93/tesseract__geometry_2include_2tesseract__geometry_2impl_2mesh_8h.html" title="Tesseract Mesh Geometry." alt="" coords="1646,452,1782,493"/>
-<area shape="rect" href="../../df/d5e/tesseract__geometry_2include_2tesseract__geometry_2impl_2octree_8h.html" title="Tesseract Octree Geometry." alt="" coords="3242,631,3378,672"/>
-<area shape="rect" href="../../db/d8b/plane_8h.html" title="Tesseract Plane Geometry." alt="" coords="3031,631,3167,672"/>
-<area shape="rect" href="../../d2/d17/tesseract__geometry_2include_2tesseract__geometry_2impl_2sdf__mesh_8h.html" title="Tesseract SDF Mesh Geometry." alt="" coords="1815,452,1951,493"/>
-<area shape="rect" href="../../d8/db6/tesseract__geometry_2include_2tesseract__geometry_2impl_2sphere_8h.html" title="Tesseract Sphere Geometry." alt="" coords="2130,631,2266,672"/>
-<area shape="rect" title=" " alt="" coords="1285,727,1425,754"/>
-<area shape="rect" href="../../d9/dc2/kinematic__limits_8h.html" title="Common Tesseract Kinematic Limits and Related Utility Functions." alt="" coords="965,720,1158,761"/>
-<area shape="rect" title=" " alt="" coords="842,638,897,665"/>
-<area shape="rect" href="../../dc/d79/tesseract__common_2include_2tesseract__common_2utils_8h.html" title="Common Tesseract Utility Functions." alt="" coords="672,549,843,575"/>
-<area shape="rect" title=" " alt="" coords="543,638,612,665"/>
-<area shape="rect" title=" " alt="" coords="637,638,716,665"/>
-<area shape="rect" title=" " alt="" coords="402,638,468,665"/>
-<area shape="rect" title=" " alt="" coords="88,638,160,665"/>
-<area shape="rect" title=" " alt="" coords="795,281,1030,307"/>
-<area shape="rect" title=" " alt="" coords="1053,281,1110,307"/>
-<area shape="rect" title=" " alt="" coords="1134,281,1194,307"/>
-<area shape="rect" title=" " alt="" coords="46,281,112,307"/>
-<area shape="rect" title=" " alt="" coords="136,281,307,307"/>
+<div class="center"><img src="../../d4/d24/bullet__utils_8cpp__incl.png" border="0" usemap="#atesseract__collision_2bullet_2src_2bullet__utils_8cpp" alt=""/></div>
+<map name="atesseract__collision_2bullet_2src_2bullet__utils_8cpp" id="atesseract__collision_2bullet_2src_2bullet__utils_8cpp">
+<area shape="rect" title="Tesseract ROS Bullet environment utility function." alt="" coords="4035,5,4205,47"/>
+<area shape="rect" href="../../d6/d91/bullet__utils_8h.html" title="Tesseract ROS Bullet environment utility function." alt="" coords="1153,95,1287,136"/>
+<area shape="rect" title=" " alt="" coords="2419,817,2487,843"/>
+<area shape="rect" title=" " alt="" coords="3611,727,3747,754"/>
+<area shape="rect" title=" " alt="" coords="3872,102,4107,129"/>
+<area shape="rect" title=" " alt="" coords="4131,95,4370,136"/>
+<area shape="rect" title=" " alt="" coords="4395,95,4552,136"/>
+<area shape="rect" title=" " alt="" coords="4576,95,4733,136"/>
+<area shape="rect" title=" " alt="" coords="4757,102,4915,129"/>
+<area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="2463,906,2654,933"/>
+<area shape="rect" title=" " alt="" coords="939,184,1117,225"/>
+<area shape="rect" title=" " alt="" coords="1192,184,1376,225"/>
+<area shape="rect" title=" " alt="" coords="545,191,722,218"/>
+<area shape="rect" title=" " alt="" coords="747,191,915,218"/>
+<area shape="rect" href="../../d3/db3/tesseract__collision_2core_2include_2tesseract__collision_2core_2types_8h.html" title="Tesseracts Collision Common Types." alt="" coords="1047,273,1177,315"/>
+<area shape="rect" href="../../dc/d54/common_8h.html" title="This is a collection of common methods." alt="" coords="1400,184,1531,225"/>
+<area shape="rect" title=" " alt="" coords="245,906,331,933"/>
+<area shape="rect" title=" " alt="" coords="1372,906,1487,933"/>
+<area shape="rect" title=" " alt="" coords="1203,817,1261,843"/>
+<area shape="rect" title=" " alt="" coords="1286,817,1333,843"/>
+<area shape="rect" title=" " alt="" coords="933,370,984,397"/>
+<area shape="rect" title=" " alt="" coords="139,817,250,843"/>
+<area shape="rect" title=" " alt="" coords="1578,817,1657,843"/>
+<area shape="rect" title=" " alt="" coords="1059,370,1165,397"/>
+<area shape="rect" href="../../d4/ddb/geometries_8h.html" title="Tesseract Geometries." alt="" coords="2727,363,2863,404"/>
+<area shape="rect" href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html" title="Common Tesseract Types." alt="" coords="764,727,943,754"/>
+<area shape="rect" href="../../d4/da8/collision__margin__data_8h.html" title="This is used to store collision margin information." alt="" coords="412,541,596,583"/>
+<area shape="rect" href="../../df/d9e/tesseract__geometry_2include_2tesseract__geometry_2impl_2box_8h.html" title="Tesseract Box Geometry." alt="" coords="2709,631,2845,672"/>
+<area shape="rect" href="../../d8/d2b/tesseract__geometry_2include_2tesseract__geometry_2impl_2capsule_8h.html" title="Tesseract Capsule Geometry." alt="" coords="2869,631,3005,672"/>
+<area shape="rect" href="../../dc/df2/tesseract__geometry_2include_2tesseract__geometry_2impl_2cone_8h.html" title="Tesseract Cone Geometry." alt="" coords="2549,631,2685,672"/>
+<area shape="rect" href="../../de/dd2/tesseract__geometry_2include_2tesseract__geometry_2impl_2convex__mesh_8h.html" title="Tesseract Convex Mesh Geometry." alt="" coords="1984,452,2128,493"/>
+<area shape="rect" href="../../d2/deb/polygon__mesh_8h.html" title="Tesseract Polygon Mesh Geometry." alt="" coords="1821,541,1968,583"/>
+<area shape="rect" href="../../d8/d3b/tesseract__geometry_2include_2tesseract__geometry_2impl_2cylinder_8h.html" title="Tesseract Cylinder Geometry." alt="" coords="3349,631,3485,672"/>
+<area shape="rect" href="../../d5/d93/tesseract__geometry_2include_2tesseract__geometry_2impl_2mesh_8h.html" title="Tesseract Mesh Geometry." alt="" coords="1615,452,1751,493"/>
+<area shape="rect" href="../../df/d5e/tesseract__geometry_2include_2tesseract__geometry_2impl_2octree_8h.html" title="Tesseract Octree Geometry." alt="" coords="3509,631,3645,672"/>
+<area shape="rect" href="../../db/d8b/plane_8h.html" title="Tesseract Plane Geometry." alt="" coords="3029,631,3165,672"/>
+<area shape="rect" href="../../d2/d17/tesseract__geometry_2include_2tesseract__geometry_2impl_2sdf__mesh_8h.html" title="Tesseract SDF Mesh Geometry." alt="" coords="2393,452,2529,493"/>
+<area shape="rect" href="../../d8/db6/tesseract__geometry_2include_2tesseract__geometry_2impl_2sphere_8h.html" title="Tesseract Sphere Geometry." alt="" coords="3189,631,3325,672"/>
+<area shape="rect" href="../../d0/da6/tesseract__geometry_2include_2tesseract__geometry_2geometry_8h.html" title="Tesseract Geometries." alt="" coords="2491,720,2627,761"/>
+<area shape="rect" href="../../df/d8e/mesh__material_8h.html" title="Tesseract Mesh Material read from a mesh file." alt="" coords="1869,631,2019,672"/>
+<area shape="rect" href="../../d3/d95/resource__locator_8h.html" title="Locate and retrieve resource data." alt="" coords="1628,720,1815,761"/>
+<area shape="rect" title=" " alt="" coords="798,817,938,843"/>
+<area shape="rect" title=" " alt="" coords="963,817,1077,843"/>
+<area shape="rect" href="../../d9/dc2/kinematic__limits_8h.html" title="Common Tesseract Kinematic Limits and Related Utility Functions." alt="" coords="478,809,671,851"/>
+<area shape="rect" title=" " alt="" coords="511,899,638,940"/>
+<area shape="rect" title=" " alt="" coords="195,727,250,754"/>
+<area shape="rect" href="../../dc/d79/tesseract__common_2include_2tesseract__common_2utils_8h.html" title="Common Tesseract Utility Functions." alt="" coords="419,638,589,665"/>
+<area shape="rect" title=" " alt="" coords="519,727,588,754"/>
+<area shape="rect" title=" " alt="" coords="326,727,405,754"/>
+<area shape="rect" title=" " alt="" coords="429,727,494,754"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -180,7 +181,7 @@ Functions</h2></td></tr>
 Levi Armstrong </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Dec 18, 2017 </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>TODO </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000023">Bug:</a></b></dt><dd>No known bugs</dd></dl>
+<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000015">Bug:</a></b></dt><dd>No known bugs</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2017, Southwest Research Institute </dd>
 <dd>
 Copyright (c) 2013, John Schulman</dd></dl>
@@ -196,7 +197,7 @@ Copyright (c) 2013, John Schulman</dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:24 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:16 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

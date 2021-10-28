@@ -89,8 +89,7 @@ Collaboration diagram for tesseract_common::ManipulatorInfo:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/dc5/structtesseract__common_1_1ManipulatorInfo__coll__graph.png" border="0" usemap="#atesseract__common_1_1ManipulatorInfo_coll__map" alt="Collaboration graph"/></div>
 <map name="atesseract__common_1_1ManipulatorInfo_coll__map" id="atesseract__common_1_1ManipulatorInfo_coll__map">
-<area shape="rect" title="Contains information about a robot manipulator." alt="" coords="5,307,233,333"/>
-<area shape="rect" href="../../d2/dad/classtesseract__common_1_1ToolCenterPoint.html" title="Manipulator Info Tool Center Point Definition." alt="" coords="249,201,451,243"/>
+<area shape="rect" title="Contains information about a robot manipulator." alt="" coords="5,229,233,256"/>
 <area shape="rect" title=" " alt="" coords="80,96,159,123"/>
 <area shape="rect" title=" " alt="" coords="57,5,181,47"/>
 </map>
@@ -100,10 +99,10 @@ Collaboration diagram for tesseract_common::ManipulatorInfo:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3a5fb1060b979532c639ed77d38d9eb"><td class="memItemLeft" align="right" valign="top">EIGEN_MAKE_ALIGNED_OPERATOR_NEW&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#ae3a5fb1060b979532c639ed77d38d9eb">ManipulatorInfo</a> ()=default</td></tr>
 <tr class="separator:ae3a5fb1060b979532c639ed77d38d9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd0bfa5fb44531b699bb135f71a4b62b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#afd0bfa5fb44531b699bb135f71a4b62b">ManipulatorInfo</a> (std::string <a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a01a307e8b4b478b5129294157ad344fd">manipulator</a>)</td></tr>
-<tr class="separator:afd0bfa5fb44531b699bb135f71a4b62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c82b14afa664230fc286a57f328d9a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#aa4c82b14afa664230fc286a57f328d9a">ManipulatorInfo</a> (std::string manipulator_, std::string working_frame_, std::string tcp_frame_, const Eigen::Isometry3d &amp;tcp_offset_=Eigen::Isometry3d::Identity())</td></tr>
+<tr class="separator:aa4c82b14afa664230fc286a57f328d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcf7745a4e3ea769fef1122af8cc1fb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html">ManipulatorInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#afcf7745a4e3ea769fef1122af8cc1fb1">getCombined</a> (const <a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html">ManipulatorInfo</a> &amp;manip_info_override) const</td></tr>
-<tr class="memdesc:afcf7745a4e3ea769fef1122af8cc1fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the provided manipulator information member is not empty it will override this and return a new manipualtor information with the combined results.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#afcf7745a4e3ea769fef1122af8cc1fb1">More...</a><br /></td></tr>
+<tr class="memdesc:afcf7745a4e3ea769fef1122af8cc1fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the provided manipulator information member is not empty it will override this and return a new manipulator information with the combined results.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#afcf7745a4e3ea769fef1122af8cc1fb1">More...</a><br /></td></tr>
 <tr class="separator:afcf7745a4e3ea769fef1122af8cc1fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e57927da4742bb782eeacbe803e556d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a7e57927da4742bb782eeacbe803e556d">empty</a> () const</td></tr>
 <tr class="memdesc:a7e57927da4742bb782eeacbe803e556d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any data is current being stored.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a7e57927da4742bb782eeacbe803e556d">More...</a><br /></td></tr>
@@ -118,15 +117,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a01a307e8b4b478b5129294157ad344fd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a01a307e8b4b478b5129294157ad344fd">manipulator</a></td></tr>
 <tr class="memdesc:a01a307e8b4b478b5129294157ad344fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the manipulator group.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a01a307e8b4b478b5129294157ad344fd">More...</a><br /></td></tr>
 <tr class="separator:a01a307e8b4b478b5129294157ad344fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256f01ba9f28a07c7681dd85cb6bf631"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a256f01ba9f28a07c7681dd85cb6bf631">working_frame</a></td></tr>
+<tr class="memdesc:a256f01ba9f28a07c7681dd85cb6bf631"><td class="mdescLeft">&#160;</td><td class="mdescRight">The working frame to which waypoints are relative.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a256f01ba9f28a07c7681dd85cb6bf631">More...</a><br /></td></tr>
+<tr class="separator:a256f01ba9f28a07c7681dd85cb6bf631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae179f24016c98a1779b348edad8975af"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#ae179f24016c98a1779b348edad8975af">tcp_frame</a></td></tr>
+<tr class="memdesc:ae179f24016c98a1779b348edad8975af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The coordinate frame within to the environment to use as the reference frame for the tool center point (TCP) which is defined by an offset transform relative to this frame.  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#ae179f24016c98a1779b348edad8975af">More...</a><br /></td></tr>
+<tr class="separator:ae179f24016c98a1779b348edad8975af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeec269ba1d25ed10a23ec961a11303ef"><td class="memItemLeft" align="right" valign="top">std::variant&lt; std::string, Eigen::Isometry3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#aeec269ba1d25ed10a23ec961a11303ef">tcp_offset</a> { Eigen::Isometry3d::Identity() }</td></tr>
+<tr class="memdesc:aeec269ba1d25ed10a23ec961a11303ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Optional) Offset transform applied to the tcp_frame link to represent the manipulator TCP  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#aeec269ba1d25ed10a23ec961a11303ef">More...</a><br /></td></tr>
+<tr class="separator:aeec269ba1d25ed10a23ec961a11303ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ab227eae3c22eea4d68b7284313eab2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a9ab227eae3c22eea4d68b7284313eab2">manipulator_ik_solver</a></td></tr>
 <tr class="memdesc:a9ab227eae3c22eea4d68b7284313eab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Optional) IK Solver to be used  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a9ab227eae3c22eea4d68b7284313eab2">More...</a><br /></td></tr>
 <tr class="separator:a9ab227eae3c22eea4d68b7284313eab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af64e5a3496ec957da16feec23d3557b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/dad/classtesseract__common_1_1ToolCenterPoint.html">ToolCenterPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#af64e5a3496ec957da16feec23d3557b8">tcp</a></td></tr>
-<tr class="memdesc:af64e5a3496ec957da16feec23d3557b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Optional) The tool center point, if of type bool it is empty  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#af64e5a3496ec957da16feec23d3557b8">More...</a><br /></td></tr>
-<tr class="separator:af64e5a3496ec957da16feec23d3557b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a256f01ba9f28a07c7681dd85cb6bf631"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a256f01ba9f28a07c7681dd85cb6bf631">working_frame</a></td></tr>
-<tr class="memdesc:a256f01ba9f28a07c7681dd85cb6bf631"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Optional) The working frame to which waypoints are relative. If empty the base link of the environment is used  <a href="../../d4/d31/structtesseract__common_1_1ManipulatorInfo.html#a256f01ba9f28a07c7681dd85cb6bf631">More...</a><br /></td></tr>
-<tr class="separator:a256f01ba9f28a07c7681dd85cb6bf631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -167,8 +169,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="afd0bfa5fb44531b699bb135f71a4b62b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd0bfa5fb44531b699bb135f71a4b62b">&#9670;&nbsp;</a></span>ManipulatorInfo() <span class="overload">[2/2]</span></h2>
+<a id="aa4c82b14afa664230fc286a57f328d9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c82b14afa664230fc286a57f328d9a">&#9670;&nbsp;</a></span>ManipulatorInfo() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,8 +179,30 @@ Friends</h2></td></tr>
           <td class="memname">tesseract_common::ManipulatorInfo::ManipulatorInfo </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>manipulator</em></td><td>)</td>
+          <td class="paramname"><em>manipulator_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>working_frame_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>tcp_frame_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Isometry3d &amp;&#160;</td>
+          <td class="paramname"><em>tcp_offset_</em> = <code>Eigen::Isometry3d::Identity()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -222,7 +246,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>If the provided manipulator information member is not empty it will override this and return a new manipualtor information with the combined results. </p>
+<p>If the provided manipulator information member is not empty it will override this and return a new manipulator information with the combined results. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">manip_info_override</td><td>The manipulator information to check for overrides </td></tr>
@@ -363,19 +387,35 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<a id="af64e5a3496ec957da16feec23d3557b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af64e5a3496ec957da16feec23d3557b8">&#9670;&nbsp;</a></span>tcp</h2>
+<a id="ae179f24016c98a1779b348edad8975af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae179f24016c98a1779b348edad8975af">&#9670;&nbsp;</a></span>tcp_frame</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d2/dad/classtesseract__common_1_1ToolCenterPoint.html">ToolCenterPoint</a> tesseract_common::ManipulatorInfo::tcp</td>
+          <td class="memname">std::string tesseract_common::ManipulatorInfo::tcp_frame</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>(Optional) The tool center point, if of type bool it is empty </p>
+<p>The coordinate frame within to the environment to use as the reference frame for the tool center point (TCP) which is defined by an offset transform relative to this frame. </p>
+
+</div>
+</div>
+<a id="aeec269ba1d25ed10a23ec961a11303ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec269ba1d25ed10a23ec961a11303ef">&#9670;&nbsp;</a></span>tcp_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::variant&lt;std::string, Eigen::Isometry3d&gt; tesseract_common::ManipulatorInfo::tcp_offset { Eigen::Isometry3d::Identity() }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>(Optional) Offset transform applied to the tcp_frame link to represent the manipulator TCP </p>
 
 </div>
 </div>
@@ -391,7 +431,8 @@ template&lt;class Archive &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>(Optional) The working frame to which waypoints are relative. If empty the base link of the environment is used </p>
+<p>The working frame to which waypoints are relative. </p>
+<p>If the tcp_frame is external to manipulator then the working frame must be an active frame on the manipulator </p>
 
 </div>
 </div>
@@ -402,7 +443,7 @@ template&lt;class Archive &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:25 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:18 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

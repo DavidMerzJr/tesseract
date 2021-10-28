@@ -165,7 +165,7 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    sl = boost::filesystem::path(library_directory) / library_name;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  boost::filesystem::path actual_path =</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      (std::strncmp(sl.filename().string().c_str(), <span class="stringliteral">&quot;lib&quot;</span>, 3) ?</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      (std::strncmp(sl.filename().string().c_str(), <span class="stringliteral">&quot;lib&quot;</span>, 3) != 0 ?</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;           boost::filesystem::path((sl.has_parent_path() ? sl.parent_path() / L<span class="stringliteral">&quot;lib&quot;</span> : L<span class="stringliteral">&quot;lib&quot;</span>).native() +</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                                   sl.filename().native()) :</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;           sl);</div>
@@ -179,8 +179,8 @@ $(function() {
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// TESSERACT_COMMON_CLASS_LOADER_HPP</span></div>
 <div class="ttc" id="aclass__loader_8h_html"><div class="ttname"><a href="../../dd/d9f/class__loader_8h.html">class_loader.h</a></div><div class="ttdoc">Class Loader to be used throughout Tesseract for loading plugins.</div></div>
 <div class="ttc" id="amacros_8h_html"><div class="ttname"><a href="../../de/d3c/macros_8h.html">macros.h</a></div><div class="ttdoc">Common Tesseract Macros.</div></div>
-<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:65</div></div>
-<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:35</div></div>
+<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:69</div></div>
+<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:36</div></div>
 <div class="ttc" id="anamespacetesseract__common_html"><div class="ttname"><a href="../../df/da9/namespacetesseract__common.html">tesseract_common</a></div><div class="ttdef"><b>Definition:</b> any.h:57</div></div>
 <div class="ttc" id="astructtesseract__common_1_1ClassLoader_html_a0bc9e092d94b12566d67e5a5ee0de337"><div class="ttname"><a href="../../d7/d3b/structtesseract__common_1_1ClassLoader.html#a0bc9e092d94b12566d67e5a5ee0de337">tesseract_common::ClassLoader::isClassAvailable</a></div><div class="ttdeci">static bool isClassAvailable(const std::string &amp;symbol_name, const std::string &amp;library_name, const std::string &amp;library_directory=&quot;&quot;)</div><div class="ttdoc">Check if the symbol is available in the library_name searching system folders for library.</div><div class="ttdef"><b>Definition:</b> class_loader.hpp:77</div></div>
 <div class="ttc" id="astructtesseract__common_1_1ClassLoader_html_ad1933611b2e5247267c29b146fb3054e"><div class="ttname"><a href="../../d7/d3b/structtesseract__common_1_1ClassLoader.html#ad1933611b2e5247267c29b146fb3054e">tesseract_common::ClassLoader::createSharedInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; ClassBase &gt; createSharedInstance(const std::string &amp;symbol_name, const std::string &amp;library_name, const std::string &amp;library_directory=&quot;&quot;)</div><div class="ttdoc">Create a shared instance for the provided symbol_name loaded from the library_name searching system f...</div><div class="ttdef"><b>Definition:</b> class_loader.hpp:44</div></div>
@@ -188,7 +188,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:23 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:16 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

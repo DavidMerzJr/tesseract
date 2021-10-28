@@ -1,4 +1,4 @@
-<map id="tesseract_environment/include/tesseract_environment/core/commands/change_link_origin_command.h" name="tesseract_environment/include/tesseract_environment/core/commands/change_link_origin_command.h">
+<map id="tesseract_environment/include/tesseract_environment/commands/change_link_origin_command.h" name="tesseract_environment/include/tesseract_environment/commands/change_link_origin_command.h">
 <area shape="rect" id="node1" title="Used to change a links origin in environment." alt="" coords="179,5,382,76"/>
 <area shape="rect" id="node2" href="$de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="5,213,196,240"/>
 <area shape="rect" id="node3" title=" " alt="" coords="304,213,372,240"/>

@@ -20,14 +20,18 @@ struct \mbox{\hyperlink{structtesseract__common_1_1JointState}{Joint\+State}}
 \item 
 struct \mbox{\hyperlink{structtesseract__common_1_1KinematicLimits}{Kinematic\+Limits}}
 \begin{DoxyCompactList}\small\item\em Store kinematic limits. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classtesseract__common_1_1ToolCenterPoint}{Tool\+Center\+Point}}
-\begin{DoxyCompactList}\small\item\em Manipulator Info Tool Center Point Definition. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structtesseract__common_1_1ManipulatorInfo}{Manipulator\+Info}}
 \begin{DoxyCompactList}\small\item\em Contains information about a robot manipulator. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__common_1_1PluginLoader}{Plugin\+Loader}}
 \begin{DoxyCompactList}\small\item\em This is a utility class for loading plugins within Tesseract. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__common_1_1ResourceLocator}{Resource\+Locator}}
+\begin{DoxyCompactList}\small\item\em Abstract class for resource loaders. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__common_1_1Resource}{Resource}}
 \begin{DoxyCompactList}\small\item\em Represents resource data available from a file or url. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__common_1_1SimpleResourceLocator}{Simple\+Resource\+Locator}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtesseract__common_1_1Resource}{Resource}} locator implementation using a provided function to locate file resources. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__common_1_1SimpleLocatedResource}{Simple\+Located\+Resource}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtesseract__common_1_1Resource}{Resource}} implementation for a local file. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__common_1_1BytesResource}{Bytes\+Resource}}
 \item 
 struct \mbox{\hyperlink{structtesseract__common_1_1ambiguate}{ambiguate}}
@@ -50,6 +54,14 @@ class \mbox{\hyperlink{classtesseract__common_1_1Timer}{Timer}}
 \begin{DoxyCompactList}\small\item\em A simple timer class leveraging chrono high resolution clock. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structtesseract__common_1_1PairHash}{Pair\+Hash}}
 \item 
+struct \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The Plugin Information struct. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1PluginInfoContainer}{Plugin\+Info\+Container}}
+\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1KinematicsPluginInfo}{Kinematics\+Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The kinematics plugin information structure. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtesseract__common_1_1ContactManagersPluginInfo}{Contact\+Managers\+Plugin\+Info}}
+\begin{DoxyCompactList}\small\item\em The contact managers plugin information structure. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__common_1_1TestPluginBase}{Test\+Plugin\+Base}}
 \item 
 class \mbox{\hyperlink{classtesseract__common_1_1TestPluginMultiply}{Test\+Plugin\+Multiply}}
@@ -61,6 +73,8 @@ using \mbox{\hyperlink{namespacetesseract__common_a84cc21cc4b384291adbbddaa81fe6
 \item 
 using \mbox{\hyperlink{namespacetesseract__common_a57fa3336d4e5f8655281342a9c94aece}{Joint\+Trajectory}} = \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ \mbox{\hyperlink{structtesseract__common_1_1JointState}{Joint\+State}} $>$
 \begin{DoxyCompactList}\small\item\em Represents a joint trajectory. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacetesseract__common_a2ef4ec89c4c07fc0a75c4bc24da9681c}{Simple\+Resource\+Locator\+Fn}} = std\+::function$<$ std\+::string(const std\+::string \&)$>$
+\item 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacetesseract__common_a000d15c3ab8d8ba4ebdaae64153b053a}{Aligned\+Vector}} = \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ T, Eigen\+::aligned\+\_\+allocator$<$ T $>$ $>$
 \begin{DoxyCompactList}\small\item\em Enable easy switching to std\+::filesystem when available. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Key , typename Value $>$ }\\using \mbox{\hyperlink{namespacetesseract__common_a2c5a4b6149060671cf8c3f9d15ef58c4}{Aligned\+Map}} = std\+::map$<$ Key, Value, std\+::less$<$ Key $>$, Eigen\+::aligned\+\_\+allocator$<$ std\+::pair$<$ const Key, Value $>$ $>$$>$
@@ -82,7 +96,9 @@ using \mbox{\hyperlink{namespacetesseract__common_a917718f518f98714fce17e831ec1e
 using \mbox{\hyperlink{namespacetesseract__common_a431ff65777ee0bed71e7671390638244}{Traj\+Array}} = Eigen\+::\+Matrix$<$ double, Eigen\+::\+Dynamic, Eigen\+::\+Dynamic, Eigen\+::\+Row\+Major $>$
 \item 
 using \mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{Link\+Names\+Pair}} = std\+::pair$<$ std\+::string, std\+::string $>$
-\end{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacetesseract__common_a43d1f6e0418164a6db0e1c447150340e}{Plugin\+Info\+Map}} = std\+::map$<$ std\+::string, \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}} $>$
+\begin{DoxyCompactList}\small\item\em A map of \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}} to user defined name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -102,16 +118,32 @@ bool \mbox{\hyperlink{namespacetesseract__common_a2eab6bf31cc0eb0089298c5e3e377f
 \begin{DoxyCompactList}\small\item\em Check if joint position is within bounds or relativilty equal to a limit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacetesseract__common_aaea55ba44081a4d90868727a7106f933}{enforce\+Position\+Limits}} (Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$ joint\+\_\+positions, const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix\+X2d $>$ \&position\+\_\+limits)
 \begin{DoxyCompactList}\small\item\em Enforce position to be within the provided limits. \end{DoxyCompactList}\item 
-std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a0b6d0012d51401bfd898e534ad9c9be9}{parse\+Environment\+Variable\+List}} (const std\+::string \&env\+\_\+variable)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_abab89b9d8c62a5eb8f4eed37e0c388f1}{parse\+Environment\+Variable\+List}} (const std\+::string \&env\+\_\+variable)
 \item 
-std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ad4ee50cb59c0f007847dc0b1ec705948}{get\+All\+Search\+Paths}} (const std\+::string \&search\+\_\+paths\+\_\+env, const std\+::list$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+paths)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ae0f72c84dda77755301b5372c89e06af}{get\+All\+Search\+Paths}} (const std\+::string \&search\+\_\+paths\+\_\+env, const std\+::set$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+paths)
 \item 
-std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a2e05a4098ef0cdb5c01c325b45a1a1fd}{parse\+Environment\+Variable\+Map}} (const std\+::string \&env\+\_\+variable)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ab95e168b09d14e3cee3de2bcd38efb63}{get\+All\+Search\+Libraries}} (const std\+::string \&search\+\_\+libraries\+\_\+env, const std\+::set$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+libraries)
 \item 
-std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a6a03c86a7a2621390889d15ec9783b2b}{get\+All\+Plugins}} (const std\+::string \&plugins\+\_\+env, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&existing\+\_\+plugins)
-\item 
-static \mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{Link\+Names\+Pair}} \mbox{\hyperlink{namespacetesseract__common_a0569af9dd122b26e12ebdc4bb1de2bda}{make\+Ordered\+Link\+Pair}} (const std\+::string \&link\+\_\+name1, const std\+::string \&link\+\_\+name2)
+\mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{Link\+Names\+Pair}} \mbox{\hyperlink{namespacetesseract__common_a11bc9620a27eede3300420410e0b4a7a}{make\+Ordered\+Link\+Pair}} (const std\+::string \&link\+\_\+name1, const std\+::string \&link\+\_\+name2)
 \begin{DoxyCompactList}\small\item\em Create a pair of strings, where the pair.\+first is always $<$= pair.\+second. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\std\+::string \mbox{\hyperlink{namespacetesseract__common_a7f13ad2a741226ab5255302f6750ed4a}{str\+Format}} (const std\+::string \&format, Args... args)
+\item 
+void \mbox{\hyperlink{namespacetesseract__common_a4ed12ea384452e2d5d4f7a0854035384}{twist\+Change\+Ref\+Point}} (Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$ twist, const Eigen\+::\+Ref$<$ const Eigen\+::\+Vector3d $>$ \&ref\+\_\+point)
+\begin{DoxyCompactList}\small\item\em Change the reference point of the provided Twist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacetesseract__common_a98c27df906a6e17d088772d3d1c21a5d}{twist\+Change\+Base}} (Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$ twist, const Eigen\+::\+Isometry3d \&change\+\_\+base)
+\begin{DoxyCompactList}\small\item\em Change the base coordinate system of the Twist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacetesseract__common_a9b00920e39050a4b9df5e3100aac7e55}{jacobian\+Change\+Base}} (Eigen\+::\+Ref$<$ Eigen\+::\+Matrix\+Xd $>$ jacobian, const Eigen\+::\+Isometry3d \&change\+\_\+base)
+\begin{DoxyCompactList}\small\item\em Change the base coordinate system of the jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacetesseract__common_a5043afd3f3dbdd6655d543e09a7c9ea4}{jacobian\+Change\+Ref\+Point}} (Eigen\+::\+Ref$<$ Eigen\+::\+Matrix\+Xd $>$ jacobian, const Eigen\+::\+Ref$<$ const Eigen\+::\+Vector3d $>$ \&ref\+\_\+point)
+\begin{DoxyCompactList}\small\item\em Change the reference point of the jacobian. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{namespacetesseract__common_a757f1e4610f79b4e79e796c698a3c113}{concat}} (const Eigen\+::\+Vector\+Xd \&a, const Eigen\+::\+Vector\+Xd \&b)
+\begin{DoxyCompactList}\small\item\em Concatenate two vector. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector3d \mbox{\hyperlink{namespacetesseract__common_a715e8a56239e73ccfa00e82cda79a28c}{calc\+Rotational\+Error}} (const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix3d $>$ \&R)
+\begin{DoxyCompactList}\small\item\em Calculate the rotation error vector given a rotation error matrix where the angle is between \mbox{[}-\/pi, pi\mbox{]}. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector3d \mbox{\hyperlink{namespacetesseract__common_a41a6314e5371fa9604c459b85f159afd}{calc\+Rotational\+Error2}} (const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix3d $>$ \&R)
+\begin{DoxyCompactList}\small\item\em Calculate the rotation error vector given a rotation error matrix where the angle is between \mbox{[}0, 2 $\ast$ pi\mbox{]}. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{namespacetesseract__common_a913b8ec499e3bfe779dc95bae54f39d4}{calc\+Transform\+Error}} (const Eigen\+::\+Isometry3d \&t1, const Eigen\+::\+Isometry3d \&t2)
+\begin{DoxyCompactList}\small\item\em Calculate error between two transforms expressed in t1 coordinate system. \end{DoxyCompactList}\item 
 Eigen\+::\+Vector4d \mbox{\hyperlink{namespacetesseract__common_a0d105162c2cd10693e7387cb74d8318b}{compute\+Random\+Color}} ()
 \begin{DoxyCompactList}\small\item\em This computes a random color with alpha set to 1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacetesseract__common_ac4e9558332430365cd69cb2eec1784c8}{print\+Nested\+Exception}} (const std\+::exception \&e, int level=0)
@@ -123,17 +155,19 @@ bool \mbox{\hyperlink{namespacetesseract__common_a1dc3a9525efbe582991edd4eedc260
 bool \mbox{\hyperlink{namespacetesseract__common_a0db40f06dba7e6be18a2c4f098ad7a00}{is\+Numeric}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&sv)
 \begin{DoxyCompactList}\small\item\em Determine if each string in vector is a number. \end{DoxyCompactList}\item 
 Eigen\+::\+Vector\+Xd \mbox{\hyperlink{namespacetesseract__common_aa14552337385ce1de42da699506f8b03}{generate\+Random\+Number}} (const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix\+X2d $>$ \&limits)
-\begin{DoxyCompactList}\small\item\em Given a set of limits it will generate a vector of randon numbers between the limit. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Given a set of limits it will generate a vector of random numbers between the limit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacetesseract__common_af46edf9701e45b20e95a5abfac500b8f}{ltrim}} (std\+::string \&s)
 \begin{DoxyCompactList}\small\item\em Left trim string. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacetesseract__common_aa86a4f0e5ca9d2b1f5abc3f34735d85b}{rtrim}} (std\+::string \&s)
 \begin{DoxyCompactList}\small\item\em Right trim string. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacetesseract__common_aeacd629bcf585286917aafa7b8e603bb}{trim}} (std\+::string \&s)
 \begin{DoxyCompactList}\small\item\em Trim left and right of string. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespacetesseract__common_aaedf0e7043da047ab5a970a5669cf5d0}{is\+Identical}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&vec1, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&vec2, bool ordered=true)
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{namespacetesseract__common_a988d90ea1a18bb1b94cf257a78bc5bc2}{is\+Identical}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ T $>$ \&vec1, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ T $>$ \&vec2, bool ordered=true)
 \begin{DoxyCompactList}\small\item\em Check if two vector of strings are identical. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{namespacetesseract__common_a1077809c98ad8bf5262e426cff6e63a3}{get\+Timestamp\+String}} ()
 \begin{DoxyCompactList}\small\item\em Get Timestamp string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacetesseract__common_a7da14d8e3b6c20175711209343aafe2f}{reorder}} (Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$ v, \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$ order)
+\begin{DoxyCompactList}\small\item\em Reorder Eigen\+::\+Vector\+Xd implace given index list. \end{DoxyCompactList}\item 
 tinyxml2\+::\+XMLError \mbox{\hyperlink{namespacetesseract__common_ae1a3ebd3610dce6d24cc7569606fd9ab}{Query\+String\+Value}} (const tinyxml2\+::\+XMLElement $\ast$xml\+\_\+element, std\+::string \&value)
 \begin{DoxyCompactList}\small\item\em Query a string value from xml element. \end{DoxyCompactList}\item 
 tinyxml2\+::\+XMLError \mbox{\hyperlink{namespacetesseract__common_ab95676b5418063a1d7c84fbba4ff1fe0}{Query\+String\+Text}} (const tinyxml2\+::\+XMLElement $\ast$xml\+\_\+element, std\+::string \&text)
@@ -163,6 +197,10 @@ template bool \mbox{\hyperlink{namespacetesseract__common_aa70232725f5f768795d33
 template bool \mbox{\hyperlink{namespacetesseract__common_a0b9e402f37e71867b838508147b93ba7}{to\+Numeric$<$ int $>$}} (const std\+::string \&, int \&)
 \item 
 template bool \mbox{\hyperlink{namespacetesseract__common_a4b11049d2f1fe507189aedf890101ce7}{to\+Numeric$<$ long $>$}} (const std\+::string \&, long \&)
+\item 
+template bool \mbox{\hyperlink{namespacetesseract__common_ae409f9b0116e2e1d12fabe369960ff6d}{is\+Identical$<$ std\+::string $>$}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&, bool)
+\item 
+template bool \mbox{\hyperlink{namespacetesseract__common_a7cc0ecb230ef7a0129fe8f88b8dd19ba}{is\+Identical$<$ Eigen\+::\+Index $>$}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$ \&, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$ \&, bool)
 \item 
 {\footnotesize template$<$typename E $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+polymorphic$<$ E $>$\+::value $>$ \mbox{\hyperlink{namespacetesseract__common_a62810a7ae6f501b0850f65eaebe96f2e}{my\+\_\+rethrow\+\_\+if\+\_\+nested}} (const E \&)
 \item 
@@ -222,6 +260,22 @@ Represents a joint trajectory.
 \index{PairsCollisionMarginData@{PairsCollisionMarginData}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{PairsCollisionMarginData}{PairsCollisionMarginData}}
 {\footnotesize\ttfamily using \mbox{\hyperlink{namespacetesseract__common_a84cc21cc4b384291adbbddaa81fe6447}{tesseract\+\_\+common\+::\+Pairs\+Collision\+Margin\+Data}} = typedef std\+::unordered\+\_\+map$<$\mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{tesseract\+\_\+common\+::\+Link\+Names\+Pair}}, double, \mbox{\hyperlink{structtesseract__common_1_1PairHash}{tesseract\+\_\+common\+::\+Pair\+Hash}}$>$}
+
+\mbox{\Hypertarget{namespacetesseract__common_a43d1f6e0418164a6db0e1c447150340e}\label{namespacetesseract__common_a43d1f6e0418164a6db0e1c447150340e}} 
+\index{tesseract\_common@{tesseract\_common}!PluginInfoMap@{PluginInfoMap}}
+\index{PluginInfoMap@{PluginInfoMap}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{PluginInfoMap}{PluginInfoMap}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacetesseract__common_a43d1f6e0418164a6db0e1c447150340e}{tesseract\+\_\+common\+::\+Plugin\+Info\+Map}} = typedef std\+::map$<$std\+::string, \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}}$>$}
+
+
+
+A map of \mbox{\hyperlink{structtesseract__common_1_1PluginInfo}{Plugin\+Info}} to user defined name. 
+
+\mbox{\Hypertarget{namespacetesseract__common_a2ef4ec89c4c07fc0a75c4bc24da9681c}\label{namespacetesseract__common_a2ef4ec89c4c07fc0a75c4bc24da9681c}} 
+\index{tesseract\_common@{tesseract\_common}!SimpleResourceLocatorFn@{SimpleResourceLocatorFn}}
+\index{SimpleResourceLocatorFn@{SimpleResourceLocatorFn}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{SimpleResourceLocatorFn}{SimpleResourceLocatorFn}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacetesseract__common_a2ef4ec89c4c07fc0a75c4bc24da9681c}{tesseract\+\_\+common\+::\+Simple\+Resource\+Locator\+Fn}} = typedef std\+::function$<$std\+::string(const std\+::string\&)$>$}
 
 \mbox{\Hypertarget{namespacetesseract__common_a917718f518f98714fce17e831ec1ea11}\label{namespacetesseract__common_a917718f518f98714fce17e831ec1ea11}} 
 \index{tesseract\_common@{tesseract\_common}!Toolpath@{Toolpath}}
@@ -351,6 +405,66 @@ The max\+\_\+diff is for handling when comparing numbers near zero
 \begin{DoxyReturn}{Returns}
 True if they are relativily equal, otherwise false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a715e8a56239e73ccfa00e82cda79a28c}\label{namespacetesseract__common_a715e8a56239e73ccfa00e82cda79a28c}} 
+\index{tesseract\_common@{tesseract\_common}!calcRotationalError@{calcRotationalError}}
+\index{calcRotationalError@{calcRotationalError}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{calcRotationalError()}{calcRotationalError()}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d tesseract\+\_\+common\+::calc\+Rotational\+Error (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix3d $>$ \&}]{R }\end{DoxyParamCaption})}
+
+
+
+Calculate the rotation error vector given a rotation error matrix where the angle is between \mbox{[}-\/pi, pi\mbox{]}. 
+
+This should be used only for calculating the error. Do not use for numerically calculating jacobians because it breaks down a -\/PI and PI 
+\begin{DoxyParams}{Parameters}
+{\em R} & rotation error matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Rotation error vector = Eigen\+::\+Angle\+Axisd.\+axis() $\ast$ Eigen\+::\+Angle\+Axisd.\+angle() 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a41a6314e5371fa9604c459b85f159afd}\label{namespacetesseract__common_a41a6314e5371fa9604c459b85f159afd}} 
+\index{tesseract\_common@{tesseract\_common}!calcRotationalError2@{calcRotationalError2}}
+\index{calcRotationalError2@{calcRotationalError2}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{calcRotationalError2()}{calcRotationalError2()}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d tesseract\+\_\+common\+::calc\+Rotational\+Error2 (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Ref$<$ const Eigen\+::\+Matrix3d $>$ \&}]{R }\end{DoxyParamCaption})}
+
+
+
+Calculate the rotation error vector given a rotation error matrix where the angle is between \mbox{[}0, 2 $\ast$ pi\mbox{]}. 
+
+This function does not break down when the angle is near zero or 2pi when calculating the numerical jacobian. This is because when using Eigen\textquotesingle{}s angle axis it converts the angle to be between \mbox{[}0, PI\mbox{]} where internally if the angle is between \mbox{[}-\/PI, 0\mbox{]} it flips the sign of the axis. Both this function and calc\+Rotational\+Error both check for this flip and reverts it. Since the angle is always between \mbox{[}-\/PI, PI\mbox{]}, switching the range to \mbox{[}0, PI\mbox{]} will never be close to 2PI. In the case of zero, it also does not break down because we are making sure that the angle axis aligns with the quaternion axis eliminating this issue. As you can see the quaternion keeps the angle small but flips the axis so the correct delta rotation is calculated.
+
+Angle\+: 0.\+001 results in an axis\+: \mbox{[}0, 0, 1\mbox{]} Angle\+: -\/0.\+001 results in and axis\+: \mbox{[}0, 0, -\/1\mbox{]} e1 = angle $\ast$ axis = \mbox{[}0, 0, 0.\+001\mbox{]} e2 = angle $\ast$ axis = \mbox{[}0, 0, -\/0.\+001\mbox{]} delta = e2 -\/ e1 = \mbox{[}0, 0, 0.\+002\mbox{]}
+
+This should be used when numerically calculating rotation jacobians 
+\begin{DoxyParams}{Parameters}
+{\em R} & rotation error matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Rotation error vector = Eigen\+::\+Angle\+Axisd.\+axis() $\ast$ Eigen\+::\+Angle\+Axisd.\+angle() 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a913b8ec499e3bfe779dc95bae54f39d4}\label{namespacetesseract__common_a913b8ec499e3bfe779dc95bae54f39d4}} 
+\index{tesseract\_common@{tesseract\_common}!calcTransformError@{calcTransformError}}
+\index{calcTransformError@{calcTransformError}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{calcTransformError()}{calcTransformError()}}
+{\footnotesize\ttfamily Eigen\+::\+Vector\+Xd tesseract\+\_\+common\+::calc\+Transform\+Error (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Isometry3d \&}]{t1,  }\item[{const Eigen\+::\+Isometry3d \&}]{t2 }\end{DoxyParamCaption})}
+
+
+
+Calculate error between two transforms expressed in t1 coordinate system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t1} & Target Transform \\
+\hline
+{\em t2} & Current Transform \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+error \mbox{[}Position, Rotational(\+Angle Axis)\mbox{]} 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacetesseract__common_a0d105162c2cd10693e7387cb74d8318b}\label{namespacetesseract__common_a0d105162c2cd10693e7387cb74d8318b}} 
 \index{tesseract\_common@{tesseract\_common}!computeRandomColor@{computeRandomColor}}
 \index{computeRandomColor@{computeRandomColor}!tesseract\_common@{tesseract\_common}}
@@ -364,6 +478,16 @@ This computes a random color with alpha set to 1.
 \begin{DoxyReturn}{Returns}
 A random color 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a757f1e4610f79b4e79e796c698a3c113}\label{namespacetesseract__common_a757f1e4610f79b4e79e796c698a3c113}} 
+\index{tesseract\_common@{tesseract\_common}!concat@{concat}}
+\index{concat@{concat}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{concat()}{concat()}}
+{\footnotesize\ttfamily Eigen\+::\+Vector\+Xd tesseract\+\_\+common\+::concat (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{a,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Concatenate two vector. 
+
 \mbox{\Hypertarget{namespacetesseract__common_aaea55ba44081a4d90868727a7106f933}\label{namespacetesseract__common_aaea55ba44081a4d90868727a7106f933}} 
 \index{tesseract\_common@{tesseract\_common}!enforcePositionLimits@{enforcePositionLimits}}
 \index{enforcePositionLimits@{enforcePositionLimits}!tesseract\_common@{tesseract\_common}}
@@ -389,7 +513,7 @@ Enforce position to be within the provided limits.
 
 
 
-Given a set of limits it will generate a vector of randon numbers between the limit. 
+Given a set of limits it will generate a vector of random numbers between the limit. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -399,17 +523,17 @@ Given a set of limits it will generate a vector of randon numbers between the li
 \begin{DoxyReturn}{Returns}
 A vector of random numbers between the provided limits. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacetesseract__common_a6a03c86a7a2621390889d15ec9783b2b}\label{namespacetesseract__common_a6a03c86a7a2621390889d15ec9783b2b}} 
-\index{tesseract\_common@{tesseract\_common}!getAllPlugins@{getAllPlugins}}
-\index{getAllPlugins@{getAllPlugins}!tesseract\_common@{tesseract\_common}}
-\doxysubsubsection{\texorpdfstring{getAllPlugins()}{getAllPlugins()}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ tesseract\+\_\+common\+::get\+All\+Plugins (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{plugins\+\_\+env,  }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{existing\+\_\+plugins }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{namespacetesseract__common_ab95e168b09d14e3cee3de2bcd38efb63}\label{namespacetesseract__common_ab95e168b09d14e3cee3de2bcd38efb63}} 
+\index{tesseract\_common@{tesseract\_common}!getAllSearchLibraries@{getAllSearchLibraries}}
+\index{getAllSearchLibraries@{getAllSearchLibraries}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{getAllSearchLibraries()}{getAllSearchLibraries()}}
+{\footnotesize\ttfamily std\+::set$<$std\+::string$>$ tesseract\+\_\+common\+::get\+All\+Search\+Libraries (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{search\+\_\+libraries\+\_\+env,  }\item[{const std\+::set$<$ std\+::string $>$ \&}]{existing\+\_\+search\+\_\+libraries }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{namespacetesseract__common_ad4ee50cb59c0f007847dc0b1ec705948}\label{namespacetesseract__common_ad4ee50cb59c0f007847dc0b1ec705948}} 
+\mbox{\Hypertarget{namespacetesseract__common_ae0f72c84dda77755301b5372c89e06af}\label{namespacetesseract__common_ae0f72c84dda77755301b5372c89e06af}} 
 \index{tesseract\_common@{tesseract\_common}!getAllSearchPaths@{getAllSearchPaths}}
 \index{getAllSearchPaths@{getAllSearchPaths}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{getAllSearchPaths()}{getAllSearchPaths()}}
-{\footnotesize\ttfamily std\+::list$<$std\+::string$>$ tesseract\+\_\+common\+::get\+All\+Search\+Paths (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{search\+\_\+paths\+\_\+env,  }\item[{const std\+::list$<$ std\+::string $>$ \&}]{existing\+\_\+search\+\_\+paths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::set$<$std\+::string$>$ tesseract\+\_\+common\+::get\+All\+Search\+Paths (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{search\+\_\+paths\+\_\+env,  }\item[{const std\+::set$<$ std\+::string $>$ \&}]{existing\+\_\+search\+\_\+paths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{namespacetesseract__common_a58ecad04db85855fa9e4de21084598ca}\label{namespacetesseract__common_a58ecad04db85855fa9e4de21084598ca}} 
 \index{tesseract\_common@{tesseract\_common}!getTempPath@{getTempPath}}
@@ -437,11 +561,12 @@ Get Timestamp string.
 \begin{DoxyReturn}{Returns}
 Timestamp string 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacetesseract__common_aaedf0e7043da047ab5a970a5669cf5d0}\label{namespacetesseract__common_aaedf0e7043da047ab5a970a5669cf5d0}} 
+\mbox{\Hypertarget{namespacetesseract__common_a988d90ea1a18bb1b94cf257a78bc5bc2}\label{namespacetesseract__common_a988d90ea1a18bb1b94cf257a78bc5bc2}} 
 \index{tesseract\_common@{tesseract\_common}!isIdentical@{isIdentical}}
 \index{isIdentical@{isIdentical}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{isIdentical()}{isIdentical()}}
-{\footnotesize\ttfamily bool tesseract\+\_\+common\+::is\+Identical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&}]{vec1,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&}]{vec2,  }\item[{bool}]{ordered = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool tesseract\+\_\+common\+::is\+Identical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ T $>$ \&}]{vec1,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ T $>$ \&}]{vec2,  }\item[{bool}]{ordered = {\ttfamily true} }\end{DoxyParamCaption})}
 
 
 
@@ -456,6 +581,18 @@ Check if two vector of strings are identical.
 {\em ordered} & If true order is relavent, othwise if false order is not relavent \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacetesseract__common_a7cc0ecb230ef7a0129fe8f88b8dd19ba}\label{namespacetesseract__common_a7cc0ecb230ef7a0129fe8f88b8dd19ba}} 
+\index{tesseract\_common@{tesseract\_common}!isIdentical$<$ Eigen::Index $>$@{isIdentical$<$ Eigen::Index $>$}}
+\index{isIdentical$<$ Eigen::Index $>$@{isIdentical$<$ Eigen::Index $>$}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{isIdentical$<$ Eigen::Index $>$()}{isIdentical< Eigen::Index >()}}
+{\footnotesize\ttfamily template bool \mbox{\hyperlink{namespacetesseract__common_a988d90ea1a18bb1b94cf257a78bc5bc2}{tesseract\+\_\+common\+::is\+Identical}}$<$ Eigen\+::\+Index $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$ \&}]{,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$ \&}]{,  }\item[{bool}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetesseract__common_ae409f9b0116e2e1d12fabe369960ff6d}\label{namespacetesseract__common_ae409f9b0116e2e1d12fabe369960ff6d}} 
+\index{tesseract\_common@{tesseract\_common}!isIdentical$<$ std::string $>$@{isIdentical$<$ std::string $>$}}
+\index{isIdentical$<$ std::string $>$@{isIdentical$<$ std::string $>$}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{isIdentical$<$ std::string $>$()}{isIdentical< std::string >()}}
+{\footnotesize\ttfamily template bool \mbox{\hyperlink{namespacetesseract__common_a988d90ea1a18bb1b94cf257a78bc5bc2}{tesseract\+\_\+common\+::is\+Identical}}$<$ std\+::string $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&}]{,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&}]{,  }\item[{bool}]{ }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{namespacetesseract__common_a1dc3a9525efbe582991edd4eedc26079}\label{namespacetesseract__common_a1dc3a9525efbe582991edd4eedc26079}} 
 \index{tesseract\_common@{tesseract\_common}!isNumeric@{isNumeric}}
 \index{isNumeric@{isNumeric}!tesseract\_common@{tesseract\_common}}
@@ -492,6 +629,40 @@ Determine if each string in vector is a number.
 \begin{DoxyReturn}{Returns}
 True if all strings are numeric, otherwise false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a9b00920e39050a4b9df5e3100aac7e55}\label{namespacetesseract__common_a9b00920e39050a4b9df5e3100aac7e55}} 
+\index{tesseract\_common@{tesseract\_common}!jacobianChangeBase@{jacobianChangeBase}}
+\index{jacobianChangeBase@{jacobianChangeBase}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{jacobianChangeBase()}{jacobianChangeBase()}}
+{\footnotesize\ttfamily void tesseract\+\_\+common\+::jacobian\+Change\+Base (\begin{DoxyParamCaption}\item[{Eigen\+::\+Ref$<$ Eigen\+::\+Matrix\+Xd $>$}]{jacobian,  }\item[{const Eigen\+::\+Isometry3d \&}]{change\+\_\+base }\end{DoxyParamCaption})}
+
+
+
+Change the base coordinate system of the jacobian. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & The current Jacobian which gets modified in place \\
+\hline
+{\em change\+\_\+base} & The transform from the desired frame to the current base frame of the jacobian \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacetesseract__common_a5043afd3f3dbdd6655d543e09a7c9ea4}\label{namespacetesseract__common_a5043afd3f3dbdd6655d543e09a7c9ea4}} 
+\index{tesseract\_common@{tesseract\_common}!jacobianChangeRefPoint@{jacobianChangeRefPoint}}
+\index{jacobianChangeRefPoint@{jacobianChangeRefPoint}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{jacobianChangeRefPoint()}{jacobianChangeRefPoint()}}
+{\footnotesize\ttfamily void tesseract\+\_\+common\+::jacobian\+Change\+Ref\+Point (\begin{DoxyParamCaption}\item[{Eigen\+::\+Ref$<$ Eigen\+::\+Matrix\+Xd $>$}]{jacobian,  }\item[{const Eigen\+::\+Ref$<$ const Eigen\+::\+Vector3d $>$ \&}]{ref\+\_\+point }\end{DoxyParamCaption})}
+
+
+
+Change the reference point of the jacobian. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & The current Jacobian which gets modified in place \\
+\hline
+{\em ref\+\_\+point} & Is expressed in the same base frame of the jacobian and is a vector from the old point to the new point. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacetesseract__common_af46edf9701e45b20e95a5abfac500b8f}\label{namespacetesseract__common_af46edf9701e45b20e95a5abfac500b8f}} 
 \index{tesseract\_common@{tesseract\_common}!ltrim@{ltrim}}
 \index{ltrim@{ltrim}!tesseract\_common@{tesseract\_common}}
@@ -507,11 +678,11 @@ Left trim string.
 {\em s} & The string to left trim \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespacetesseract__common_a0569af9dd122b26e12ebdc4bb1de2bda}\label{namespacetesseract__common_a0569af9dd122b26e12ebdc4bb1de2bda}} 
+\mbox{\Hypertarget{namespacetesseract__common_a11bc9620a27eede3300420410e0b4a7a}\label{namespacetesseract__common_a11bc9620a27eede3300420410e0b4a7a}} 
 \index{tesseract\_common@{tesseract\_common}!makeOrderedLinkPair@{makeOrderedLinkPair}}
 \index{makeOrderedLinkPair@{makeOrderedLinkPair}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{makeOrderedLinkPair()}{makeOrderedLinkPair()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{Link\+Names\+Pair}} tesseract\+\_\+common\+::make\+Ordered\+Link\+Pair (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{link\+\_\+name1,  }\item[{const std\+::string \&}]{link\+\_\+name2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacetesseract__common_a5b28b7ae665b374a7ca166d496f648ce}{Link\+Names\+Pair}} tesseract\+\_\+common\+::make\+Ordered\+Link\+Pair (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{link\+\_\+name1,  }\item[{const std\+::string \&}]{link\+\_\+name2 }\end{DoxyParamCaption})}
 
 
 
@@ -521,7 +692,7 @@ This is commonly used along with \mbox{\hyperlink{structtesseract__common_1_1Pai
 \begin{DoxyParams}{Parameters}
 {\em link\+\_\+name1} & First link name \\
 \hline
-{\em link\+\_\+name2} & Second link anme \\
+{\em link\+\_\+name2} & Second link name \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -541,17 +712,11 @@ std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+polymorphic$<$E$>$\+::value$>$ te
 {\footnotesize\ttfamily template$<$typename E $>$ \\
 std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+polymorphic$<$E$>$\+::value$>$ tesseract\+\_\+common\+::my\+\_\+rethrow\+\_\+if\+\_\+nested (\begin{DoxyParamCaption}\item[{const E \&}]{e }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{namespacetesseract__common_a0b6d0012d51401bfd898e534ad9c9be9}\label{namespacetesseract__common_a0b6d0012d51401bfd898e534ad9c9be9}} 
+\mbox{\Hypertarget{namespacetesseract__common_abab89b9d8c62a5eb8f4eed37e0c388f1}\label{namespacetesseract__common_abab89b9d8c62a5eb8f4eed37e0c388f1}} 
 \index{tesseract\_common@{tesseract\_common}!parseEnvironmentVariableList@{parseEnvironmentVariableList}}
 \index{parseEnvironmentVariableList@{parseEnvironmentVariableList}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{parseEnvironmentVariableList()}{parseEnvironmentVariableList()}}
-{\footnotesize\ttfamily std\+::list$<$std\+::string$>$ tesseract\+\_\+common\+::parse\+Environment\+Variable\+List (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{env\+\_\+variable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-\mbox{\Hypertarget{namespacetesseract__common_a2e05a4098ef0cdb5c01c325b45a1a1fd}\label{namespacetesseract__common_a2e05a4098ef0cdb5c01c325b45a1a1fd}} 
-\index{tesseract\_common@{tesseract\_common}!parseEnvironmentVariableMap@{parseEnvironmentVariableMap}}
-\index{parseEnvironmentVariableMap@{parseEnvironmentVariableMap}!tesseract\_common@{tesseract\_common}}
-\doxysubsubsection{\texorpdfstring{parseEnvironmentVariableMap()}{parseEnvironmentVariableMap()}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ tesseract\+\_\+common\+::parse\+Environment\+Variable\+Map (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{env\+\_\+variable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::set$<$std\+::string$>$ tesseract\+\_\+common\+::parse\+Environment\+Variable\+List (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{env\+\_\+variable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{namespacetesseract__common_ac4e9558332430365cd69cb2eec1784c8}\label{namespacetesseract__common_ac4e9558332430365cd69cb2eec1784c8}} 
 \index{tesseract\_common@{tesseract\_common}!printNestedException@{printNestedException}}
@@ -724,6 +889,23 @@ Query a string value from xml element.
 \begin{DoxyReturn}{Returns}
 tinyxml2\+::\+XML\+\_\+\+SUCCESS if successful, otherwise returns tinyxml2\+::\+XML\+\_\+\+NO\+\_\+\+ATTRIBUTE 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a7da14d8e3b6c20175711209343aafe2f}\label{namespacetesseract__common_a7da14d8e3b6c20175711209343aafe2f}} 
+\index{tesseract\_common@{tesseract\_common}!reorder@{reorder}}
+\index{reorder@{reorder}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{reorder()}{reorder()}}
+{\footnotesize\ttfamily void tesseract\+\_\+common\+::reorder (\begin{DoxyParamCaption}\item[{Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$}]{v,  }\item[{\mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ Eigen\+::\+Index $>$}]{order }\end{DoxyParamCaption})}
+
+
+
+Reorder Eigen\+::\+Vector\+Xd implace given index list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The vector to reorder \\
+\hline
+{\em order} & A vector of index which define the new order \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacetesseract__common_aa86a4f0e5ca9d2b1f5abc3f34735d85b}\label{namespacetesseract__common_aa86a4f0e5ca9d2b1f5abc3f34735d85b}} 
 \index{tesseract\_common@{tesseract\_common}!rtrim@{rtrim}}
 \index{rtrim@{rtrim}!tesseract\_common@{tesseract\_common}}
@@ -763,6 +945,13 @@ Check if joint position is within bounds or relativilty equal to a limit.
 \begin{DoxyReturn}{Returns}
 True if the all position are within the limits or relativily equal to the limit, otherwise false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__common_a7f13ad2a741226ab5255302f6750ed4a}\label{namespacetesseract__common_a7f13ad2a741226ab5255302f6750ed4a}} 
+\index{tesseract\_common@{tesseract\_common}!strFormat@{strFormat}}
+\index{strFormat@{strFormat}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{strFormat()}{strFormat()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+std\+::string tesseract\+\_\+common\+::str\+Format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format,  }\item[{Args...}]{args }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{namespacetesseract__common_aadfa4845aecc119ae62b37e59c6ee168}\label{namespacetesseract__common_aadfa4845aecc119ae62b37e59c6ee168}} 
 \index{tesseract\_common@{tesseract\_common}!StringAttribute@{StringAttribute}}
 \index{StringAttribute@{StringAttribute}!tesseract\_common@{tesseract\_common}}
@@ -790,7 +979,7 @@ Parsed string attribute or default value if attribute does not exist.
 \index{toNumeric@{toNumeric}!tesseract\_common@{tesseract\_common}}
 \doxysubsubsection{\texorpdfstring{toNumeric()}{toNumeric()}}
 {\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
-bool tesseract\+\_\+common\+::to\+Numeric (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s,  }\item[{Float\+Type \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+bool tesseract\+\_\+common\+::to\+Numeric (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s,  }\item[{Float\+Type \&}]{value }\end{DoxyParamCaption})}
 
 
 
@@ -843,6 +1032,40 @@ Trim left and right of string.
 
 \begin{DoxyParams}{Parameters}
 {\em s} & The string to trim \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacetesseract__common_a98c27df906a6e17d088772d3d1c21a5d}\label{namespacetesseract__common_a98c27df906a6e17d088772d3d1c21a5d}} 
+\index{tesseract\_common@{tesseract\_common}!twistChangeBase@{twistChangeBase}}
+\index{twistChangeBase@{twistChangeBase}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{twistChangeBase()}{twistChangeBase()}}
+{\footnotesize\ttfamily void tesseract\+\_\+common\+::twist\+Change\+Base (\begin{DoxyParamCaption}\item[{Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$}]{twist,  }\item[{const Eigen\+::\+Isometry3d \&}]{change\+\_\+base }\end{DoxyParamCaption})}
+
+
+
+Change the base coordinate system of the Twist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em twist} & The current Twist which gets modified in place \\
+\hline
+{\em change\+\_\+base} & The transform from the desired frame to the current base frame of the Twist \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacetesseract__common_a4ed12ea384452e2d5d4f7a0854035384}\label{namespacetesseract__common_a4ed12ea384452e2d5d4f7a0854035384}} 
+\index{tesseract\_common@{tesseract\_common}!twistChangeRefPoint@{twistChangeRefPoint}}
+\index{twistChangeRefPoint@{twistChangeRefPoint}!tesseract\_common@{tesseract\_common}}
+\doxysubsubsection{\texorpdfstring{twistChangeRefPoint()}{twistChangeRefPoint()}}
+{\footnotesize\ttfamily void tesseract\+\_\+common\+::twist\+Change\+Ref\+Point (\begin{DoxyParamCaption}\item[{Eigen\+::\+Ref$<$ Eigen\+::\+Vector\+Xd $>$}]{twist,  }\item[{const Eigen\+::\+Ref$<$ const Eigen\+::\+Vector3d $>$ \&}]{ref\+\_\+point }\end{DoxyParamCaption})}
+
+
+
+Change the reference point of the provided Twist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em twist} & The current Twist which gets modified in place \\
+\hline
+{\em ref\+\_\+point} & Is expressed in the same base frame of the Twist and is a vector from the old point to the new point. \\
 \hline
 \end{DoxyParams}
 

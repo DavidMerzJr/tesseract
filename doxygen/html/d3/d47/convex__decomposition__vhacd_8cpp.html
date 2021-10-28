@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tesseract: tesseract_collision/src/convex_decomposition/convex_decomposition_vhacd.cpp File Reference</title>
+<title>Tesseract: tesseract_collision/vhacd/src/convex_decomposition_vhacd.cpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_10d374c56a837e7f10014d66610d1e74.html">tesseract_collision</a></li><li class="navelem"><a class="el" href="../../dir_4d640d490387bc96edaa54c486c377a2.html">src</a></li><li class="navelem"><a class="el" href="../../dir_f1c1d8a4f6e095e7f6bfa9d7c2cff15b.html">convex_decomposition</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_10d374c56a837e7f10014d66610d1e74.html">tesseract_collision</a></li><li class="navelem"><a class="el" href="../../dir_cef080a1c457534c26e3494a884a3d55.html">vhacd</a></li><li class="navelem"><a class="el" href="../../dir_2d037ac4c80e9c2728069caca20305d9.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -78,64 +78,46 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="../../de/d3c/macros_8h_source.html">tesseract_common/macros.h</a>&gt;</code><br />
 <code>#include &lt;console_bridge/console.h&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;<a class="el" href="../../d0/dc4/VHACD_8h_source.html">tesseract_collision/vhacd/VHACD.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="../../dc/d54/common_8h_source.html">tesseract_collision/core/common.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="../../d2/df5/convex__decomposition__vhacd_8h_source.html">tesseract_collision/convex_decomposition/convex_decomposition_vhacd.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d0/d01/convex__hull__utils_8h_source.html">tesseract_collision/bullet/convex_hull_utils.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d2/df5/convex__decomposition__vhacd_8h_source.html">tesseract_collision/vhacd/convex_decomposition_vhacd.h</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for convex_decomposition_vhacd.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d2/d31/convex__decomposition__vhacd_8cpp__incl.png" border="0" usemap="#atesseract__collision_2src_2convex__decomposition_2convex__decomposition__vhacd_8cpp" alt=""/></div>
-<map name="atesseract__collision_2src_2convex__decomposition_2convex__decomposition__vhacd_8cpp" id="atesseract__collision_2src_2convex__decomposition_2convex__decomposition__vhacd_8cpp">
-<area shape="rect" title=" " alt="" coords="2399,5,2623,61"/>
-<area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="3475,868,3666,895"/>
-<area shape="rect" title=" " alt="" coords="5,235,173,262"/>
-<area shape="rect" href="../../d0/dc4/VHACD_8h.html" title=" " alt="" coords="4405,228,4536,269"/>
-<area shape="rect" href="../../dc/d54/common_8h.html" title="This is a collection of common methods." alt="" coords="711,124,841,165"/>
-<area shape="rect" href="../../d2/df5/convex__decomposition__vhacd_8h.html" title="Convex decomposition VHACD implementation." alt="" coords="2431,109,2590,180"/>
-<area shape="rect" title=" " alt="" coords="4520,332,4581,359"/>
-<area shape="rect" title=" " alt="" coords="4445,332,4496,359"/>
-<area shape="rect" title=" " alt="" coords="1662,697,1717,723"/>
-<area shape="rect" title=" " alt="" coords="197,235,432,262"/>
-<area shape="rect" title=" " alt="" coords="455,235,513,262"/>
-<area shape="rect" title=" " alt="" coords="537,235,597,262"/>
-<area shape="rect" title=" " alt="" coords="1331,868,1445,895"/>
-<area shape="rect" title=" " alt="" coords="672,235,739,262"/>
-<area shape="rect" title=" " alt="" coords="925,697,997,723"/>
-<area shape="rect" title=" " alt="" coords="1021,697,1088,723"/>
-<area shape="rect" title=" " alt="" coords="1600,235,1771,262"/>
-<area shape="rect" href="../../dc/d79/tesseract__common_2include_2tesseract__common_2utils_8h.html" title="Common Tesseract Utility Functions." alt="" coords="1339,607,1509,634"/>
-<area shape="rect" href="../../d3/d0c/tesseract__collision_2include_2tesseract__collision_2core_2types_8h.html" title="Tesseracts Collision Common Types." alt="" coords="1445,228,1576,269"/>
-<area shape="rect" title=" " alt="" coords="2200,786,2259,813"/>
-<area shape="rect" title=" " alt="" coords="2107,786,2176,813"/>
-<area shape="rect" title=" " alt="" coords="1406,697,1485,723"/>
-<area shape="rect" title=" " alt="" coords="1214,697,1279,723"/>
-<area shape="rect" title=" " alt="" coords="1303,697,1382,723"/>
-<area shape="rect" href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html" title="Common Tesseract Types." alt="" coords="1843,697,2021,723"/>
-<area shape="rect" title=" " alt="" coords="888,868,973,895"/>
-<area shape="rect" title=" " alt="" coords="3199,786,3267,813"/>
-<area shape="rect" title=" " alt="" coords="2035,786,2082,813"/>
-<area shape="rect" title=" " alt="" coords="977,786,1087,813"/>
-<area shape="rect" title=" " alt="" coords="1819,786,1959,813"/>
-<area shape="rect" href="../../d9/dc2/kinematic__limits_8h.html" title="Common Tesseract Kinematic Limits and Related Utility Functions." alt="" coords="1291,779,1485,820"/>
-<area shape="rect" title=" " alt="" coords="1641,332,1719,359"/>
-<area shape="rect" title=" " alt="" coords="1509,332,1616,359"/>
-<area shape="rect" href="../../d4/ddb/geometries_8h.html" title="Tesseract Geometries." alt="" coords="3375,325,3511,366"/>
-<area shape="rect" href="../../d4/da8/collision__margin__data_8h.html" title="This is used to store collision margin information." alt="" coords="1332,511,1516,552"/>
-<area shape="rect" href="../../df/d9e/tesseract__geometry_2include_2tesseract__geometry_2impl_2box_8h.html" title="Tesseract Box Geometry." alt="" coords="3813,600,3949,641"/>
-<area shape="rect" href="../../d8/d2b/tesseract__geometry_2include_2tesseract__geometry_2impl_2capsule_8h.html" title="Tesseract Capsule Geometry." alt="" coords="3653,600,3789,641"/>
-<area shape="rect" href="../../dc/df2/tesseract__geometry_2include_2tesseract__geometry_2impl_2cone_8h.html" title="Tesseract Cone Geometry." alt="" coords="4293,600,4429,641"/>
-<area shape="rect" href="../../de/dd2/tesseract__geometry_2include_2tesseract__geometry_2impl_2convex__mesh_8h.html" title="Tesseract Convex Mesh Geometry." alt="" coords="2892,421,3036,463"/>
-<area shape="rect" href="../../d2/deb/polygon__mesh_8h.html" title="Tesseract Polygon Mesh Geometry." alt="" coords="2451,511,2597,552"/>
-<area shape="rect" href="../../d8/d3b/tesseract__geometry_2include_2tesseract__geometry_2impl_2cylinder_8h.html" title="Tesseract Cylinder Geometry." alt="" coords="3973,600,4109,641"/>
-<area shape="rect" href="../../d5/d93/tesseract__geometry_2include_2tesseract__geometry_2impl_2mesh_8h.html" title="Tesseract Mesh Geometry." alt="" coords="2567,421,2703,463"/>
-<area shape="rect" href="../../df/d5e/tesseract__geometry_2include_2tesseract__geometry_2impl_2octree_8h.html" title="Tesseract Octree Geometry." alt="" coords="4133,600,4269,641"/>
-<area shape="rect" href="../../db/d8b/plane_8h.html" title="Tesseract Plane Geometry." alt="" coords="3493,600,3629,641"/>
-<area shape="rect" href="../../d2/d17/tesseract__geometry_2include_2tesseract__geometry_2impl_2sdf__mesh_8h.html" title="Tesseract SDF Mesh Geometry." alt="" coords="2244,421,2380,463"/>
-<area shape="rect" href="../../d8/db6/tesseract__geometry_2include_2tesseract__geometry_2impl_2sphere_8h.html" title="Tesseract Sphere Geometry." alt="" coords="3283,600,3419,641"/>
-<area shape="rect" href="../../d0/da6/tesseract__geometry_2include_2tesseract__geometry_2geometry_8h.html" title="Tesseract Geometries." alt="" coords="3321,689,3457,731"/>
-<area shape="rect" href="../../df/d8e/mesh__material_8h.html" title="Tesseract Mesh Material read from a mesh file." alt="" coords="2552,600,2701,641"/>
-<area shape="rect" href="../../d8/d01/resource_8h.html" title="Class to retrieve data from resources." alt="" coords="2317,697,2515,723"/>
-<area shape="rect" href="../../dd/dc4/convex__decomposition_8h.html" title="Convex decomposition interface." alt="" coords="2427,317,2595,373"/>
+<div class="center"><img src="../../d2/d31/convex__decomposition__vhacd_8cpp__incl.png" border="0" usemap="#atesseract__collision_2vhacd_2src_2convex__decomposition__vhacd_8cpp" alt=""/></div>
+<map name="atesseract__collision_2vhacd_2src_2convex__decomposition__vhacd_8cpp" id="atesseract__collision_2vhacd_2src_2convex__decomposition__vhacd_8cpp">
+<area shape="rect" title=" " alt="" coords="1992,5,2211,61"/>
+<area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="1171,771,1362,798"/>
+<area shape="rect" title=" " alt="" coords="2139,124,2307,151"/>
+<area shape="rect" title=" " alt="" coords="2331,124,2397,151"/>
+<area shape="rect" title=" " alt="" coords="2421,124,2493,151"/>
+<area shape="rect" href="../../d0/dc4/VHACD_8h.html" title=" " alt="" coords="1893,117,2024,158"/>
+<area shape="rect" href="../../d0/d01/convex__hull__utils_8h.html" title="This is a collection of common methods." alt="" coords="1225,213,1356,269"/>
+<area shape="rect" href="../../d2/df5/convex__decomposition__vhacd_8h.html" title="Convex decomposition VHACD implementation." alt="" coords="1631,109,1828,165"/>
+<area shape="rect" title=" " alt="" coords="1848,228,1909,255"/>
+<area shape="rect" title=" " alt="" coords="1933,228,1984,255"/>
+<area shape="rect" title=" " alt="" coords="2009,228,2063,255"/>
+<area shape="rect" href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html" title="Common Tesseract Types." alt="" coords="717,593,896,619"/>
+<area shape="rect" href="../../d5/d93/tesseract__geometry_2include_2tesseract__geometry_2impl_2mesh_8h.html" title="Tesseract Mesh Geometry." alt="" coords="1043,317,1179,359"/>
+<area shape="rect" href="../../de/dd2/tesseract__geometry_2include_2tesseract__geometry_2impl_2convex__mesh_8h.html" title="Tesseract Convex Mesh Geometry." alt="" coords="1456,317,1600,359"/>
+<area shape="rect" title=" " alt="" coords="943,771,1028,798"/>
+<area shape="rect" title=" " alt="" coords="75,771,189,798"/>
+<area shape="rect" title=" " alt="" coords="1475,682,1533,709"/>
+<area shape="rect" title=" " alt="" coords="1382,682,1450,709"/>
+<area shape="rect" title=" " alt="" coords="550,682,597,709"/>
+<area shape="rect" title=" " alt="" coords="621,682,731,709"/>
+<area shape="rect" title=" " alt="" coords="246,682,386,709"/>
+<area shape="rect" title=" " alt="" coords="411,682,525,709"/>
+<area shape="rect" href="../../d9/dc2/kinematic__limits_8h.html" title="Common Tesseract Kinematic Limits and Related Utility Functions." alt="" coords="755,675,949,716"/>
+<area shape="rect" title=" " alt="" coords="789,764,915,805"/>
+<area shape="rect" href="../../d3/d95/resource__locator_8h.html" title="Locate and retrieve resource data." alt="" coords="1173,585,1360,627"/>
+<area shape="rect" href="../../d0/da6/tesseract__geometry_2include_2tesseract__geometry_2geometry_8h.html" title="Tesseract Geometries." alt="" coords="1435,585,1571,627"/>
+<area shape="rect" href="../../df/d8e/mesh__material_8h.html" title="Tesseract Mesh Material read from a mesh file." alt="" coords="1067,496,1216,537"/>
+<area shape="rect" href="../../d2/deb/polygon__mesh_8h.html" title="Tesseract Polygon Mesh Geometry." alt="" coords="1148,407,1295,448"/>
+<area shape="rect" title=" " alt="" coords="1227,682,1306,709"/>
+<area shape="rect" href="../../dd/dc4/convex__decomposition_8h.html" title="Convex decomposition interface." alt="" coords="1560,221,1757,262"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -152,7 +134,7 @@ Namespaces</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:24 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:16 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

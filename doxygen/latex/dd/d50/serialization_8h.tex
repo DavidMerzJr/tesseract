@@ -6,6 +6,7 @@ Additional Boost serialization wrappers.
 
 
 {\ttfamily \#include $<$tesseract\+\_\+common/macros.\+h$>$}\newline
+{\ttfamily \#include $<$variant$>$}\newline
 {\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
 {\ttfamily \#include $<$boost/serialization/tracking.\+hpp$>$}\newline
 {\ttfamily \#include $<$boost/serialization/tracking\+\_\+enum.\+hpp$>$}\newline
@@ -53,6 +54,12 @@ This graph shows which files directly or indirectly include this file\+:
 \item 
 {\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{namespaceboost_1_1serialization_acc2c87e6f21f9f87a5ef38ef10d38d8d}{boost\+::serialization\+::serialize}} (Archive \&ar, Eigen\+::\+Matrix\+X2d \&g, const unsigned int version)
 \item 
+{\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{namespaceboost_1_1serialization_a5cedb22a9f3074c8826d852064662178}{boost\+::serialization\+::save}} (Archive \&ar, const std\+::variant$<$ std\+::string, Eigen\+::\+Isometry3d $>$ \&g, const unsigned int version)
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{namespaceboost_1_1serialization_a70b58a18bac429a856c7f6e7bcb527f7}{boost\+::serialization\+::load}} (Archive \&ar, std\+::variant$<$ std\+::string, Eigen\+::\+Isometry3d $>$ \&g, const unsigned int version)
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{namespaceboost_1_1serialization_a101eccbce7d00cf44575ef3e5e43e745}{boost\+::serialization\+::serialize}} (Archive \&ar, std\+::variant$<$ std\+::string, Eigen\+::\+Isometry3d $>$ \&g, const unsigned int version)
+\item 
 \mbox{\hyperlink{serialization_8h_a6ce327d54a408162d753adb9cc40e1cd}{BOOST\+\_\+\+CLASS\+\_\+\+TRACKING}} (Eigen\+::\+Vector\+Xd, boost\+::serialization\+::track\+\_\+never)
 \item 
 \mbox{\hyperlink{serialization_8h_aa77c59b509467002de669b90fb0205c7}{BOOST\+\_\+\+CLASS\+\_\+\+TRACKING}} (Eigen\+::\+Isometry3d, boost\+::serialization\+::track\+\_\+never)
@@ -81,7 +88,7 @@ February 21, 2021
 TODO 
 \end{DoxyVersion}
 \begin{DoxyRefDesc}{Bug}
-\item[\mbox{\hyperlink{bug__bug000041}{Bug}}]No known bugs\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{bug__bug000050}{Bug}}]No known bugs\end{DoxyRefDesc}
 
 
 \begin{DoxyCopyright}{Copyright}

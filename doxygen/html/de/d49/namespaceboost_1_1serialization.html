@@ -105,10 +105,19 @@ Functions</h2></td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#acc2c87e6f21f9f87a5ef38ef10d38d8d">serialize</a> (Archive &amp;ar, Eigen::MatrixX2d &amp;g, const unsigned int version)</td></tr>
 <tr class="separator:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a5cedb22a9f3074c8826d852064662178">save</a> (Archive &amp;ar, const std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a5cedb22a9f3074c8826d852064662178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a70b58a18bac429a856c7f6e7bcb527f7">load</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a101eccbce7d00cf44575ef3e5e43e745">serialize</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a101eccbce7d00cf44575ef3e5e43e745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a937c95e720c6f8a627a8598c22799506"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a937c95e720c6f8a627a8598c22799506">&#9670;&nbsp;</a></span>load() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a937c95e720c6f8a627a8598c22799506">&#9670;&nbsp;</a></span>load() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +153,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="a594198c2e90f0a9eef3a1b3ca33f939f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a594198c2e90f0a9eef3a1b3ca33f939f">&#9670;&nbsp;</a></span>load() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a594198c2e90f0a9eef3a1b3ca33f939f">&#9670;&nbsp;</a></span>load() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +189,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="a792bfcb1890d3e795dffa17790816d2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a792bfcb1890d3e795dffa17790816d2e">&#9670;&nbsp;</a></span>load() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a792bfcb1890d3e795dffa17790816d2e">&#9670;&nbsp;</a></span>load() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,8 +224,44 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
+<a id="a70b58a18bac429a856c7f6e7bcb527f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70b58a18bac429a856c7f6e7bcb527f7">&#9670;&nbsp;</a></span>load() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void boost::serialization::load </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a070c97bca3f5e369906d91323be197f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a070c97bca3f5e369906d91323be197f5">&#9670;&nbsp;</a></span>save() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a070c97bca3f5e369906d91323be197f5">&#9670;&nbsp;</a></span>save() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +297,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="a7ee92ce4c3d6937ac3e020c1866db330"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ee92ce4c3d6937ac3e020c1866db330">&#9670;&nbsp;</a></span>save() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee92ce4c3d6937ac3e020c1866db330">&#9670;&nbsp;</a></span>save() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,7 +333,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="a530b9d6ab7e0038d80a74e7030f750e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a530b9d6ab7e0038d80a74e7030f750e5">&#9670;&nbsp;</a></span>save() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a530b9d6ab7e0038d80a74e7030f750e5">&#9670;&nbsp;</a></span>save() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,8 +368,44 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
+<a id="a5cedb22a9f3074c8826d852064662178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cedb22a9f3074c8826d852064662178">&#9670;&nbsp;</a></span>save() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void boost::serialization::save </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4b28ff5af1663c933c8f23f65071e013"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b28ff5af1663c933c8f23f65071e013">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b28ff5af1663c933c8f23f65071e013">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,7 +441,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="acc2c87e6f21f9f87a5ef38ef10d38d8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc2c87e6f21f9f87a5ef38ef10d38d8d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2c87e6f21f9f87a5ef38ef10d38d8d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,7 +477,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <a id="a2da13e661fc59d6f4e6af326fa4a119d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2da13e661fc59d6f4e6af326fa4a119d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2da13e661fc59d6f4e6af326fa4a119d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -431,10 +512,46 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
+<a id="a101eccbce7d00cf44575ef3e5e43e745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a101eccbce7d00cf44575ef3e5e43e745">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void boost::serialization::serialize </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:25 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:17 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

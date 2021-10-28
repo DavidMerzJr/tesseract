@@ -1,5 +1,5 @@
-<map id="tesseract_environment/include/tesseract_environment/core/commands/add_link_command.h" name="tesseract_environment/include/tesseract_environment/core/commands/add_link_command.h">
-<area shape="rect" id="node1" title="Used to add link and joint to environment." alt="" coords="105,5,351,61"/>
+<map id="tesseract_environment/include/tesseract_environment/commands/add_link_command.h" name="tesseract_environment/include/tesseract_environment/commands/add_link_command.h">
+<area shape="rect" id="node1" title="Used to add link and joint to environment." alt="" coords="120,5,336,61"/>
 <area shape="rect" id="node2" href="$de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="18,288,209,315"/>
 <area shape="rect" id="node3" title=" " alt="" coords="299,288,367,315"/>
 <area shape="rect" id="node4" href="$d0/d09/command_8h.html" title="This contains classes for recording operations applied to the environment for tracking changes...." alt="" coords="36,199,191,240"/>

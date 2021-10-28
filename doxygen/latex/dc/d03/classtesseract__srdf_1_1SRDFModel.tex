@@ -41,9 +41,9 @@ virtual \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_ad0a31f46d66793483479
 \item 
 \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel}{SRDFModel}} \& \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a4de80d6aff38de6a1c0c69d575b1b70b}{operator=}} (\mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel}{SRDFModel}} \&\&)=default
 \item 
-void \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_ab38b514b3d9c6a30d323ebac054a8de2}{init\+File}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&scene\+\_\+graph, const std\+::string \&filename)
+void \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_adf0a949b46216d9823a83661781ac1e6}{init\+File}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&scene\+\_\+graph, const std\+::string \&filename, const \mbox{\hyperlink{classtesseract__common_1_1ResourceLocator}{tesseract\+\_\+common\+::\+Resource\+Locator}} \&locator)
 \begin{DoxyCompactList}\small\item\em Load Model given a filename. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a100271ff8717425953c31cfd7ac14bd3}{init\+String}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&scene\+\_\+graph, const std\+::string \&xmlstring)
+void \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_ab557f44132eedcfb16d3cbb545ce9863}{init\+String}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&scene\+\_\+graph, const std\+::string \&xmlstring, const \mbox{\hyperlink{classtesseract__common_1_1ResourceLocator}{tesseract\+\_\+common\+::\+Resource\+Locator}} \&locator)
 \begin{DoxyCompactList}\small\item\em Load Model from a XML-\/string. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a029ffab3d81e17c436a8162220776dca}{save\+To\+File}} (const std\+::string \&file\+\_\+path) const
 \begin{DoxyCompactList}\small\item\em Save the model to a file. \end{DoxyCompactList}\item 
@@ -56,10 +56,12 @@ std\+::string \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a3424eb860989d4
 \begin{DoxyCompactList}\small\item\em The name of the srdf model. \end{DoxyCompactList}\item 
 std\+::array$<$ int, 3 $>$ \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a43680d09b5966592ada54b63a8849aa6}{version}} \{ \{ 1, 0, 0 \} \}
 \begin{DoxyCompactList}\small\item\em The version number major.\+minor\mbox{[}.patch\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structtesseract__srdf_1_1KinematicsInformation}{Kinematics\+Information}} \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a3cb7ccb84088f10f83159fe03710ac4c}{kinematics\+\_\+information}}
+\begin{DoxyCompactList}\small\item\em Contact information related to kinematics. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structtesseract__common_1_1ContactManagersPluginInfo}{tesseract\+\_\+common\+::\+Contact\+Managers\+Plugin\+Info}} \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a64b6c21f31b7061450d62fd7d57e433b}{contact\+\_\+managers\+\_\+plugin\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em The contact managers plugin information. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classtesseract__scene__graph_1_1AllowedCollisionMatrix}{tesseract\+\_\+scene\+\_\+graph\+::\+Allowed\+Collision\+Matrix}} \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a66343b735a4febc8fe44ac23a06e2b3f}{acm}}
 \begin{DoxyCompactList}\small\item\em The allowed collision matrix. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structtesseract__srdf_1_1KinematicsInformation}{Kinematics\+Information}} \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a3cb7ccb84088f10f83159fe03710ac4c}{kinematics\+\_\+information}}
-\begin{DoxyCompactList}\small\item\em A map of group opw kinematics data. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classtesseract__common_1_1CollisionMarginData_a9d0116259e8c3b97d61e63a3209ffa7b}{tesseract\+\_\+common\+::\+Collision\+Margin\+Data\+::\+Ptr}} \mbox{\hyperlink{classtesseract__srdf_1_1SRDFModel_a24c04018109a2b2c7f7e9fde494b26d1}{collision\+\_\+margin\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Collision margin data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -120,11 +122,11 @@ Representation of semantic information about the robot.
 
 Clear the model. 
 
-\mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_ab38b514b3d9c6a30d323ebac054a8de2}\label{classtesseract__srdf_1_1SRDFModel_ab38b514b3d9c6a30d323ebac054a8de2}} 
+\mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_adf0a949b46216d9823a83661781ac1e6}\label{classtesseract__srdf_1_1SRDFModel_adf0a949b46216d9823a83661781ac1e6}} 
 \index{tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}!initFile@{initFile}}
 \index{initFile@{initFile}!tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}}
 \doxysubsubsection{\texorpdfstring{initFile()}{initFile()}}
-{\footnotesize\ttfamily void tesseract\+\_\+srdf\+::\+SRDFModel\+::init\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void tesseract\+\_\+srdf\+::\+SRDFModel\+::init\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{const std\+::string \&}]{filename,  }\item[{const \mbox{\hyperlink{classtesseract__common_1_1ResourceLocator}{tesseract\+\_\+common\+::\+Resource\+Locator}} \&}]{locator }\end{DoxyParamCaption})}
 
 
 
@@ -135,11 +137,11 @@ Load Model given a filename.
 {\em std\+::nested\+\_\+exception} & if an error occurs during parsing srdf \\
 \hline
 \end{DoxyExceptions}
-\mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_a100271ff8717425953c31cfd7ac14bd3}\label{classtesseract__srdf_1_1SRDFModel_a100271ff8717425953c31cfd7ac14bd3}} 
+\mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_ab557f44132eedcfb16d3cbb545ce9863}\label{classtesseract__srdf_1_1SRDFModel_ab557f44132eedcfb16d3cbb545ce9863}} 
 \index{tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}!initString@{initString}}
 \index{initString@{initString}!tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}}
 \doxysubsubsection{\texorpdfstring{initString()}{initString()}}
-{\footnotesize\ttfamily void tesseract\+\_\+srdf\+::\+SRDFModel\+::init\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{const std\+::string \&}]{xmlstring }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void tesseract\+\_\+srdf\+::\+SRDFModel\+::init\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{tesseract\+\_\+scene\+\_\+graph\+::\+Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{const std\+::string \&}]{xmlstring,  }\item[{const \mbox{\hyperlink{classtesseract__common_1_1ResourceLocator}{tesseract\+\_\+common\+::\+Resource\+Locator}} \&}]{locator }\end{DoxyParamCaption})}
 
 
 
@@ -195,6 +197,16 @@ The allowed collision matrix.
 
 Collision margin data. 
 
+\mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_a64b6c21f31b7061450d62fd7d57e433b}\label{classtesseract__srdf_1_1SRDFModel_a64b6c21f31b7061450d62fd7d57e433b}} 
+\index{tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}!contact\_managers\_plugin\_info@{contact\_managers\_plugin\_info}}
+\index{contact\_managers\_plugin\_info@{contact\_managers\_plugin\_info}!tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}}
+\doxysubsubsection{\texorpdfstring{contact\_managers\_plugin\_info}{contact\_managers\_plugin\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtesseract__common_1_1ContactManagersPluginInfo}{tesseract\+\_\+common\+::\+Contact\+Managers\+Plugin\+Info}} tesseract\+\_\+srdf\+::\+SRDFModel\+::contact\+\_\+managers\+\_\+plugin\+\_\+info}
+
+
+
+The contact managers plugin information. 
+
 \mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_a3cb7ccb84088f10f83159fe03710ac4c}\label{classtesseract__srdf_1_1SRDFModel_a3cb7ccb84088f10f83159fe03710ac4c}} 
 \index{tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}!kinematics\_information@{kinematics\_information}}
 \index{kinematics\_information@{kinematics\_information}!tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}}
@@ -203,7 +215,7 @@ Collision margin data.
 
 
 
-A map of group opw kinematics data. 
+Contact information related to kinematics. 
 
 \mbox{\Hypertarget{classtesseract__srdf_1_1SRDFModel_a3424eb860989d4c2bfe1a0a204cf7925}\label{classtesseract__srdf_1_1SRDFModel_a3424eb860989d4c2bfe1a0a204cf7925}} 
 \index{tesseract\_srdf::SRDFModel@{tesseract\_srdf::SRDFModel}!name@{name}}

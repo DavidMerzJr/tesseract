@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">// Compare class types before casting the incoming object to the T type</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">if</span> (rhs.getType() == <a class="code" href="../../d0/de7/structtesseract__common_1_1detail__any_1_1AnyInner.html#ae2f684553aeb177661f6bffd586f195f">getType</a>())</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keyword">auto</span> any_type = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(rhs.recover());</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span>* any_type = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(rhs.recover());</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d0/de7/structtesseract__common_1_1detail__any_1_1AnyInner.html#ac044a16a2a7da963708ee16b4cf574ee">any_type_</a> == *any_type;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -277,7 +277,7 @@ $(function() {
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../da/d73/classtesseract__common_1_1Any.html#af207dd9e6a1ff78340bdcf05e1c8be22">getType</a>() != <span class="keyword">typeid</span>(T))</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      <span class="keywordflow">throw</span> std::bad_cast();</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">auto</span> p = <span class="keyword">static_cast&lt;</span><a class="code" href="../../da/d73/classtesseract__common_1_1Any.html#a842b0ebe8a90b899be7a2877ecc76d3a">uncvref_t&lt;T&gt;</a>*<span class="keyword">&gt;</span>(<a class="code" href="../../da/d73/classtesseract__common_1_1Any.html#a8f2f5c3d13691e573cab8ac5042c570a">any_type_</a>-&gt;recover());</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">auto</span>* p = <span class="keyword">static_cast&lt;</span><a class="code" href="../../da/d73/classtesseract__common_1_1Any.html#a842b0ebe8a90b899be7a2877ecc76d3a">uncvref_t&lt;T&gt;</a>*<span class="keyword">&gt;</span>(<a class="code" href="../../da/d73/classtesseract__common_1_1Any.html#a8f2f5c3d13691e573cab8ac5042c570a">any_type_</a>-&gt;recover());</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">return</span> *p;</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  }</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
@@ -327,8 +327,8 @@ $(function() {
 <div class="ttc" id="aclasstesseract__common_1_1Any_html_ac98d07dd8f7b70e16ccb9a01abf56b9c"><div class="ttname"><a href="../../da/d73/classtesseract__common_1_1Any.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">tesseract_common::Any::access</a></div><div class="ttdeci">friend class boost::serialization::access</div><div class="ttdef"><b>Definition:</b> any.h:250</div></div>
 <div class="ttc" id="aclasstesseract__common_1_1Any_html_af207dd9e6a1ff78340bdcf05e1c8be22"><div class="ttname"><a href="../../da/d73/classtesseract__common_1_1Any.html#af207dd9e6a1ff78340bdcf05e1c8be22">tesseract_common::Any::getType</a></div><div class="ttdeci">std::type_index getType() const</div><div class="ttdef"><b>Definition:</b> any.h:217</div></div>
 <div class="ttc" id="amacros_8h_html"><div class="ttname"><a href="../../de/d3c/macros_8h.html">macros.h</a></div><div class="ttdoc">Common Tesseract Macros.</div></div>
-<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:65</div></div>
-<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:35</div></div>
+<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:69</div></div>
+<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:36</div></div>
 <div class="ttc" id="anamespaceboost_html"><div class="ttname"><a href="../../d4/da9/namespaceboost.html">boost</a></div><div class="ttdef"><b>Definition:</b> any.h:147</div></div>
 <div class="ttc" id="anamespacetesseract__common_html"><div class="ttname"><a href="../../df/da9/namespacetesseract__common.html">tesseract_common</a></div><div class="ttdef"><b>Definition:</b> any.h:57</div></div>
 <div class="ttc" id="astructtesseract__common_1_1detail__any_1_1AnyInnerBase_html"><div class="ttname"><a href="../../d3/d6e/structtesseract__common_1_1detail__any_1_1AnyInnerBase.html">tesseract_common::detail_any::AnyInnerBase</a></div><div class="ttdef"><b>Definition:</b> any.h:62</div></div>
@@ -367,7 +367,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:23 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:16 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

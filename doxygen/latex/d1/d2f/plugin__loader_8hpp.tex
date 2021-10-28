@@ -8,6 +8,7 @@ Plugin Loader to be used throughout Tesseract for loading plugins.
 {\ttfamily \#include $<$tesseract\+\_\+common/macros.\+h$>$}\newline
 {\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\newline
 {\ttfamily \#include $<$console\+\_\+bridge/console.\+h$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
 {\ttfamily \#include $<$tesseract\+\_\+common/plugin\+\_\+loader.\+h$>$}\newline
 {\ttfamily \#include $<$tesseract\+\_\+common/class\+\_\+loader.\+h$>$}\newline
 Include dependency graph for plugin\+\_\+loader.\+hpp\+:
@@ -34,13 +35,11 @@ This graph shows which files directly or indirectly include this file\+:
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a0b6d0012d51401bfd898e534ad9c9be9}{tesseract\+\_\+common\+::parse\+Environment\+Variable\+List}} (const std\+::string \&env\+\_\+variable)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_abab89b9d8c62a5eb8f4eed37e0c388f1}{tesseract\+\_\+common\+::parse\+Environment\+Variable\+List}} (const std\+::string \&env\+\_\+variable)
 \item 
-std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ad4ee50cb59c0f007847dc0b1ec705948}{tesseract\+\_\+common\+::get\+All\+Search\+Paths}} (const std\+::string \&search\+\_\+paths\+\_\+env, const std\+::list$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+paths)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ae0f72c84dda77755301b5372c89e06af}{tesseract\+\_\+common\+::get\+All\+Search\+Paths}} (const std\+::string \&search\+\_\+paths\+\_\+env, const std\+::set$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+paths)
 \item 
-std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a2e05a4098ef0cdb5c01c325b45a1a1fd}{tesseract\+\_\+common\+::parse\+Environment\+Variable\+Map}} (const std\+::string \&env\+\_\+variable)
-\item 
-std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_a6a03c86a7a2621390889d15ec9783b2b}{tesseract\+\_\+common\+::get\+All\+Plugins}} (const std\+::string \&plugins\+\_\+env, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&existing\+\_\+plugins)
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__common_ab95e168b09d14e3cee3de2bcd38efb63}{tesseract\+\_\+common\+::get\+All\+Search\+Libraries}} (const std\+::string \&search\+\_\+libraries\+\_\+env, const std\+::set$<$ std\+::string $>$ \&existing\+\_\+search\+\_\+libraries)
 \end{DoxyCompactItemize}
 
 
@@ -57,7 +56,7 @@ March 25, 2021
 TODO 
 \end{DoxyVersion}
 \begin{DoxyRefDesc}{Bug}
-\item[\mbox{\hyperlink{bug__bug000039}{Bug}}]No known bugs\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{bug__bug000048}{Bug}}]No known bugs\end{DoxyRefDesc}
 
 
 \begin{DoxyCopyright}{Copyright}

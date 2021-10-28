@@ -92,17 +92,18 @@ Include dependency graph for serialization.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dd/d53/serialization_8cpp__incl.png" border="0" usemap="#atesseract__common_2src_2serialization_8cpp" alt=""/></div>
 <map name="atesseract__common_2src_2serialization_8cpp" id="atesseract__common_2src_2serialization_8cpp">
-<area shape="rect" title="Additional Boost serialization wrappers." alt="" coords="567,5,722,47"/>
+<area shape="rect" title="Additional Boost serialization wrappers." alt="" coords="562,5,717,47"/>
 <area shape="rect" href="../../de/d3c/macros_8h.html" title="Common Tesseract Macros." alt="" coords="5,191,196,218"/>
 <area shape="rect" title=" " alt="" coords="220,191,315,218"/>
-<area shape="rect" title=" " alt="" coords="507,95,633,136"/>
-<area shape="rect" title=" " alt="" coords="657,95,784,136"/>
-<area shape="rect" title=" " alt="" coords="808,95,935,136"/>
-<area shape="rect" href="../../dd/d50/serialization_8h.html" title="Additional Boost serialization wrappers." alt="" coords="268,102,483,129"/>
-<area shape="rect" title=" " alt="" coords="959,102,1163,129"/>
-<area shape="rect" title=" " alt="" coords="1187,102,1387,129"/>
-<area shape="rect" title=" " alt="" coords="339,184,465,225"/>
-<area shape="rect" title=" " alt="" coords="489,184,624,225"/>
+<area shape="rect" title=" " alt="" coords="501,95,628,136"/>
+<area shape="rect" title=" " alt="" coords="652,95,779,136"/>
+<area shape="rect" title=" " alt="" coords="803,95,929,136"/>
+<area shape="rect" href="../../dd/d50/serialization_8h.html" title="Additional Boost serialization wrappers." alt="" coords="263,102,477,129"/>
+<area shape="rect" title=" " alt="" coords="953,102,1157,129"/>
+<area shape="rect" title=" " alt="" coords="1182,102,1382,129"/>
+<area shape="rect" title=" " alt="" coords="339,191,401,218"/>
+<area shape="rect" title=" " alt="" coords="425,184,552,225"/>
+<area shape="rect" title=" " alt="" coords="576,184,711,225"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -142,6 +143,15 @@ Functions</h2></td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
 <tr class="memitem:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#acc2c87e6f21f9f87a5ef38ef10d38d8d">boost::serialization::serialize</a> (Archive &amp;ar, Eigen::MatrixX2d &amp;g, const unsigned int version)</td></tr>
 <tr class="separator:acc2c87e6f21f9f87a5ef38ef10d38d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a5cedb22a9f3074c8826d852064662178"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a5cedb22a9f3074c8826d852064662178">boost::serialization::save</a> (Archive &amp;ar, const std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a5cedb22a9f3074c8826d852064662178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a70b58a18bac429a856c7f6e7bcb527f7">boost::serialization::load</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a70b58a18bac429a856c7f6e7bcb527f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a101eccbce7d00cf44575ef3e5e43e745"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d49/namespaceboost_1_1serialization.html#a101eccbce7d00cf44575ef3e5e43e745">boost::serialization::serialize</a> (Archive &amp;ar, std::variant&lt; std::string, Eigen::Isometry3d &gt; &amp;g, const unsigned int version)</td></tr>
+<tr class="separator:a101eccbce7d00cf44575ef3e5e43e745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Additional Boost serialization wrappers. </p>
@@ -153,7 +163,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Levi Armstrong </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>February 21, 2021 </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>TODO </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000049">Bug:</a></b></dt><dd>No known bugs</dd></dl>
+<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000060">Bug:</a></b></dt><dd>No known bugs</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2021, Southwest Research Institute</dd></dl>
 <dl class="section user"><dt>License</dt><dd>Software License Agreement (Apache License) </dd></dl>
 <dl class="section user"><dt></dt><dd>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> </dd></dl>
@@ -161,7 +171,7 @@ Functions</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:24 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:17 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

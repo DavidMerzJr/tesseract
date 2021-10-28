@@ -1,10 +1,17 @@
 \hypertarget{namespacetesseract__scene__graph}{}\doxysection{tesseract\+\_\+scene\+\_\+graph Namespace Reference}
 \label{namespacetesseract__scene__graph}\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetesseract__scene__graph_1_1test__suite}{test\+\_\+suite}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1AllowedCollisionMatrix}{Allowed\+Collision\+Matrix}}
 \item 
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1ShortestPath}{Shortest\+Path}}
+\begin{DoxyCompactList}\small\item\em Holds the shortest path information. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}}
 \item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1JointDynamics}{Joint\+Dynamics}}
@@ -19,6 +26,8 @@ class \mbox{\hyperlink{classtesseract__scene__graph_1_1JointMimic}{Joint\+Mimic}
 \item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint}{Joint}}
 \item 
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}} populated when parsing scene graph. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1Material}{Material}}
 \item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1Inertial}{Inertial}}
@@ -29,14 +38,38 @@ class \mbox{\hyperlink{classtesseract__scene__graph_1_1Collision}{Collision}}
 \item 
 class \mbox{\hyperlink{classtesseract__scene__graph_1_1Link}{Link}}
 \item 
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1SceneState}{Scene\+State}}
+\begin{DoxyCompactList}\small\item\em This holds a state of the scene. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1ugraph__vertex__copier}{ugraph\+\_\+vertex\+\_\+copier}}
+\item 
 struct \mbox{\hyperlink{structtesseract__scene__graph_1_1kdl__tree__builder}{kdl\+\_\+tree\+\_\+builder}}
 \begin{DoxyCompactList}\small\item\em Everytime a vertex is visited for the first time add a new segment to the KDL Tree;. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classtesseract__scene__graph_1_1ResourceLocator}{Resource\+Locator}}
-\begin{DoxyCompactList}\small\item\em Abstract class for resource loaders. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classtesseract__scene__graph_1_1SimpleResourceLocator}{Simple\+Resource\+Locator}}
-\begin{DoxyCompactList}\small\item\em Resource locator implementation using a provided function to locate file resources. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classtesseract__scene__graph_1_1SimpleLocatedResource}{Simple\+Located\+Resource}}
-\begin{DoxyCompactList}\small\item\em Resource implementation for a local file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1kdl__sub__tree__builder}{kdl\+\_\+sub\+\_\+tree\+\_\+builder}}
+\begin{DoxyCompactList}\small\item\em Everytime a vertex is visited for the first time add a new segment to the KDL Tree;. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1KDLStateSolver}{KDLState\+Solver}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1MutableStateSolver}{Mutable\+State\+Solver}}
+\begin{DoxyCompactList}\small\item\em A mutable state solver allows you to reconfigure the solver\textquotesingle{}s links and joints. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTNode}{OFKTNode}}
+\begin{DoxyCompactList}\small\item\em The OFKT node is contains multiple trasformation which are described below. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTBaseNode}{OFKTBase\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTRootNode}{OFKTRoot\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTFixedNode}{OFKTFixed\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTRevoluteNode}{OFKTRevolute\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTContinuousNode}{OFKTContinuous\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTPrismaticNode}{OFKTPrismatic\+Node}}
+\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1OFKTStateSolver}{OFKTState\+Solver}}
+\begin{DoxyCompactList}\small\item\em An implementation of the Optimized Forward Kinematic Tree as a stat solver. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtesseract__scene__graph_1_1StateSolver}{State\+Solver}}
+\item 
+struct \mbox{\hyperlink{structtesseract__scene__graph_1_1ofkt__builder}{ofkt\+\_\+builder}}
+\begin{DoxyCompactList}\small\item\em Everytime a vertex is visited for the first time add a new node to the tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,7 +83,7 @@ using \mbox{\hyperlink{namespacetesseract__scene__graph_a9dc21bc544723df21ec2705
 \begin{DoxyCompactList}\small\item\em Edge\+Property. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacetesseract__scene__graph_acbaf9f6ad6831a8d42a5ece9f2d611a2}{Graph}} = boost\+::adjacency\+\_\+list$<$ boost\+::listS, boost\+::listS, boost\+::bidirectionalS, \mbox{\hyperlink{namespacetesseract__scene__graph_a87d88949e8773cc1ab1a583b4bc6824f}{Vertex\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a9dc21bc544723df21ec27052717c4e1e}{Edge\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a8a54db22a9b9c10174389d74fc6a46bc}{Graph\+Property}} $>$
 \item 
-using \mbox{\hyperlink{namespacetesseract__scene__graph_a69d7f23b6559723bd757a453bda40714}{Simple\+Resource\+Locator\+Fn}} = std\+::function$<$ std\+::string(const std\+::string \&)$>$
+using \mbox{\hyperlink{namespacetesseract__scene__graph_a9d854d1aefdbcdab3a70f2051ee528f5}{UGraph}} = boost\+::adjacency\+\_\+list$<$ boost\+::listS, boost\+::listS, boost\+::undirectedS, \mbox{\hyperlink{namespacetesseract__scene__graph_a87d88949e8773cc1ab1a583b4bc6824f}{Vertex\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a9dc21bc544723df21ec27052717c4e1e}{Edge\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a8a54db22a9b9c10174389d74fc6a46bc}{Graph\+Property}} $>$
 \end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -69,20 +102,32 @@ enum class \mbox{\hyperlink{namespacetesseract__scene__graph_ade43fa945a554b6e0c
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \mbox{\hyperlink{namespacetesseract__scene__graph_a8282e1e01e7595b9ae8ce47813ccf35d}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph_a52654d2ec93d3faa655f811c4bc72bed}{Scene\+Graph\+::\+Path}} \&path)
+std\+::ostream \& \mbox{\hyperlink{namespacetesseract__scene__graph_a24ea91fec7fb64354921f429f24d6835}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{structtesseract__scene__graph_1_1ShortestPath}{Shortest\+Path}} \&path)
 \item 
 std\+::ostream \& \mbox{\hyperlink{namespacetesseract__scene__graph_a889d2454755511e4d1878c948a3f7942}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{namespacetesseract__scene__graph_ade43fa945a554b6e0c703e38e6a8cf16}{Joint\+Type}} \&type)
 \item 
 KDL\+::\+Frame \mbox{\hyperlink{namespacetesseract__scene__graph_a9f0ce2dde1dfc29ac92461d216bb82a8}{convert}} (const Eigen\+::\+Isometry3d \&transform)
 \begin{DoxyCompactList}\small\item\em Convert Eigen\+::\+Isometry3d to KDL\+::\+Frame. \end{DoxyCompactList}\item 
+Eigen\+::\+Isometry3d \mbox{\hyperlink{namespacetesseract__scene__graph_a349ab6dd4cccc8b8f3107d3d5d2b8bab}{convert}} (const KDL\+::\+Frame \&frame)
+\begin{DoxyCompactList}\small\item\em Convert KDL\+::\+Frame to Eigen\+::\+Isometry3d. \end{DoxyCompactList}\item 
 KDL\+::\+Vector \mbox{\hyperlink{namespacetesseract__scene__graph_a2b1998c47fe8c81fdada6a5f7c28581d}{convert}} (const Eigen\+::\+Vector3d \&\mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{vector}})
-\begin{DoxyCompactList}\small\item\em Convert Eigen\+::\+Isometry3d to KDL\+::\+Frame. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Convert Eigen\+::\+Vector3d to KDL\+::\+Vector. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector3d \mbox{\hyperlink{namespacetesseract__scene__graph_a9dd0c08437ac8c8b831cfbe76e6b84f0}{convert}} (const KDL\+::\+Vector \&\mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{vector}})
+\begin{DoxyCompactList}\small\item\em Convert KDL\+::\+Vector to Eigen\+::\+Vector3d. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{namespacetesseract__scene__graph_a139a142184a040457f1cfae06454e82c}{convert}} (const KDL\+::\+Jacobian \&jacobian)
+\begin{DoxyCompactList}\small\item\em Convert KDL\+::\+Jacobian to Eigen\+::\+Matrix. \end{DoxyCompactList}\item 
+KDL\+::\+Jacobian \mbox{\hyperlink{namespacetesseract__scene__graph_a7ba8edc21e496aae822d39365e84ed16}{convert}} (const Eigen\+::\+Matrix\+Xd \&jacobian)
+\begin{DoxyCompactList}\small\item\em Convert Eigen\+::\+Matrix to KDL\+::\+Jacobian. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{namespacetesseract__scene__graph_a4c1f3ecbf1f8c75d1f67dee86b20514f}{convert}} (const KDL\+::\+Jacobian \&jacobian, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ int $>$ \&q\+\_\+nrs)
+\begin{DoxyCompactList}\small\item\em Convert a subset of KDL\+::\+Jacobian to Eigen\+::\+Matrix. \end{DoxyCompactList}\item 
 KDL\+::\+Joint \mbox{\hyperlink{namespacetesseract__scene__graph_aa77add93f95a664b924ff3067128eb15}{convert}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint_a705d1f0a066833444550aa0c7f6d16b9}{Joint\+::\+Const\+Ptr}} \&joint)
 \begin{DoxyCompactList}\small\item\em Convert Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint}{Joint}} to KDL \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint}{Joint}}. \end{DoxyCompactList}\item 
 KDL\+::\+Rigid\+Body\+Inertia \mbox{\hyperlink{namespacetesseract__scene__graph_aecc9b2b45d0f05eaa5afa16a5c99729a}{convert}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1Inertial_a460e182afe4ea7ff68c9855afa89f68b}{Inertial\+::\+Const\+Ptr}} \&inertial)
 \begin{DoxyCompactList}\small\item\em Convert Tesseract Inertail to KDL \mbox{\hyperlink{classtesseract__scene__graph_1_1Inertial}{Inertial}}. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespacetesseract__scene__graph_a7132480e5402ba4a3c44d4dc09712c0a}{parse\+Scene\+Graph}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&scene\+\_\+graph, KDL\+::\+Tree \&tree)
-\begin{DoxyCompactList}\small\item\em Convert a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree If graph is not a tree it will return false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}} \mbox{\hyperlink{namespacetesseract__scene__graph_a439bf1eadaac010f053903e68227ee2e}{parse\+Scene\+Graph}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&scene\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Convert a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}} \mbox{\hyperlink{namespacetesseract__scene__graph_a7930a86b5321e8e39bfcde88012c1aca}{parse\+Scene\+Graph}} (const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&scene\+\_\+graph, const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&joint\+\_\+names, const std\+::unordered\+\_\+map$<$ std\+::string, double $>$ \&joint\+\_\+values)
+\begin{DoxyCompactList}\small\item\em Convert a portion of a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \mbox{\hyperlink{namespacetesseract__scene__graph_ac2abd4b3afef22a092ab25d0104a22e4}{get\+Allowed\+Collisions}} (const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&link\+\_\+names, const \mbox{\hyperlink{namespacetesseract__scene__graph_a40a7b2e03fe5365f09dd8c309b6bcffb}{Allowed\+Collision\+Entries}} \&acm\+\_\+entries, bool remove\+\_\+duplicates=true)
 \begin{DoxyCompactList}\small\item\em Gets allowed collisions for a set of link names. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
@@ -125,11 +170,11 @@ The edge\+\_\+weight represents the distance between the two links \mbox{\Hypert
 
 Defines the boost graph property. 
 
-\mbox{\Hypertarget{namespacetesseract__scene__graph_a69d7f23b6559723bd757a453bda40714}\label{namespacetesseract__scene__graph_a69d7f23b6559723bd757a453bda40714}} 
-\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!SimpleResourceLocatorFn@{SimpleResourceLocatorFn}}
-\index{SimpleResourceLocatorFn@{SimpleResourceLocatorFn}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{SimpleResourceLocatorFn}{SimpleResourceLocatorFn}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacetesseract__scene__graph_a69d7f23b6559723bd757a453bda40714}{tesseract\+\_\+scene\+\_\+graph\+::\+Simple\+Resource\+Locator\+Fn}} = typedef std\+::function$<$std\+::string(const std\+::string\&)$>$}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a9d854d1aefdbcdab3a70f2051ee528f5}\label{namespacetesseract__scene__graph_a9d854d1aefdbcdab3a70f2051ee528f5}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!UGraph@{UGraph}}
+\index{UGraph@{UGraph}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{UGraph}{UGraph}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacetesseract__scene__graph_a9d854d1aefdbcdab3a70f2051ee528f5}{tesseract\+\_\+scene\+\_\+graph\+::\+UGraph}} = typedef boost\+::adjacency\+\_\+list$<$boost\+::listS, boost\+::listS, boost\+::undirectedS, \mbox{\hyperlink{namespacetesseract__scene__graph_a87d88949e8773cc1ab1a583b4bc6824f}{Vertex\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a9dc21bc544723df21ec27052717c4e1e}{Edge\+Property}}, \mbox{\hyperlink{namespacetesseract__scene__graph_a8a54db22a9b9c10174389d74fc6a46bc}{Graph\+Property}}$>$}
 
 \mbox{\Hypertarget{namespacetesseract__scene__graph_a87d88949e8773cc1ab1a583b4bc6824f}\label{namespacetesseract__scene__graph_a87d88949e8773cc1ab1a583b4bc6824f}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!VertexProperty@{VertexProperty}}
@@ -186,8 +231,8 @@ FIXED&\\
 \mbox{\Hypertarget{namespacetesseract__scene__graph_a9f0ce2dde1dfc29ac92461d216bb82a8}\label{namespacetesseract__scene__graph_a9f0ce2dde1dfc29ac92461d216bb82a8}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
 \index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily KDL\+::\+Frame tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Isometry3d \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily KDL\+::\+Frame tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Isometry3d \&}]{transform }\end{DoxyParamCaption})}
 
 
 
@@ -200,30 +245,48 @@ Convert Eigen\+::\+Isometry3d to KDL\+::\+Frame.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 frame Output KDL Frame 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a7ba8edc21e496aae822d39365e84ed16}\label{namespacetesseract__scene__graph_a7ba8edc21e496aae822d39365e84ed16}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
+\index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily KDL\+::\+Jacobian tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix\+Xd \&}]{jacobian }\end{DoxyParamCaption})}
+
+
+
+Convert Eigen\+::\+Matrix to KDL\+::\+Jacobian. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & Input Eigen Matrix\+Xd \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+KDL Jacobian 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacetesseract__scene__graph_a2b1998c47fe8c81fdada6a5f7c28581d}\label{namespacetesseract__scene__graph_a2b1998c47fe8c81fdada6a5f7c28581d}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
 \index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily KDL\+::\+Vector tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector3d \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily KDL\+::\+Vector tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector3d \&}]{vector }\end{DoxyParamCaption})}
 
 
 
-Convert Eigen\+::\+Isometry3d to KDL\+::\+Frame. 
+Convert Eigen\+::\+Vector3d to KDL\+::\+Vector. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em transform} & Input Eigen transform (Isometry3d) \\
+{\em vector} & Input Eigen Vector3d \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-frame Output KDL Frame 
+vector Output KDL Vector 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacetesseract__scene__graph_aecc9b2b45d0f05eaa5afa16a5c99729a}\label{namespacetesseract__scene__graph_aecc9b2b45d0f05eaa5afa16a5c99729a}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
 \index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily KDL\+::\+Rigid\+Body\+Inertia tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1Inertial_a460e182afe4ea7ff68c9855afa89f68b}{Inertial\+::\+Const\+Ptr}} \&}]{inertial }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily KDL\+::\+Rigid\+Body\+Inertia tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1Inertial_a460e182afe4ea7ff68c9855afa89f68b}{Inertial\+::\+Const\+Ptr}} \&}]{inertial }\end{DoxyParamCaption})}
 
 
 
@@ -240,8 +303,8 @@ Convert Tesseract Inertail to KDL \mbox{\hyperlink{classtesseract__scene__graph_
 \mbox{\Hypertarget{namespacetesseract__scene__graph_aa77add93f95a664b924ff3067128eb15}\label{namespacetesseract__scene__graph_aa77add93f95a664b924ff3067128eb15}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
 \index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily KDL\+::\+Joint tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint_a705d1f0a066833444550aa0c7f6d16b9}{Joint\+::\+Const\+Ptr}} \&}]{joint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily KDL\+::\+Joint tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint_a705d1f0a066833444550aa0c7f6d16b9}{Joint\+::\+Const\+Ptr}} \&}]{joint }\end{DoxyParamCaption})}
 
 
 
@@ -254,6 +317,80 @@ Convert Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint}{Joint}
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A KDL \mbox{\hyperlink{classtesseract__scene__graph_1_1Joint}{Joint}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a349ab6dd4cccc8b8f3107d3d5d2b8bab}\label{namespacetesseract__scene__graph_a349ab6dd4cccc8b8f3107d3d5d2b8bab}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
+\index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily Eigen\+::\+Isometry3d tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const KDL\+::\+Frame \&}]{frame }\end{DoxyParamCaption})}
+
+
+
+Convert KDL\+::\+Frame to Eigen\+::\+Isometry3d. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & Input KDL Frame \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Eigen transform (Isometry3d) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a139a142184a040457f1cfae06454e82c}\label{namespacetesseract__scene__graph_a139a142184a040457f1cfae06454e82c}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
+\index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const KDL\+::\+Jacobian \&}]{jacobian }\end{DoxyParamCaption})}
+
+
+
+Convert KDL\+::\+Jacobian to Eigen\+::\+Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & Input KDL Jacobian \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Eigen Matrix\+Xd 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a4c1f3ecbf1f8c75d1f67dee86b20514f}\label{namespacetesseract__scene__graph_a4c1f3ecbf1f8c75d1f67dee86b20514f}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
+\index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const KDL\+::\+Jacobian \&}]{jacobian,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ int $>$ \&}]{q\+\_\+nrs }\end{DoxyParamCaption})}
+
+
+
+Convert a subset of KDL\+::\+Jacobian to Eigen\+::\+Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & Input KDL Jacobian \\
+\hline
+{\em q\+\_\+nrs} & Input the columns to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Eigen Matrix\+Xd 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a9dd0c08437ac8c8b831cfbe76e6b84f0}\label{namespacetesseract__scene__graph_a9dd0c08437ac8c8b831cfbe76e6b84f0}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!convert@{convert}}
+\index{convert@{convert}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d tesseract\+\_\+scene\+\_\+graph\+::convert (\begin{DoxyParamCaption}\item[{const KDL\+::\+Vector \&}]{vector }\end{DoxyParamCaption})}
+
+
+
+Convert KDL\+::\+Vector to Eigen\+::\+Vector3d. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & Input KDL Vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+frame Output Eigen Vector3d 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacetesseract__scene__graph_ac2abd4b3afef22a092ab25d0104a22e4}\label{namespacetesseract__scene__graph_ac2abd4b3afef22a092ab25d0104a22e4}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!getAllowedCollisions@{getAllowedCollisions}}
@@ -283,22 +420,27 @@ vector of links that are allowed to collide with links given
 \doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily std\+::ostream\& tesseract\+\_\+scene\+\_\+graph\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{namespacetesseract__scene__graph_ade43fa945a554b6e0c703e38e6a8cf16}{Joint\+Type}} \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{namespacetesseract__scene__graph_a8282e1e01e7595b9ae8ce47813ccf35d}\label{namespacetesseract__scene__graph_a8282e1e01e7595b9ae8ce47813ccf35d}} 
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a24ea91fec7fb64354921f429f24d6835}\label{namespacetesseract__scene__graph_a24ea91fec7fb64354921f429f24d6835}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
 \doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily std\+::ostream\& tesseract\+\_\+scene\+\_\+graph\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph_a52654d2ec93d3faa655f811c4bc72bed}{Scene\+Graph\+::\+Path}} \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::ostream\& tesseract\+\_\+scene\+\_\+graph\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{structtesseract__scene__graph_1_1ShortestPath}{Shortest\+Path}} \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{namespacetesseract__scene__graph_a7132480e5402ba4a3c44d4dc09712c0a}\label{namespacetesseract__scene__graph_a7132480e5402ba4a3c44d4dc09712c0a}} 
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a439bf1eadaac010f053903e68227ee2e}\label{namespacetesseract__scene__graph_a439bf1eadaac010f053903e68227ee2e}} 
 \index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!parseSceneGraph@{parseSceneGraph}}
 \index{parseSceneGraph@{parseSceneGraph}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
-\doxysubsubsection{\texorpdfstring{parseSceneGraph()}{parseSceneGraph()}}
-{\footnotesize\ttfamily bool tesseract\+\_\+scene\+\_\+graph\+::parse\+Scene\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{KDL\+::\+Tree \&}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{parseSceneGraph()}{parseSceneGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}} tesseract\+\_\+scene\+\_\+graph\+::parse\+Scene\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&}]{scene\+\_\+graph }\end{DoxyParamCaption})}
 
 
 
-Convert a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree If graph is not a tree it will return false. 
+Convert a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree. 
 
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & graph is not a tree \\
+\hline
+\end{DoxyExceptions}
 
 \begin{DoxyParams}{Parameters}
 {\em scene\+\_\+graph} & The Tesseract Scene Graph \\
@@ -307,7 +449,32 @@ Convert a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Returns Flase if error occured, otherwise true 
+Returns KDL tree data representation of the scene graph 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacetesseract__scene__graph_a7930a86b5321e8e39bfcde88012c1aca}\label{namespacetesseract__scene__graph_a7930a86b5321e8e39bfcde88012c1aca}} 
+\index{tesseract\_scene\_graph@{tesseract\_scene\_graph}!parseSceneGraph@{parseSceneGraph}}
+\index{parseSceneGraph@{parseSceneGraph}!tesseract\_scene\_graph@{tesseract\_scene\_graph}}
+\doxysubsubsection{\texorpdfstring{parseSceneGraph()}{parseSceneGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtesseract__scene__graph_1_1KDLTreeData}{KDLTree\+Data}} tesseract\+\_\+scene\+\_\+graph\+::parse\+Scene\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} \&}]{scene\+\_\+graph,  }\item[{const \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$ \&}]{joint\+\_\+names,  }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, double $>$ \&}]{joint\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Convert a portion of a Tesseract \mbox{\hyperlink{classtesseract__scene__graph_1_1SceneGraph}{Scene\+Graph}} into a KDL Tree. 
+
+This will create a new tree from multiple sub tree defined by the provided joint names The values are used to convert non fixed joints that are not listed in joint\+\_\+names to a fixed joint. The first tree found a link is defined attaching world to the base link and all other trees are attached to this link by a fixed joint. 
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & graph is not a tree it will return false. \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+graph} & The Tesseract Scene Graph \\
+\hline
+{\em tree} & The KDL Tree to populate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns KDL tree representation of the sub scene graph 
 \end{DoxyReturn}
 
 

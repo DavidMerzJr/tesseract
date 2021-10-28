@@ -130,7 +130,7 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &lt;console_bridge/console.h&gt;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html">tesseract_common/types.h</a>&gt;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../d8/d01/resource_8h.html">tesseract_common/resource.h</a>&gt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../d3/d95/resource__locator_8h.html">tesseract_common/resource_locator.h</a>&gt;</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#include &lt;regex&gt;</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &lt;boost/filesystem/path.hpp&gt;</span></div>
@@ -233,12 +233,12 @@ $(function() {
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        {</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;          <span class="comment">// Use PBR Metallic material properties if available</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;          base_color = Eigen::Vector4d(pbr_base_color.r, pbr_base_color.g, pbr_base_color.b, pbr_base_color.a);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;          <span class="keywordtype">float</span> metallicFactor;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;          <span class="keywordtype">float</span> metallicFactor{ 0 };</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;          <span class="keywordflow">if</span> (mat-&gt;Get(AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR, metallicFactor) == AI_SUCCESS)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;          {</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            metallic = metallicFactor;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;          }</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;          <span class="keywordtype">float</span> roughnessFactor;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;          <span class="keywordtype">float</span> roughnessFactor{ 0.5 };</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          <span class="keywordflow">if</span> (mat-&gt;Get(AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR, roughnessFactor) == AI_SUCCESS)</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;          {</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            roughness = roughnessFactor;</div>
@@ -274,8 +274,8 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;          <span class="keywordflow">if</span> (a-&gt;HasTextureCoords(i))</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;          {</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            aiString texName;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            aiTextureMapping mapping;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uvIndex;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            aiTextureMapping mapping{ aiTextureMapping_OTHER };</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uvIndex{ 0 };</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <span class="keywordflow">if</span> (mat-&gt;GetTexture(aiTextureType_DIFFUSE, i, &amp;texName, &amp;mapping, &amp;uvIndex) == AI_SUCCESS)</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            {</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;              <a class="code" href="../../d8/def/classtesseract__common_1_1Resource.html#acdba916fa227bef4391c469581844dc6">tesseract_common::Resource::Ptr</a> texture_image;</div>
@@ -287,13 +287,13 @@ $(function() {
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                <span class="keywordtype">int</span> tex_index = std::atoi(texNamec + 1);</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                <span class="keywordflow">if</span> (0 &gt; tex_index || scene-&gt;mNumTextures &lt;= <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span><span class="keyword">&gt;</span>(tex_index))</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                  <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                <span class="keyword">auto</span> texture_data = scene-&gt;mTextures[tex_index];</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                <span class="keyword">auto</span>* texture_data = scene-&gt;mTextures[tex_index];</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                <span class="comment">// returned pointer is not null, read texture from memory</span></div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                std::string file_type = texture_data-&gt;achFormatHint;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                <span class="keywordflow">if</span> (file_type == <span class="stringliteral">&quot;jpg&quot;</span> || file_type == <span class="stringliteral">&quot;png&quot;</span>)</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                {</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                  texture_image = std::make_shared&lt;tesseract_common::BytesResource&gt;(</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                      <span class="stringliteral">&quot;data://&quot;</span>, (<span class="keyword">const</span> uint8_t*)texture_data-&gt;pcData, texture_data-&gt;mWidth);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                      <span class="stringliteral">&quot;data://&quot;</span>, (<span class="keyword">const</span> uint8_t*)texture_data-&gt;pcData, texture_data-&gt;mWidth);  <span class="comment">// NOLINT</span></div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                }</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                {</div>
@@ -308,7 +308,7 @@ $(function() {
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                  <span class="keywordflow">continue</span>;</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                }</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                std::string texName_str(texName.C_Str());</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keyword">auto</span> tex_resource = resource-&gt;locateSubResource(texName_str);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keyword">auto</span> tex_resource = resource-&gt;locateResource(texName_str);</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <span class="keywordflow">if</span> (!tex_resource)</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                {</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                  <span class="keywordflow">continue</span>;</div>
@@ -582,25 +582,25 @@ $(function() {
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160; </div>
 <div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasstesseract__common_1_1Resource_html_acdba916fa227bef4391c469581844dc6"><div class="ttname"><a href="../../d8/def/classtesseract__common_1_1Resource.html#acdba916fa227bef4391c469581844dc6">tesseract_common::Resource::Ptr</a></div><div class="ttdeci">std::shared_ptr&lt; Resource &gt; Ptr</div><div class="ttdef"><b>Definition:</b> resource.h:55</div></div>
+<div class="ttc" id="aclasstesseract__common_1_1Resource_html_acdba916fa227bef4391c469581844dc6"><div class="ttname"><a href="../../d8/def/classtesseract__common_1_1Resource.html#acdba916fa227bef4391c469581844dc6">tesseract_common::Resource::Ptr</a></div><div class="ttdeci">std::shared_ptr&lt; Resource &gt; Ptr</div><div class="ttdef"><b>Definition:</b> resource_locator.h:79</div></div>
 <div class="ttc" id="aclasstesseract__geometry_1_1MeshMaterial_html_ad67358c38f5044f5759070974ec73e54"><div class="ttname"><a href="../../d6/dbc/classtesseract__geometry_1_1MeshMaterial.html#ad67358c38f5044f5759070974ec73e54">tesseract_geometry::MeshMaterial::Ptr</a></div><div class="ttdeci">std::shared_ptr&lt; MeshMaterial &gt; Ptr</div><div class="ttdef"><b>Definition:</b> mesh_material.h:69</div></div>
 <div class="ttc" id="amacros_8h_html"><div class="ttname"><a href="../../de/d3c/macros_8h.html">macros.h</a></div><div class="ttdoc">Common Tesseract Macros.</div></div>
-<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:65</div></div>
+<div class="ttc" id="amacros_8h_html_a8cc0e3c6a3382c5c0b19eb9e676fc2db"><div class="ttname"><a href="../../de/d3c/macros_8h.html#a8cc0e3c6a3382c5c0b19eb9e676fc2db">TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</a></div><div class="ttdeci">#define TESSERACT_COMMON_IGNORE_WARNINGS_PUSH</div><div class="ttdef"><b>Definition:</b> macros.h:69</div></div>
 <div class="ttc" id="amesh__material_8h_html"><div class="ttname"><a href="../../df/d8e/mesh__material_8h.html">mesh_material.h</a></div><div class="ttdoc">Tesseract Mesh Material read from a mesh file.</div></div>
-<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:35</div></div>
-<div class="ttc" id="anamespacetesseract__common_html_ac60e1af30f961fc086b69e330c6434d4"><div class="ttname"><a href="../../df/da9/namespacetesseract__common.html#ac60e1af30f961fc086b69e330c6434d4">tesseract_common::VectorVector2d</a></div><div class="ttdeci">AlignedVector&lt; Eigen::Vector2d &gt; VectorVector2d</div><div class="ttdef"><b>Definition:</b> types.h:63</div></div>
+<div class="ttc" id="anamespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP_html"><div class="ttname"><a href="../../df/d21/namespaceTESSERACT__COMMON__IGNORE__WARNINGS__POP.html">TESSERACT_COMMON_IGNORE_WARNINGS_POP</a></div><div class="ttdef"><b>Definition:</b> create_convex_hull.cpp:36</div></div>
+<div class="ttc" id="anamespacetesseract__common_html_ac60e1af30f961fc086b69e330c6434d4"><div class="ttname"><a href="../../df/da9/namespacetesseract__common.html#ac60e1af30f961fc086b69e330c6434d4">tesseract_common::VectorVector2d</a></div><div class="ttdeci">AlignedVector&lt; Eigen::Vector2d &gt; VectorVector2d</div><div class="ttdef"><b>Definition:</b> types.h:64</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html">tesseract_geometry</a></div><div class="ttdef"><b>Definition:</b> geometry.h:40</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html_a0c0060eed1989b39565981e6742a3aa2"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html#a0c0060eed1989b39565981e6742a3aa2">tesseract_geometry::createMeshFromAsset</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; T &gt; &gt; createMeshFromAsset(const aiScene *scene, const Eigen::Vector3d &amp;scale, tesseract_common::Resource::Ptr resource, bool normals, bool vertex_colors, bool material_and_texture)</div><div class="ttdoc">Create list of meshes from the assimp scene.</div><div class="ttdef"><b>Definition:</b> mesh_parser.h:299</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html_a24986eb36c9781b611dfa3348354c980"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html#a24986eb36c9781b611dfa3348354c980">tesseract_geometry::extractMeshData</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; T &gt; &gt; extractMeshData(const aiScene *scene, const aiNode *node, const aiMatrix4x4 &amp;parent_transform, const Eigen::Vector3d &amp;scale, tesseract_common::Resource::Ptr resource, bool normals, bool vertex_colors, bool material_and_texture)</div><div class="ttdef"><b>Definition:</b> mesh_parser.h:76</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html_a5b7ae1c48794bcb9bb4de99e332094ab"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html#a5b7ae1c48794bcb9bb4de99e332094ab">tesseract_geometry::createMeshFromResource</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; T &gt; &gt; createMeshFromResource(tesseract_common::Resource::Ptr resource, Eigen::Vector3d scale=Eigen::Vector3d(1, 1, 1), bool triangulate=false, bool flatten=false, bool normals=false, bool vertex_colors=false, bool material_and_texture=false)</div><div class="ttdoc">Create a mesh using assimp from resource.</div><div class="ttdef"><b>Definition:</b> mesh_parser.h:418</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html_a6eb14091f9adce45929f5fddece2d7f7"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html#a6eb14091f9adce45929f5fddece2d7f7">tesseract_geometry::createMeshFromPath</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; T &gt; &gt; createMeshFromPath(const std::string &amp;path, Eigen::Vector3d scale=Eigen::Vector3d(1, 1, 1), bool triangulate=false, bool flatten=false, bool normals=false, bool vertex_colors=false, bool material_and_texture=false)</div><div class="ttdoc">Create a mesh using assimp from file path.</div><div class="ttdef"><b>Definition:</b> mesh_parser.h:336</div></div>
 <div class="ttc" id="anamespacetesseract__geometry_html_adc3bc34e93aaa227ba3bd81d09b5be77"><div class="ttname"><a href="../../d0/d17/namespacetesseract__geometry.html#adc3bc34e93aaa227ba3bd81d09b5be77">tesseract_geometry::createMeshFromBytes</a></div><div class="ttdeci">static std::vector&lt; std::shared_ptr&lt; T &gt; &gt; createMeshFromBytes(const std::string &amp;url, const uint8_t *bytes, size_t bytes_len, Eigen::Vector3d scale=Eigen::Vector3d(1, 1, 1), bool triangulate=false, bool flatten=false, bool normals=false, bool vertex_colors=false, bool material_and_texture=false)</div><div class="ttdoc">Create a mesh from byte array.</div><div class="ttdef"><b>Definition:</b> mesh_parser.h:535</div></div>
-<div class="ttc" id="aresource_8h_html"><div class="ttname"><a href="../../d8/d01/resource_8h.html">resource.h</a></div><div class="ttdoc">Class to retrieve data from resources.</div></div>
+<div class="ttc" id="aresource__locator_8h_html"><div class="ttname"><a href="../../d3/d95/resource__locator_8h.html">resource_locator.h</a></div><div class="ttdoc">Locate and retrieve resource data.</div></div>
 <div class="ttc" id="atesseract__common_2include_2tesseract__common_2types_8h_html"><div class="ttname"><a href="../../dd/ddb/tesseract__common_2include_2tesseract__common_2types_8h.html">types.h</a></div><div class="ttdoc">Common Tesseract Types.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 5 2021 18:38:23 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Oct 28 2021 14:38:16 for Tesseract by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

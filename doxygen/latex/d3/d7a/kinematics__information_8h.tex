@@ -10,6 +10,7 @@ This hold the kinematics information.
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
 {\ttfamily \#include $<$Eigen/\+Geometry$>$}\newline
 {\ttfamily \#include $<$tesseract\+\_\+common/types.\+h$>$}\newline
 {\ttfamily \#include $<$tesseract\+\_\+common/utils.\+h$>$}\newline
@@ -31,12 +32,6 @@ This graph shows which files directly or indirectly include this file\+:
 \end{figure}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structtesseract__srdf_1_1OPWKinematicParameters}{tesseract\+\_\+srdf\+::\+OPWKinematic\+Parameters}}
-\begin{DoxyCompactList}\small\item\em A structure to hold opw kinematics data. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structtesseract__srdf_1_1ROPKinematicParameters}{tesseract\+\_\+srdf\+::\+ROPKinematic\+Parameters}}
-\item 
-struct \mbox{\hyperlink{structtesseract__srdf_1_1REPKinematicParameters}{tesseract\+\_\+srdf\+::\+REPKinematic\+Parameters}}
 \item 
 struct \mbox{\hyperlink{structtesseract__srdf_1_1KinematicsInformation}{tesseract\+\_\+srdf\+::\+Kinematics\+Information}}
 \begin{DoxyCompactList}\small\item\em This hold the kinematics information used to create the SRDF and is the data container for the manipulator manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -70,15 +65,7 @@ using \mbox{\hyperlink{namespacetesseract__srdf_a780c08d254467e74cedf28edb6953b9
 \item 
 using \mbox{\hyperlink{namespacetesseract__srdf_a1c4e72bf9949de9db865b53df753ef75}{tesseract\+\_\+srdf\+::\+Link\+Groups}} = std\+::unordered\+\_\+map$<$ std\+::string, Link\+Group $>$
 \item 
-using \mbox{\hyperlink{namespacetesseract__srdf_aa47ebf37883a25659ed00be7ec1063f4}{tesseract\+\_\+srdf\+::\+Group\+Names}} = \mbox{\hyperlink{vhacdRaycastMesh_8cpp_adcf134d50025cc52907d0c8ac798d89d}{std\+::vector}}$<$ std\+::string $>$
-\item 
-using \mbox{\hyperlink{namespacetesseract__srdf_abaf65743a9f199fceba1865220b35cc5}{tesseract\+\_\+srdf\+::\+Group\+ROPKinematics}} = std\+::unordered\+\_\+map$<$ std\+::string, ROPKinematic\+Parameters $>$
-\item 
-using \mbox{\hyperlink{namespacetesseract__srdf_a0da97a5b79339f56cd3c48f0472832a0}{tesseract\+\_\+srdf\+::\+Group\+REPKinematics}} = std\+::unordered\+\_\+map$<$ std\+::string, REPKinematic\+Parameters $>$
-\item 
-using \mbox{\hyperlink{namespacetesseract__srdf_a1f61bb9bcdd8d0581de44d555b03ab94}{tesseract\+\_\+srdf\+::\+Group\+OPWKinematics}} = std\+::unordered\+\_\+map$<$ std\+::string, OPWKinematic\+Parameters $>$
-\item 
-using \mbox{\hyperlink{namespacetesseract__srdf_ab5123318ab40a1a8c4e1805da4d3d45a}{tesseract\+\_\+srdf\+::\+Group\+Default\+Kinematics\+Solver}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$
+using \mbox{\hyperlink{namespacetesseract__srdf_a4521a965628b7a88ca489d6c3c5f56ff}{tesseract\+\_\+srdf\+::\+Group\+Names}} = std\+::set$<$ std\+::string $>$
 \end{DoxyCompactItemize}
 
 
@@ -95,7 +82,7 @@ May 12, 2020
 TODO 
 \end{DoxyVersion}
 \begin{DoxyRefDesc}{Bug}
-\item[\mbox{\hyperlink{bug__bug000151}{Bug}}]No known bugs\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{bug__bug000163}{Bug}}]No known bugs\end{DoxyRefDesc}
 
 
 \begin{DoxyCopyright}{Copyright}
