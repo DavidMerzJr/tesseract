@@ -30,14 +30,55 @@ TESSERACT_COMMON_IGNORE_WARNINGS_PUSH
 #include <unordered_map>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 #include <console_bridge/console.h>
 #include <Eigen/Geometry>
-#include <tesseract_common/utils.h>
 #include <tinyxml2.h>
+
+#include <tesseract_common/utils.h>
 TESSERACT_COMMON_IGNORE_WARNINGS_POP
 
 #include <tesseract_scene_graph/link.h>
 #include <tesseract_urdf/material.h>
+
+namespace
+{
+std::string locateResource(const std::string& url)
+{
+  std::string mod_url = url;
+  if (url.find("package://") == 0)
+  {
+    mod_url.erase(0, strlen("package://"));
+    size_t pos = mod_url.find('/');
+    if (pos == std::string::npos)
+    {
+      return std::string();
+    }
+
+    std::string package = mod_url.substr(0, pos);
+    mod_url.erase(0, pos);
+    std::string package_path = ros::package::getPath(package);
+
+    if (package_path.empty())
+    {
+      return std::string();
+    }
+
+    mod_url = package_path + mod_url;
+  }
+  else if (url.find("file://") == 0)
+  {
+    mod_url.erase(0, strlen("file://"));
+    size_t pos = mod_url.find('/');
+    if (pos == std::string::npos)
+    {
+      return std::string();
+    }
+  }
+
+  return mod_url;
+}
+}
 
 tesseract_scene_graph::Material::Ptr tesseract_urdf::parseMaterial(
     const tinyxml2::XMLElement* xml_element,
@@ -122,7 +163,8 @@ tesseract_scene_graph::Material::Ptr tesseract_urdf::parseMaterial(
 
 tinyxml2::XMLElement*
 tesseract_urdf::writeMaterial(const std::shared_ptr<const tesseract_scene_graph::Material>& material,
-                              tinyxml2::XMLDocument& doc)
+                              tinyxml2::XMLDocument& doc,
+                              const std::string& package_path)
 {
   if (material == nullptr)
     std::throw_with_nested(std::runtime_error("Material is nullptr and cannot be converted to XML"));
@@ -133,6 +175,11 @@ tesseract_urdf::writeMaterial(const std::shared_ptr<const tesseract_scene_graph:
 
   if (material->texture_filename != "")
   {
+    std::string dir = noTrailingSlash(material->texture_filename).sub_str()
+
+    tesseract_common::SimpleResourceLocator locator;
+
+
     tinyxml2::XMLElement* xml_texture = doc.NewElement("texture");
     xml_texture->SetAttribute("filename", material->texture_filename.c_str());
     xml_element->InsertEndChild(xml_texture);
