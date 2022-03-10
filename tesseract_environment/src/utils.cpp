@@ -95,7 +95,7 @@ bool checkTrajectorySegment(std::vector<tesseract_collision::ContactResultMap>& 
         ss << "Continuous collision detected between '" << collision.first.first << "' and '" << collision.first.second
            << "' with distance " << collision.second.front().distance << std::endl;
 
-        CONSOLE_BRIDGE_logError(ss.str().c_str());
+        CONSOLE_BRIDGE_logInform(ss.str().c_str());
       }
     }
 
@@ -145,7 +145,7 @@ bool checkTrajectoryState(std::vector<tesseract_collision::ContactResultMap>& co
         ss << "Discrete collision detected between '" << collision.first.first << "' and '" << collision.first.second
            << "' with distance " << collision.second.front().distance << std::endl;
 
-        CONSOLE_BRIDGE_logError(ss.str().c_str());
+        CONSOLE_BRIDGE_logInform(ss.str().c_str());
       }
     }
 
@@ -210,7 +210,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
                  << "    State0: " << subtraj.row(iSubStep) << std::endl
                  << "    State1: " << subtraj.row(iSubStep + 1) << std::endl;
 
-              CONSOLE_BRIDGE_logError(ss.str().c_str());
+              CONSOLE_BRIDGE_logInform(ss.str().c_str());
             }
           }
 
@@ -242,7 +242,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
                << "    State0: " << traj.row(iStep) << std::endl
                << "    State1: " << traj.row(iStep + 1) << std::endl;
 
-            CONSOLE_BRIDGE_logError(ss.str().c_str());
+            CONSOLE_BRIDGE_logInform(ss.str().c_str());
           }
         }
 
@@ -276,7 +276,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
              << "    State0: " << traj.row(iStep) << std::endl
              << "    State1: " << traj.row(iStep + 1) << std::endl;
 
-          CONSOLE_BRIDGE_logError(ss.str().c_str());
+          CONSOLE_BRIDGE_logInform(ss.str().c_str());
         }
       }
 
@@ -340,7 +340,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
                  << "    State0: " << subtraj.row(iSubStep) << std::endl
                  << "    State1: " << subtraj.row(iSubStep + 1) << std::endl;
 
-              CONSOLE_BRIDGE_logError(ss.str().c_str());
+              CONSOLE_BRIDGE_logInform(ss.str().c_str());
             }
           }
 
@@ -371,7 +371,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
                << "    State0: " << traj.row(iStep) << std::endl
                << "    State1: " << traj.row(iStep + 1) << std::endl;
 
-            CONSOLE_BRIDGE_logError(ss.str().c_str());
+            CONSOLE_BRIDGE_logInform(ss.str().c_str());
           }
         }
 
@@ -404,7 +404,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
              << "    State0: " << traj.row(iStep) << std::endl
              << "    State1: " << traj.row(iStep + 1) << std::endl;
 
-          CONSOLE_BRIDGE_logError(ss.str().c_str());
+          CONSOLE_BRIDGE_logInform(ss.str().c_str());
         }
       }
 
@@ -474,7 +474,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
               ss << std::endl << "    State: " << subtraj.row(iSubStep) << std::endl;
 
-              CONSOLE_BRIDGE_logError(ss.str().c_str());
+              CONSOLE_BRIDGE_logInform(ss.str().c_str());
             }
           }
 
@@ -502,7 +502,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
             ss << std::endl << "    State: " << traj.row(iStep) << std::endl;
 
-            CONSOLE_BRIDGE_logError(ss.str().c_str());
+            CONSOLE_BRIDGE_logInform(ss.str().c_str());
           }
         }
 
@@ -531,7 +531,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
           ss << std::endl << "    State0: " << traj.row(iStep) << std::endl;
 
-          CONSOLE_BRIDGE_logError(ss.str().c_str());
+          CONSOLE_BRIDGE_logInform(ss.str().c_str());
         }
       }
 
@@ -599,7 +599,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
               ss << std::endl << "    State: " << subtraj.row(iSubStep) << std::endl;
 
-              CONSOLE_BRIDGE_logError(ss.str().c_str());
+              CONSOLE_BRIDGE_logInform(ss.str().c_str());
             }
           }
 
@@ -627,7 +627,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
             ss << std::endl << "    State: " << traj.row(iStep) << std::endl;
 
-            CONSOLE_BRIDGE_logError(ss.str().c_str());
+            CONSOLE_BRIDGE_logInform(ss.str().c_str());
           }
         }
 
@@ -656,7 +656,7 @@ bool checkTrajectory(std::vector<tesseract_collision::ContactResultMap>& contact
 
           ss << std::endl << "    State0: " << traj.row(iStep) << std::endl;
 
-          CONSOLE_BRIDGE_logError(ss.str().c_str());
+          CONSOLE_BRIDGE_logInform(ss.str().c_str());
         }
       }
 
