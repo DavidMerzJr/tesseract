@@ -47,7 +47,7 @@ TESSERACT_COMMON_IGNORE_WARNINGS_POP
 namespace tesseract_scene_graph
 {
 /**
- * @brief An implementation of the Optimized Forward Kinematic Tree as a stat solver
+ * @brief An implementation of the Optimized Forward Kinematic Tree as a state solver
  *
  * Starke, S., Hendrich, N., & Zhang, J. (2018). A Forward Kinematics Data Structure for Efficient Evolutionary Inverse
  * Kinematics. In Computational Kinematics (pp. 560-568). Springer, Cham.
@@ -126,6 +126,8 @@ public:
 
   std::vector<std::string> getActiveJointNames() const override final;
 
+  std::vector<std::string> getMimicJointNames() const override final;
+
   std::string getBaseLinkName() const override final;
 
   std::vector<std::string> getLinkNames() const override final;
@@ -176,16 +178,18 @@ public:
   StateSolver::UPtr clone() const override final;
 
 private:
-  SceneState current_state_;                                         /**< Current state of the scene */
-  std::vector<std::string> joint_names_;                             /**< The link names */
-  std::vector<std::string> active_joint_names_;                      /**< The active joint names */
-  std::vector<std::string> floating_joint_names_;                    /**< The floating joint names */
-  std::vector<std::string> link_names_;                              /**< The link names */
-  std::unordered_map<std::string, std::unique_ptr<OFKTNode>> nodes_; /**< The joint name map to node */
-  std::unordered_map<std::string, OFKTNode*> link_map_;              /**< The link name map to node */
-  tesseract_common::KinematicLimits limits_;                         /**< The kinematic limits */
-  std::unique_ptr<OFKTNode> root_;                                   /**< The root node of the tree */
-  int revision_{ 0 };                                                /**< The revision number */
+  SceneState current_state_;                                          /**< Current state of the scene */
+  std::vector<std::string> joint_names_;                              /**< Names of joints in the scene */
+  std::vector<std::string> active_joint_names_;                       /**< The names of mobile, directly controllable joints */
+  std::vector<std::string> mimic_joint_names_;                        /**< Names of joints are driven by other joints */
+  std::vector<std::string> floating_joint_names_;                     /**< The floating joint names */
+  std::vector<std::string> link_names_;                               /**< The link names */
+  std::unordered_map<std::string, std::unique_ptr<OFKTNode>> nodes_;  /**< The joint name map to node */
+  std::unordered_map<std::string, OFKTNode*> link_map_;               /**< The link name map to node */
+  tesseract_common::KinematicLimits limits_;                          /**< The kinematic limits */
+  std::unordered_map<std::string, JointMimic::ConstPtr> mimic_infos_; /**< Relationships between mimic joint and driving joint */
+  std::unique_ptr<OFKTNode> root_;                                    /**< The root node of the tree */
+  int revision_{ 0 };                                                 /**< The revision number */
 
   /** @brief The state solver can be accessed from multiple threads, need use mutex throughout */
   mutable std::shared_mutex mutex_;
@@ -214,6 +218,7 @@ private:
    * @param updated_parent_world_tf Transform to update
    * @param joints The joint values
    * @param floating_joints The floating joint values
+   * @param mimic_infos Information on how certain joints mimic others
    * @param node he node to start from
    * @param parent_world_tf The nodes parent's world transformaiton
    * @return True if update is required
@@ -221,6 +226,7 @@ private:
   static bool updateRequired(Eigen::Isometry3d& updated_parent_world_tf,
                              const std::unordered_map<std::string, double>& joints,
                              const tesseract_common::TransformMap& floating_joints,
+                             const std::unordered_map<std::string, JointMimic::ConstPtr>& mimic_infos,
                              const OFKTNode* node,
                              const Eigen::Isometry3d& parent_world_tf);
 
@@ -244,7 +250,7 @@ private:
    * @brief This is a const version of the function above
    * @param state The scene state to update
    * @param node The node to start from
-   * @param parent_world_tf The nodes parent's world transformaiton
+   * @param parent_world_tf The nodes parent's world transformation
    * @param update_required Indicates if work transform update is required
    */
   void
@@ -309,7 +315,7 @@ private:
 
   /**
    * @brief This is a helper function for replacing a joint
-   * @param new_kinematic_joints The vector to store new kinematic joints added to the solver
+   * @param new_kinematic_limits The vector to store new kinematic limits for joints added to the solver
    * @param joint The joint performing the replacement
    */
   void replaceJointHelper(std::vector<std::shared_ptr<const JointLimits>>& new_joint_limits, const Joint& joint);

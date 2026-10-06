@@ -47,6 +47,8 @@ TESSERACT_COMMON_IGNORE_WARNINGS_POP
 
 namespace tesseract_scene_graph
 {
+
+/// DONE ///
 /** @brief Every time a vertex is visited for the first time add a new node to the tree */
 struct ofkt_builder : public boost::dfs_visitor<>
 {
@@ -79,7 +81,7 @@ protected:
   std::vector<JointLimits::ConstPtr>& new_joints_limits_;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
   std::string prefix_;
 };
-
+/// DONE ///
 void OFKTStateSolver::cloneHelper(OFKTStateSolver& cloned, const OFKTNode* node) const
 {
   OFKTNode* parent_node = cloned.link_map_[node->getLinkName()];
@@ -148,15 +150,17 @@ void OFKTStateSolver::cloneHelper(OFKTStateSolver& cloned, const OFKTNode* node)
       throw std::runtime_error("Unsupported OFKTNode type!");  // LCOV_EXCL_LINE
     }
 
+    if ()
+
     cloneHelper(cloned, child);
   }
 }
-
+/// DONE ///
 OFKTStateSolver::OFKTStateSolver(const tesseract_scene_graph::SceneGraph& scene_graph, const std::string& prefix)
 {
   initHelper(scene_graph, prefix);
 }
-
+/// DONE ///
 OFKTStateSolver::OFKTStateSolver(const std::string& root_name)
 {
   root_ = std::make_unique<OFKTRootNode>(root_name);
@@ -164,42 +168,44 @@ OFKTStateSolver::OFKTStateSolver(const std::string& root_name)
   link_names_ = { root_name };
   current_state_.link_transforms[root_name] = root_->getWorldTransformation();
 }
-
+/// DONE ///
 OFKTStateSolver::OFKTStateSolver(const OFKTStateSolver& other) { *this = other; }
-
+/// DONE ///
 OFKTStateSolver& OFKTStateSolver::operator=(const OFKTStateSolver& other)
 {
   current_state_ = other.current_state_;
   joint_names_ = other.joint_names_;
   active_joint_names_ = other.active_joint_names_;
+  mimic_joint_names_ = other.mimic_joint_names_;
   floating_joint_names_ = other.floating_joint_names_;
   link_names_ = other.link_names_;
   root_ = std::make_unique<OFKTRootNode>(other.root_->getLinkName());
   link_map_[other.root_->getLinkName()] = root_.get();
   limits_ = other.limits_;
+  mimic_infos_ = other.mimic_infos_;
   revision_ = other.revision_;
   cloneHelper(*this, other.root_.get());
   return *this;
 }
-
+/// DONE ///
 StateSolver::UPtr OFKTStateSolver::clone() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return std::make_unique<OFKTStateSolver>(*this);
 }
-
+/// DONE ///
 void OFKTStateSolver::setRevision(int revision)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
   revision_ = revision;
 }
-
+/// DONE ///
 int OFKTStateSolver::getRevision() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return revision_;
 }
-
+/// DONE ///
 void OFKTStateSolver::clear()
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -207,14 +213,16 @@ void OFKTStateSolver::clear()
   current_state_ = SceneState();
   joint_names_.clear();
   active_joint_names_.clear();
+  mimic_joint_names_.clear();
   floating_joint_names_.clear();
   link_names_.clear();
   nodes_.clear();
   link_map_.clear();
   limits_ = tesseract_common::KinematicLimits();
+  mimic_infos_.clear();
   root_ = nullptr;
 }
-
+/// DONE ///
 void OFKTStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                const tesseract_common::TransformMap& floating_joint_values)
 {
@@ -232,9 +240,18 @@ void OFKTStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_va
     nodes_[floating_joint_value.first]->setStaticTransformation(floating_joint_value.second);
   }
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = current_state_.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    nodes_[mimic_info.first]->storeJointValue(mimic_joint_value);
+    current_state_.mimic_joints[mimic_info.first] = mimic_joint_value;
+  }
+
   update(root_.get(), false);
 }
-
+/// DONE ///
 void OFKTStateSolver::setState(const std::unordered_map<std::string, double>& joint_values,
                                const tesseract_common::TransformMap& floating_joint_values)
 {
@@ -252,9 +269,18 @@ void OFKTStateSolver::setState(const std::unordered_map<std::string, double>& jo
     nodes_[floating_joint_value.first]->setStaticTransformation(floating_joint_value.second);
   }
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = current_state_.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    nodes_[mimic_info.first]->storeJointValue(mimic_joint_value);
+    current_state_.mimic_joints[mimic_info.first] = mimic_joint_value;
+  }
+
   update(root_.get(), false);
 }
-
+/// DONE ///
 void OFKTStateSolver::setState(const std::vector<std::string>& joint_names,
                                const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                const tesseract_common::TransformMap& floating_joint_values)
@@ -274,9 +300,18 @@ void OFKTStateSolver::setState(const std::vector<std::string>& joint_names,
     nodes_[floating_joint_value.first]->setStaticTransformation(floating_joint_value.second);
   }
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = current_state_.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    nodes_[mimic_info.first]->storeJointValue(mimic_joint_value);
+    current_state_.mimic_joints[mimic_info.first] = mimic_joint_value;
+  }
+
   update(root_.get(), false);
 }
-
+/// DONE ///
 void OFKTStateSolver::setState(const tesseract_common::TransformMap& floating_joint_values)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -288,7 +323,7 @@ void OFKTStateSolver::setState(const tesseract_common::TransformMap& floating_jo
 
   update(root_.get(), false);
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                      const tesseract_common::TransformMap& floating_joint_values) const
 {
@@ -303,10 +338,18 @@ SceneState OFKTStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& jo
   for (const auto& floating_joint_value : floating_joint_values)
     state.floating_joints.at(floating_joint_value.first) = floating_joint_value.second;
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = state.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+  }
+
   update(state, root_.get(), parent_frame, false);
   return state;
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getState(const std::unordered_map<std::string, double>& joint_values,
                                      const tesseract_common::TransformMap& floating_joint_values) const
 {
@@ -321,10 +364,18 @@ SceneState OFKTStateSolver::getState(const std::unordered_map<std::string, doubl
   for (const auto& floating_joint_value : floating_joint_values)
     state.floating_joints.at(floating_joint_value.first) = floating_joint_value.second;
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = state.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+  }
+
   update(state, root_.get(), parent_frame, false);
   return state;
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getState(const std::vector<std::string>& joint_names,
                                      const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                      const tesseract_common::TransformMap& floating_joint_values) const
@@ -341,10 +392,18 @@ SceneState OFKTStateSolver::getState(const std::vector<std::string>& joint_names
   for (const auto& floating_joint_value : floating_joint_values)
     state.floating_joints.at(floating_joint_value.first) = floating_joint_value.second;
 
+  // Update any mimic joints
+  for (const auto& mimic_info : mimic_infos_)
+  {
+    double base_joint_value = state.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+  }
+
   update(state, root_.get(), parent_frame, false);
   return state;
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getState(const tesseract_common::TransformMap& floating_joint_values) const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
@@ -358,13 +417,13 @@ SceneState OFKTStateSolver::getState(const tesseract_common::TransformMap& float
   update(state, root_.get(), parent_frame, false);
   return state;
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getState() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return current_state_;
 }
-
+/// DONE ///
 void OFKTStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_transforms,
                                         const std::vector<std::string>& joint_names,
                                         const Eigen::Ref<const Eigen::VectorXd>& joint_values,
@@ -385,7 +444,7 @@ void OFKTStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_tra
   link_transforms.insert(current_state_.link_transforms.begin(), current_state_.link_transforms.end());
   update(link_transforms, joints, floating_joints, root_.get(), parent_frame, false);
 }
-
+/// DONE ///
 void OFKTStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_transforms,
                                         const std::vector<std::string>& joint_names,
                                         const Eigen::Ref<const Eigen::VectorXd>& joint_values) const
@@ -401,13 +460,13 @@ void OFKTStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_tra
   link_transforms.insert(current_state_.link_transforms.begin(), current_state_.link_transforms.end());
   update(link_transforms, joints, current_state_.floating_joints, root_.get(), parent_frame, false);
 }
-
+/// DONE ///
 SceneState OFKTStateSolver::getRandomState() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return getState(active_joint_names_, tesseract_common::generateRandomNumber(limits_.joint_limits));
 }
-
+/// DONE ///
 Eigen::MatrixXd OFKTStateSolver::getJacobian(const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                              const std::string& link_name,
                                              const tesseract_common::TransformMap& floating_joint_values) const
@@ -423,7 +482,7 @@ Eigen::MatrixXd OFKTStateSolver::getJacobian(const Eigen::Ref<const Eigen::Vecto
 
   return calcJacobianHelper(joints, link_name, floating_joints);
 }
-
+/// DONE ///
 Eigen::MatrixXd OFKTStateSolver::getJacobian(const std::unordered_map<std::string, double>& joints_values,
                                              const std::string& link_name,
                                              const tesseract_common::TransformMap& floating_joint_values) const
@@ -439,7 +498,7 @@ Eigen::MatrixXd OFKTStateSolver::getJacobian(const std::unordered_map<std::strin
 
   return calcJacobianHelper(joints, link_name, floating_joints);
 }
-
+/// DONE ///
 Eigen::MatrixXd OFKTStateSolver::getJacobian(const std::vector<std::string>& joint_names,
                                              const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                              const std::string& link_name,
@@ -475,6 +534,30 @@ Eigen::MatrixXd OFKTStateSolver::calcJacobianHelper(const std::unordered_map<std
     {
       total_tf = floating_joint_values.at(node->getJointName()) * total_tf;
     }
+    else if (mimic_infos_.count(node->getJointName()))
+    {
+      // Calculate Mimic Joint value
+      JointMimic::ConstPtr mimic_info = mimic_infos_.at(node->getJointName());
+      double base_joint_value = joints.at(mimic_info->joint_name);
+      double mimic_joint_value = base_joint_value * mimic_info->multiplier + mimic_info->offset;
+
+      // Calculate Jacobian contribution. Its sign is driven by its multiplier because it will
+      // become part of the driving joint's contribution
+      Eigen::Isometry3d local_tf = node->computeLocalTransformation(mimic_joint_value);
+      total_tf = local_tf * total_tf;
+      Eigen::VectorXd twist = node->getLocalTwist() * std::copysign(1.0, mimic_info->multiplier);
+      tesseract_common::twistChangeRefPoint(twist, total_tf.translation() - local_tf.translation());
+      tesseract_common::twistChangeBase(twist, total_tf.inverse());
+
+      // Find the column of the driving joint, because this joint is effectively part of the effect
+      // of its driving joint.
+      Eigen::Index idx =
+          std::distance(active_joint_names_.begin(),
+                        std::find(active_joint_names_.begin(), active_joint_names_.end(), mimic_info->joint_name));
+
+      // Change the contribution to be in the overall frame, then store it with its driving joint
+      jacobian.col(idx) = (jacobian.col(idx) + twist).normalized();
+    }
     else
     {
       Eigen::Isometry3d local_tf = node->computeLocalTransformation(joints.at(node->getJointName()));
@@ -486,7 +569,9 @@ Eigen::MatrixXd OFKTStateSolver::calcJacobianHelper(const std::unordered_map<std
       Eigen::VectorXd twist = node->getLocalTwist();
       tesseract_common::twistChangeRefPoint(twist, total_tf.translation() - local_tf.translation());
       tesseract_common::twistChangeBase(twist, total_tf.inverse());
-      jacobian.col(idx) = twist;
+
+      // This joint may be getting combined with a mimic joint
+      jacobian.col(idx) = (jacobian.col(idx) + twist).normalized();
     }
 
     node = node->getParent();
@@ -495,37 +580,43 @@ Eigen::MatrixXd OFKTStateSolver::calcJacobianHelper(const std::unordered_map<std
   tesseract_common::jacobianChangeBase(jacobian, total_tf);
   return jacobian;
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getJointNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return joint_names_;
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getFloatingJointNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return floating_joint_names_;
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getActiveJointNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return active_joint_names_;
 }
-
+/// DONE ///
+std::vector<std::string> OFKTStateSolver::getMimicJointNames() const
+{
+  std::shared_lock<std::shared_mutex> lock(mutex_);
+  return mimic_joint_names_;
+}
+/// DONE ///
 std::string OFKTStateSolver::getBaseLinkName() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return root_->getLinkName();
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getLinkNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return link_names_;
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getActiveLinkNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
@@ -534,7 +625,7 @@ std::vector<std::string> OFKTStateSolver::getActiveLinkNames() const
   loadActiveLinkNamesRecursive(link_names, root_.get(), false);
   return link_names;
 }
-
+/// DONE ///
 std::vector<std::string> OFKTStateSolver::getStaticLinkNames() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
@@ -543,20 +634,20 @@ std::vector<std::string> OFKTStateSolver::getStaticLinkNames() const
   loadStaticLinkNamesRecursive(link_names, root_.get());
   return link_names;
 }
-
+/// DONE ///
 bool OFKTStateSolver::isActiveLinkName(const std::string& link_name) const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   std::vector<std::string> active_link_names = getActiveLinkNames();
   return (std::find(active_link_names.begin(), active_link_names.end(), link_name) != active_link_names.end());
 }
-
+/// DONE ///
 bool OFKTStateSolver::hasLinkName(const std::string& link_name) const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return (std::find(link_names_.begin(), link_names_.end(), link_name) != link_names_.end());
 }
-
+/// DONE ///
 tesseract_common::VectorIsometry3d OFKTStateSolver::getLinkTransforms() const
 {
   tesseract_common::VectorIsometry3d link_tfs;
@@ -566,24 +657,24 @@ tesseract_common::VectorIsometry3d OFKTStateSolver::getLinkTransforms() const
 
   return link_tfs;
 }
-
+/// DONE ///
 Eigen::Isometry3d OFKTStateSolver::getLinkTransform(const std::string& link_name) const
 {
   return current_state_.link_transforms.at(link_name);
 }
-
+/// DONE ///
 Eigen::Isometry3d OFKTStateSolver::getRelativeLinkTransform(const std::string& from_link_name,
                                                             const std::string& to_link_name) const
 {
   return current_state_.link_transforms.at(from_link_name).inverse() * current_state_.link_transforms.at(to_link_name);
 }
-
+/// DONE ///
 tesseract_common::KinematicLimits OFKTStateSolver::getLimits() const
 {
   std::shared_lock<std::shared_mutex> lock(mutex_);
   return limits_;
 }
-
+/// DONE ///
 bool OFKTStateSolver::addLink(const Link& link, const Joint& joint)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -605,7 +696,7 @@ bool OFKTStateSolver::addLink(const Link& link, const Joint& joint)
 
   return true;
 }
-
+/// DONE ///
 /**
  * @brief Replace and existing joint with the provided one
  * @param joint The replacement joint
@@ -644,7 +735,7 @@ bool OFKTStateSolver::replaceJoint(const Joint& joint)
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::moveLink(const Joint& joint)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -670,7 +761,7 @@ bool OFKTStateSolver::moveLink(const Joint& joint)
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::removeLink(const std::string& name)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -702,7 +793,7 @@ bool OFKTStateSolver::removeLink(const std::string& name)
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::removeJoint(const std::string& name)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -734,7 +825,7 @@ bool OFKTStateSolver::removeJoint(const std::string& name)
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::moveJoint(const std::string& name, const std::string& parent_link)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -763,7 +854,7 @@ bool OFKTStateSolver::moveJoint(const std::string& name, const std::string& pare
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::changeJointOrigin(const std::string& name, const Eigen::Isometry3d& new_origin)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -782,7 +873,7 @@ bool OFKTStateSolver::changeJointOrigin(const std::string& name, const Eigen::Is
 
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::changeJointPositionLimits(const std::string& name, double lower, double upper)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -800,7 +891,7 @@ bool OFKTStateSolver::changeJointPositionLimits(const std::string& name, double 
   limits_.joint_limits(idx, 1) = upper;
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::changeJointVelocityLimits(const std::string& name, double limit)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -818,7 +909,7 @@ bool OFKTStateSolver::changeJointVelocityLimits(const std::string& name, double 
   limits_.velocity_limits(idx, 1) = limit;
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::changeJointAccelerationLimits(const std::string& name, double limit)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -836,7 +927,7 @@ bool OFKTStateSolver::changeJointAccelerationLimits(const std::string& name, dou
   limits_.acceleration_limits(idx, 1) = limit;
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::changeJointJerkLimits(const std::string& name, double limit)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -854,7 +945,7 @@ bool OFKTStateSolver::changeJointJerkLimits(const std::string& name, double limi
   limits_.jerk_limits(idx, 1) = limit;
   return true;
 }
-
+/// DONE ///
 bool OFKTStateSolver::insertSceneGraph(const SceneGraph& scene_graph, const Joint& joint, const std::string& prefix)
 {
   std::unique_lock<std::shared_mutex> lock(mutex_);
@@ -909,7 +1000,7 @@ bool OFKTStateSolver::insertSceneGraph(const SceneGraph& scene_graph, const Join
   update(root_.get(), false);
   return true;
 }
-
+/// DONE ///
 void OFKTStateSolver::loadActiveLinkNamesRecursive(std::vector<std::string>& active_link_names,
                                                    const OFKTNode* node,
                                                    bool active) const
@@ -936,7 +1027,7 @@ void OFKTStateSolver::loadActiveLinkNamesRecursive(std::vector<std::string>& act
     }
   }
 }
-
+/// DONE ///
 void OFKTStateSolver::loadStaticLinkNamesRecursive(std::vector<std::string>& static_link_names,
                                                    const OFKTNode* node) const
 {
@@ -948,7 +1039,7 @@ void OFKTStateSolver::loadStaticLinkNamesRecursive(std::vector<std::string>& sta
       loadStaticLinkNamesRecursive(static_link_names, child);
   }
 }
-
+/// DONE ///
 void OFKTStateSolver::update(OFKTNode* node, bool update_required)
 {
   if (node->hasJointValueChanged())
@@ -970,10 +1061,11 @@ void OFKTStateSolver::update(OFKTNode* node, bool update_required)
   for (auto* child : node->getChildren())
     update(child, update_required);
 }
-
+/// DONE ///
 bool OFKTStateSolver::updateRequired(Eigen::Isometry3d& updated_parent_world_tf,
                                      const std::unordered_map<std::string, double>& joints,
                                      const tesseract_common::TransformMap& floating_joints,
+                                     const std::unordered_map<std::string, JointMimic::ConstPtr>& mimic_infos,
                                      const OFKTNode* node,
                                      const Eigen::Isometry3d& parent_world_tf)
 {
@@ -990,6 +1082,26 @@ bool OFKTStateSolver::updateRequired(Eigen::Isometry3d& updated_parent_world_tf,
     return (!tf.isApprox(node->getLocalTransformation(), 1e-8));
   }
 
+  // If this is a mimic, check whether its base joint changed
+  if (mimic_infos.count(node->getJointName()))
+  {
+    JointMimic::ConstPtr mimic_info = mimic_infos.at(node->getJointName());
+    std::string base_joint = mimic_info->joint_name;
+    double base_joint_value = joints.at(base_joint);
+    double mimic_joint_value = base_joint_value * mimic_info->multiplier + mimic_info->offset;
+
+    if (!tesseract_common::almostEqualRelativeAndAbs(node->getJointValue(), mimic_joint_value, 1e-8))
+    {
+      updated_parent_world_tf = parent_world_tf * node->computeLocalTransformation(mimic_joint_value);
+      return true;
+    }
+    else
+    {
+      updated_parent_world_tf = parent_world_tf * node->getLocalTransformation();
+      return false;
+    }
+  }
+
   double jv = joints.at(node->getJointName());
   if (!tesseract_common::almostEqualRelativeAndAbs(node->getJointValue(), jv, 1e-8))
   {
@@ -1000,7 +1112,7 @@ bool OFKTStateSolver::updateRequired(Eigen::Isometry3d& updated_parent_world_tf,
   updated_parent_world_tf = parent_world_tf * node->getLocalTransformation();
   return false;
 }
-
+/// DONE ///
 void OFKTStateSolver::update(tesseract_common::TransformMap& link_transforms,
                              const std::unordered_map<std::string, double>& joints,
                              const tesseract_common::TransformMap& floating_joints,
@@ -1010,7 +1122,7 @@ void OFKTStateSolver::update(tesseract_common::TransformMap& link_transforms,
 {
   Eigen::Isometry3d updated_parent_world_tf{ Eigen::Isometry3d::Identity() };
   const bool local_update_required =
-      updateRequired(updated_parent_world_tf, joints, floating_joints, node, parent_world_tf);
+      updateRequired(updated_parent_world_tf, joints, floating_joints, mimic_infos_, node, parent_world_tf);
   update_required = static_cast<bool>(update_required | local_update_required);  // NOLINT
   if (update_required)
     link_transforms[node->getLinkName()] = updated_parent_world_tf;
@@ -1018,7 +1130,7 @@ void OFKTStateSolver::update(tesseract_common::TransformMap& link_transforms,
   for (const auto* child : node->getChildren())
     update(link_transforms, joints, floating_joints, child, updated_parent_world_tf, update_required);
 }
-
+/// DONE ///
 void OFKTStateSolver::update(SceneState& state,
                              const OFKTNode* node,
                              const Eigen::Isometry3d& parent_world_tf,
@@ -1037,7 +1149,7 @@ void OFKTStateSolver::update(SceneState& state,
   for (const auto* child : node->getChildren())
     update(state, child, updated_parent_world_tf, update_required);
 }
-
+/// DONE ///
 bool OFKTStateSolver::initHelper(const tesseract_scene_graph::SceneGraph& scene_graph, const std::string& prefix)
 {
   clear();
@@ -1079,7 +1191,7 @@ bool OFKTStateSolver::initHelper(const tesseract_scene_graph::SceneGraph& scene_
 
   return true;
 }
-
+/// DONE ///
 void OFKTStateSolver::moveLinkHelper(std::vector<std::shared_ptr<const JointLimits>>& new_joint_limits,
                                      const Joint& joint)
 {
@@ -1106,10 +1218,13 @@ void OFKTStateSolver::moveLinkHelper(std::vector<std::shared_ptr<const JointLimi
 
   // erase node
   nodes_.erase(old_joint_name);
+
   removeJointHelper(removed_links, removed_joints, removed_active_joints, removed_active_joints_indices);
   current_state_.joints.erase(old_joint_name);
   current_state_.floating_joints.erase(old_joint_name);
+  current_state_.mimic_joints.erase(old_joint_name);
   current_state_.joint_transforms.erase(old_joint_name);
+  mimic_infos_.erase(old_joint_name);
 
   addNode(joint, joint.getName(), joint.parent_link_name, joint.child_link_name, new_joint_limits);
 
@@ -1124,13 +1239,15 @@ void OFKTStateSolver::moveLinkHelper(std::vector<std::shared_ptr<const JointLimi
 
   update(replaced_node.get(), true);
 }
-
+/// DONE ///
 void OFKTStateSolver::replaceJointHelper(std::vector<std::shared_ptr<const JointLimits>>& new_joint_limits,
                                          const Joint& joint)
 {
   auto& n = nodes_[joint.getName()];
 
-  if (n->getType() == joint.type && n->getParent()->getLinkName() == joint.parent_link_name)
+  // Only use this function if the joint is the same type and same parent. If the old or new joint
+  // is a mimic, use the move function instead.
+  if (n->getType() == joint.type && n->getParent()->getLinkName() == joint.parent_link_name && joint.mimic == nullptr && !mimic_infos_.find(joint.getName()))
   {
     n->getParent()->removeChild(n.get());
     n->setStaticTransformation(joint.parent_to_joint_origin_transform);
@@ -1146,7 +1263,7 @@ void OFKTStateSolver::replaceJointHelper(std::vector<std::shared_ptr<const Joint
     moveLinkHelper(new_joint_limits, joint);
   }
 }
-
+/// DONE ///
 void OFKTStateSolver::removeJointHelper(const std::vector<std::string>& removed_links,
                                         const std::vector<std::string>& removed_joints,
                                         const std::vector<std::string>& removed_active_joints,
@@ -1181,6 +1298,15 @@ void OFKTStateSolver::removeJointHelper(const std::vector<std::string>& removed_
                                                                    joint_name) != removed_joints.end());
                                                }),
                                 floating_joint_names_.end());
+
+    mimic_joint_names_.erase(std::remove_if(mimic_joint_names_.begin(),
+                                            mimic_joint_names_.end(),
+                                            [removed_joints](const std::string& joint_name) {
+                                              return (std::find(removed_joints.begin(),
+                                                                removed_joints.end(),
+                                                                joint_name) != removed_joints.end());
+                                            }),
+                             mimic_joint_names_.end());
   }
 
   if (!removed_active_joints.empty())
@@ -1217,7 +1343,7 @@ void OFKTStateSolver::removeJointHelper(const std::vector<std::string>& removed_
     limits_ = l1;
   }
 }
-
+/// DONE ///
 void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
                               const std::string& joint_name,
                               const std::string& parent_link_name,
@@ -1249,13 +1375,27 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
           parent_node, child_link_name, joint_name, joint.parent_to_joint_origin_transform, joint.axis);
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
-      current_state_.joints[joint_name] = 0;
+      link_names_.push_back(n->getLinkName());
+
+      if (joint.mimic == nullptr)
+      {
+        current_state_.joints[joint_name] = 0;
+        joint_names_.push_back(joint_name);
+        active_joint_names_.push_back(joint_name);
+        new_joint_limits.push_back(joint.limits);
+      }
+      else
+      {
+        JointMimic::ConstPtr mimic_info = joint.mimic;
+        double base_joint_value = current_state_.joints.at(mimic_info->joint_name);
+        double mimic_joint_value = base_joint_value * mimic_info->multiplier + mimic_info->offset;
+        current_state_.mimic_joints[joint_name] = mimic_joint_value;
+        nodes_[joint_name]->storeJointValue(mimic_joint_value);
+        mimic_joint_names_.push_back(joint_name);
+      }
+
       current_state_.link_transforms[n->getLinkName()] = n->getWorldTransformation();
       current_state_.joint_transforms[n->getJointName()] = n->getWorldTransformation();
-      joint_names_.push_back(joint_name);
-      active_joint_names_.push_back(joint_name);
-      link_names_.push_back(n->getLinkName());
-      new_joint_limits.push_back(joint.limits);
       nodes_[joint_name] = std::move(n);
       break;
     }
@@ -1267,13 +1407,27 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
           parent_node, child_link_name, joint_name, joint.parent_to_joint_origin_transform, joint.axis);
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
-      current_state_.joints[joint_name] = 0;
+      link_names_.push_back(n->getLinkName());
+
+      if (joint.mimic == nullptr)
+      {
+        current_state_.joints[joint_name] = 0;
+        joint_names_.push_back(joint_name);
+        active_joint_names_.push_back(joint_name);
+        new_joint_limits.push_back(joint.limits);
+      }
+      else
+      {
+        JointMimic::ConstPtr mimic_info = joint.mimic;
+        double base_joint_value = current_state_.joints.at(mimic_info->joint_name);
+        double mimic_joint_value = base_joint_value * mimic_info->multiplier + mimic_info->offset;
+        current_state_.mimic_joints[joint_name] = mimic_joint_value;
+        nodes_[joint_name]->storeJointValue(mimic_joint_value);
+        mimic_joint_names_.push_back(joint_name);
+      }
+
       current_state_.link_transforms[n->getLinkName()] = n->getWorldTransformation();
       current_state_.joint_transforms[n->getJointName()] = n->getWorldTransformation();
-      joint_names_.push_back(joint_name);
-      active_joint_names_.push_back(joint_name);
-      link_names_.push_back(n->getLinkName());
-      new_joint_limits.push_back(joint.limits);
       nodes_[joint_name] = std::move(n);
       break;
     }
@@ -1285,13 +1439,27 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
           parent_node, child_link_name, joint_name, joint.parent_to_joint_origin_transform, joint.axis);
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
-      current_state_.joints[joint_name] = 0;
+      link_names_.push_back(n->getLinkName());
+
+      if (joint.mimic == nullptr)
+      {
+        current_state_.joints[joint_name] = 0;
+        joint_names_.push_back(joint_name);
+        active_joint_names_.push_back(joint_name);
+        new_joint_limits.push_back(joint.limits);
+      }
+      else
+      {
+        JointMimic::ConstPtr mimic_info = joint.mimic;
+        double base_joint_value = current_state_.joints.at(mimic_info->joint_name);
+        double mimic_joint_value = base_joint_value * mimic_info->multiplier + mimic_info->offset;
+        current_state_.mimic_joints[joint_name] = mimic_joint_value;
+        nodes_[joint_name]->storeJointValue(mimic_joint_value);
+        mimic_joint_names_.push_back(joint_name);
+      }
+
       current_state_.link_transforms[n->getLinkName()] = n->getWorldTransformation();
       current_state_.joint_transforms[n->getJointName()] = n->getWorldTransformation();
-      joint_names_.push_back(joint_name);
-      active_joint_names_.push_back(joint_name);
-      link_names_.push_back(n->getLinkName());
-      new_joint_limits.push_back(joint.limits);
       nodes_[joint_name] = std::move(n);
       break;
     }
@@ -1320,7 +1488,7 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
       // LCOV_EXCL_STOP
   }
 }
-
+/// DONE ///
 void OFKTStateSolver::removeNode(OFKTNode* node,
                                  std::vector<std::string>& removed_links,
                                  std::vector<std::string>& removed_joints,
@@ -1340,7 +1508,9 @@ void OFKTStateSolver::removeNode(OFKTNode* node,
   current_state_.link_transforms.erase(node->getLinkName());
   current_state_.joints.erase(node->getJointName());
   current_state_.floating_joints.erase(node->getJointName());
+  current_state_.mimic_joints.erase(node->getJointName());
   current_state_.joint_transforms.erase(node->getJointName());
+  mimic_infos_.erase(node->getJointName());
 
   std::vector<OFKTNode*> children = node->getChildren();
   for (auto* child : children)
@@ -1352,7 +1522,7 @@ void OFKTStateSolver::removeNode(OFKTNode* node,
   link_map_.erase(node->getLinkName());
   nodes_.erase(node->getJointName());
 }
-
+/// DONE ///
 void OFKTStateSolver::addNewJointLimits(const std::vector<std::shared_ptr<const JointLimits>>& new_joint_limits)
 {
   // Populate Joint Limits
