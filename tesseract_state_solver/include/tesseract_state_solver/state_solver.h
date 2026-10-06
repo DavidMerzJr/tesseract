@@ -214,6 +214,13 @@ public:
   virtual std::vector<std::string> getActiveJointNames() const = 0;
 
   /**
+   * @brief Get the vector of names for all mimic joints, whose values
+   * are driven by other joints
+   * @return A vector of joint names for all mimic joints
+   */
+  virtual std::vector<std::string> getMimicJointNames() const = 0;
+
+  /**
    * @brief Get the base link name
    * @return The base link name
    */
