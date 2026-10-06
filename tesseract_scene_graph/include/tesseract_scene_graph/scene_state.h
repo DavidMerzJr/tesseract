@@ -73,6 +73,9 @@ struct SceneState
   /** @brief The floating joint values used for calculating the joint and link transforms */
   tesseract_common::TransformMap floating_joints;
 
+  /** @brief The values of all mimic joints, used for calculating the joint and link transforms */
+  std::unordered_map<std::string, double> mimic_joints;
+
   /** @brief The link transforms in world coordinate system */
   tesseract_common::TransformMap link_transforms;
 
@@ -82,6 +85,8 @@ struct SceneState
   Eigen::VectorXd getJointValues(const std::vector<std::string>& joint_names) const;
 
   tesseract_common::TransformMap getFloatingJointValues(const std::vector<std::string>& joint_names) const;
+
+  Eigen::VectorXd getMimicJointValues(const std::vector<std::string>& mimic_joint_names) const;
 
   bool operator==(const SceneState& rhs) const;
   bool operator!=(const SceneState& rhs) const;
