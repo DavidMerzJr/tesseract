@@ -246,8 +246,6 @@ OFKTRevoluteNode::OFKTRevoluteNode(OFKTNode* parent,
   OFKTBaseNode::computeAndStoreWorldTransformation();
 }
 
-void OFKTRevoluteNode::storeJointValue(double joint_value) { OFKTBaseNode::storeJointValue(joint_value); }
-
 void OFKTRevoluteNode::computeAndStoreLocalTransformationImpl()
 {
   joint_tf_ = Eigen::AngleAxisd(joint_value_, axis_);

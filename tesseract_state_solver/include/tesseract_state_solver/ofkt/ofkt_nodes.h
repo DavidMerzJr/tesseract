@@ -196,7 +196,6 @@ public:
                    const Eigen::Isometry3d& static_tf,
                    const Eigen::Vector3d& axis);
 
-  void storeJointValue(double joint_value) override;
   void computeAndStoreLocalTransformation() override;
   Eigen::Isometry3d computeLocalTransformation(double joint_value) const override;
   const Eigen::Vector3d& getAxis() const;
