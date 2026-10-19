@@ -45,9 +45,9 @@ using Eigen::VectorXd;
 // LCOV_EXCL_START
 
 thread_local KDL::JntArray KDLStateSolver::kdl_joints_cache;  // NOLINT
-
+/// DONE ///
 StateSolver::UPtr KDLStateSolver::clone() const { return std::make_unique<KDLStateSolver>(*this); }
-
+/// DONE ///
 KDLStateSolver::KDLStateSolver(const tesseract_scene_graph::SceneGraph& scene_graph)
 {
   if (scene_graph.isEmpty())
@@ -56,14 +56,15 @@ KDLStateSolver::KDLStateSolver(const tesseract_scene_graph::SceneGraph& scene_gr
   data_ = tesseract_scene_graph::parseSceneGraph(scene_graph);
   processKDLData(scene_graph);
 }
-
+/// DONE ///
 KDLStateSolver::KDLStateSolver(const tesseract_scene_graph::SceneGraph& scene_graph, KDLTreeData data)
   : data_(std::move(data))
 {
   processKDLData(scene_graph);
 }
-
+/// DONE ///
 KDLStateSolver::KDLStateSolver(const KDLStateSolver& other) { *this = other; }
+/// DONE ///
 KDLStateSolver& KDLStateSolver::operator=(const KDLStateSolver& other)
 {
   current_state_ = other.current_state_;
@@ -135,7 +136,7 @@ void KDLStateSolver::setState(const std::vector<std::string>& joint_names,
                       data_.tree.getRootSegment(),
                       parent_frame);
 }
-
+/// DONE ///
 void KDLStateSolver::setState(const tesseract_common::TransformMap& /*floating_joint_values*/)
 {
   throw std::runtime_error("KDLStateSolver, not supported!");
@@ -189,7 +190,7 @@ SceneState KDLStateSolver::getState(const std::unordered_map<std::string, double
 
   return state;
 }
-
+/// DONE ///
 void KDLStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_transforms,
                                        const std::vector<std::string>& joint_names,
                                        const Eigen::Ref<const Eigen::VectorXd>& joint_values,
@@ -241,14 +242,14 @@ SceneState KDLStateSolver::getState(const std::vector<std::string>& joint_names,
 
   return state;
 }
-
+/// DONE ///
 SceneState KDLStateSolver::getState(const tesseract_common::TransformMap& /*floating_joint_values*/) const
 {
   throw std::runtime_error("KDLStateSolver, not supported!");
 }
-
+/// DONE ///
 SceneState KDLStateSolver::getState() const { return current_state_; }
-
+/// DONE ///
 SceneState KDLStateSolver::getRandomState() const
 {
   Eigen::VectorXd rs = tesseract_common::generateRandomNumber(limits_.joint_limits);
@@ -292,27 +293,29 @@ Eigen::MatrixXd KDLStateSolver::getJacobian(const std::vector<std::string>& join
 
   throw std::runtime_error("KDLStateSolver: Failed to calculate jacobian.");
 }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getJointNames() const { return data_.joint_names; }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getFloatingJointNames() const { return data_.floating_joint_names; }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getActiveJointNames() const { return data_.active_joint_names; }
-
+/// DONE ///
+std::vector<std::string> KDLStateSolver::getMimicJointNames() const { return data_.mimic_joint_names; };
+/// DONE ///
 std::string KDLStateSolver::getBaseLinkName() const { return data_.base_link_name; }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getLinkNames() const { return data_.link_names; }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getActiveLinkNames() const { return data_.active_link_names; }
-
+/// DONE ///
 std::vector<std::string> KDLStateSolver::getStaticLinkNames() const { return data_.static_link_names; }
-
+/// DONE ///
 bool KDLStateSolver::isActiveLinkName(const std::string& link_name) const
 {
   return (std::find(data_.active_link_names.begin(), data_.active_link_names.end(), link_name) !=
           data_.active_link_names.end());
 }
-
+/// DONE ///
 bool KDLStateSolver::hasLinkName(const std::string& link_name) const
 {
   return (std::find(data_.link_names.begin(), data_.link_names.end(), link_name) != data_.link_names.end());
@@ -389,11 +392,17 @@ bool KDLStateSolver::processKDLData(const tesseract_scene_graph::SceneGraph& sce
                       Eigen::Isometry3d::Identity());
   return true;
 }
-
+/// DONE ///
 bool KDLStateSolver::setJointValuesHelper(KDL::JntArray& q,
                                           const std::string& joint_name,
                                           const double& joint_value) const
 {
+  if (mimic_infos.count(joint_name))
+  {
+    CONSOLE_BRIDGE_logError("Tried to set joint name %s which is a mimic joint, set its base joint %s instead.", joint_name.c_str(), mimic_infos.at(joint_name)->joint_name);
+    return false;
+  }
+
   auto qnr = joint_to_qnr_.find(joint_name);
   if (qnr != joint_to_qnr_.end())
   {

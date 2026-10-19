@@ -55,6 +55,7 @@ namespace tesseract_scene_graph
 {
 class SceneGraph;
 class Joint;
+class JointMimic;
 class Inertial;
 
 /**
@@ -131,10 +132,12 @@ struct KDLTreeData
   std::vector<std::string> joint_names;
   std::vector<std::string> active_joint_names;
   std::vector<std::string> floating_joint_names;
+  std::vector<std::string> mimic_joint_names;
   std::vector<std::string> link_names;
   std::vector<std::string> active_link_names;
   std::vector<std::string> static_link_names;
   tesseract_common::TransformMap floating_joint_values;
+  std::unordered_map<std::string, std::shared_ptr<const JointMimic>> mimic_infos; /**< Relationships between mimic joint and driving joint */
 
   bool operator==(const KDLTreeData& rhs) const;
   bool operator!=(const KDLTreeData& rhs) const;

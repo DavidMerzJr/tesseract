@@ -108,6 +108,8 @@ public:
 
   std::vector<std::string> getActiveJointNames() const override final;
 
+  std::vector<std::string> getMimicJointNames() const override final;
+
   std::string getBaseLinkName() const override final;
 
   std::vector<std::string> getLinkNames() const override final;

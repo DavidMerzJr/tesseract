@@ -48,6 +48,7 @@ TESSERACT_COMMON_IGNORE_WARNINGS_POP
 
 namespace tesseract_scene_graph
 {
+/// DONE ///
 KDL::Frame convert(const Eigen::Isometry3d& transform)
 {
   KDL::Frame frame;
@@ -70,7 +71,7 @@ KDL::Frame convert(const Eigen::Isometry3d& transform)
 
   return frame;
 }
-
+/// DONE ///
 Eigen::Isometry3d convert(const KDL::Frame& frame)
 {
   Eigen::Isometry3d transform;
@@ -99,13 +100,13 @@ Eigen::Isometry3d convert(const KDL::Frame& frame)
 
   return transform;
 }
-
+/// DONE ///
 KDL::Vector convert(const Eigen::Vector3d& vector) { return KDL::Vector{ vector(0), vector(1), vector(2) }; }
-
+/// DONE ///
 Eigen::Vector3d convert(const KDL::Vector& vector) { return Eigen::Vector3d{ vector(0), vector(1), vector(2) }; }
-
+/// DONE ///
 Eigen::MatrixXd convert(const KDL::Jacobian& jacobian) { return jacobian.data; }
-
+/// DONE ///
 KDL::Jacobian convert(const Eigen::MatrixXd& jacobian)
 {
   if (jacobian.rows() != 6)
@@ -116,7 +117,7 @@ KDL::Jacobian convert(const Eigen::MatrixXd& jacobian)
 
   return matrix;
 }
-
+/// DONE ///
 Eigen::MatrixXd convert(const KDL::Jacobian& jacobian, const std::vector<int>& q_nrs)
 {
   Eigen::MatrixXd matrix(jacobian.rows(), q_nrs.size());
@@ -129,7 +130,7 @@ Eigen::MatrixXd convert(const KDL::Jacobian& jacobian, const std::vector<int>& q
 
   return matrix;
 }
-
+/// DONE ///
 KDL::Joint convert(const std::shared_ptr<const Joint>& joint)
 {
   KDL::Frame parent_joint = convert(joint->parent_to_joint_origin_transform);
@@ -164,7 +165,7 @@ KDL::Joint convert(const std::shared_ptr<const Joint>& joint)
     }
   }
 }
-
+/// DONE ///
 KDL::RigidBodyInertia convert(const std::shared_ptr<const Inertial>& inertial)
 {
   KDL::Frame origin = convert(inertial->origin);
@@ -200,9 +201,11 @@ bool KDLTreeData::operator==(const KDLTreeData& rhs) const
   equal &= (joint_names == rhs.joint_names);
   equal &= (active_joint_names == rhs.active_joint_names);
   equal &= (floating_joint_names == rhs.floating_joint_names);
+  equal &= (mimic_joint_names == rhs.mimic_joint_names);
   equal &= (link_names == rhs.link_names);
   equal &= (active_link_names == rhs.active_link_names);
   equal &= (static_link_names == rhs.static_link_names);
+  equal &= (mimic_infos == rhs.mimic_infos); // TODO: This may need to be more robust due to pointers
 
   auto isometry_equal = [](const Eigen::Isometry3d& iso_1, const Eigen::Isometry3d& iso_2) {
     return iso_1.isApprox(iso_2, 1e-5);
@@ -212,7 +215,7 @@ bool KDLTreeData::operator==(const KDLTreeData& rhs) const
 
   return equal;
 }
-
+/// DONE ///
 bool KDLTreeData::operator!=(const KDLTreeData& rhs) const { return !operator==(rhs); }
 
 /**
@@ -221,6 +224,7 @@ bool KDLTreeData::operator!=(const KDLTreeData& rhs) const { return !operator==(
  */
 struct kdl_tree_builder : public boost::dfs_visitor<>
 {
+  /// DONE ///
   kdl_tree_builder(KDLTreeData& data) : data_(data) {}
 
   template <class u, class g>
@@ -245,6 +249,7 @@ struct kdl_tree_builder : public boost::dfs_visitor<>
       data_.joint_names.reserve(num_e);
       data_.active_joint_names.reserve(num_e);
       data_.floating_joint_names.reserve(num_e);
+      data_.mimic_joint_names.reserve(num_e);
 
       data_.link_names.push_back(link->getName());
       data_.static_link_names.push_back(link->getName());
