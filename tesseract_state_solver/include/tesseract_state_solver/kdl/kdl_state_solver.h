@@ -139,6 +139,8 @@ private:
   std::vector<int> joint_qnr_;               /**< The kdl segment number corresponding to joint in joint names */
   KDL::JntArray kdl_jnt_array_;              /**< The kdl joint array */
   tesseract_common::KinematicLimits limits_; /**< The kinematic limits */
+  std::unordered_map<std::string, unsigned int> mimic_joint_to_qnr_; /**< Map between mimic joint names and kdl segment numbers */
+  std::vector<int> mimic_joint_qnr_;  /**< The kdl segment number corresponding to the mimic joints in joint_names */
   mutable std::mutex mutex_; /**< @brief KDL is not thread safe due to mutable variables in Joint Class */
 
   static thread_local KDL::JntArray kdl_joints_cache;  // NOLINT

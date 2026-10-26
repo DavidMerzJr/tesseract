@@ -73,6 +73,8 @@ KDLStateSolver& KDLStateSolver::operator=(const KDLStateSolver& other)
   joint_qnr_ = other.joint_qnr_;
   kdl_jnt_array_ = other.kdl_jnt_array_;
   limits_ = other.limits_;
+  mimic_joint_to_qnr_ = other.mimic_joint_to_qnr_;
+  mimic_joint_qnr_ = other.mimic_joint_qnr_;
   jac_solver_ = std::make_unique<KDL::TreeJntToJacSolver>(data_.tree);
   return *this;
 }
@@ -85,6 +87,14 @@ void KDLStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_val
   {
     if (setJointValuesHelper(kdl_jnt_array_, data_.active_joint_names[i], joint_values[i]))
       current_state_.joints[data_.active_joint_names[i]] = joint_values[i];
+  }
+
+  // Update any mimic joints in the SceneState, setJointValuesHelper updated them in kdl_jnt_array_
+  for (const auto& mimic_info : data_.mimic_infos)
+  {
+    double base_joint_value = current_state_.joints.at(mimic_info.second->joint_name);
+    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+    current_state_.mimic_joints[mimic_info.first] = mimic_joint_value;
   }
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
@@ -397,23 +407,37 @@ bool KDLStateSolver::setJointValuesHelper(KDL::JntArray& q,
                                           const std::string& joint_name,
                                           const double& joint_value) const
 {
-  if (mimic_infos.count(joint_name))
+  if (data_.mimic_infos.count(joint_name))
   {
-    CONSOLE_BRIDGE_logError("Tried to set joint name %s which is a mimic joint, set its base joint %s instead.", joint_name.c_str(), mimic_infos.at(joint_name)->joint_name);
+    CONSOLE_BRIDGE_logError("Tried to set joint name %s which is a mimic joint, set its reference joint `%s` instead.", joint_name.c_str(), mimic_infos_.at(joint_name)->joint_name);
     return false;
   }
 
+  // Update the provided joint, if it is a joint kdl is tracking
   auto qnr = joint_to_qnr_.find(joint_name);
   if (qnr != joint_to_qnr_.end())
   {
     q(qnr->second) = joint_value;
+
+    // If this joint is the reference joint for a mimic joint, update that mimic joint
+    for (auto mimic_info : data_.mimic_infos)
+    {
+      if (mimic_info.second->joint_name == joint_name)
+      {
+        auto mqnr = mimic_joint_to_qnr_.find(mimic_info.first);
+
+        if (mqnr != mimic_joint_to_qnr_.end())
+        q(mqnr->second) = mimic_info.second->multiplier * joint_value + mimic_info.second->offset;
+      }
+    }
+
     return true;
   }
 
   CONSOLE_BRIDGE_logError("Tried to set joint name %s which does not exist!", joint_name.c_str());
   return false;
 }
-
+/// DONE ///
 void KDLStateSolver::calculateTransformsHelper(tesseract_common::TransformMap& link_transforms,
                                                tesseract_common::TransformMap& joint_transforms,
                                                const KDL::JntArray& q_in,
@@ -441,7 +465,7 @@ void KDLStateSolver::calculateTransformsHelper(tesseract_common::TransformMap& l
     }
   }
 }
-
+/// DONE ///
 void KDLStateSolver::calculateTransformsHelper(tesseract_common::TransformMap& link_transforms,
                                                const KDL::JntArray& q_in,
                                                const KDL::SegmentMap::const_iterator& it,
@@ -465,7 +489,7 @@ void KDLStateSolver::calculateTransformsHelper(tesseract_common::TransformMap& l
     }
   }
 }
-
+/// DONE ///
 void KDLStateSolver::calculateTransforms(tesseract_common::TransformMap& link_transforms,
                                          tesseract_common::TransformMap& joint_transforms,
                                          const KDL::JntArray& q_in,
@@ -475,7 +499,7 @@ void KDLStateSolver::calculateTransforms(tesseract_common::TransformMap& link_tr
   std::lock_guard<std::mutex> guard(mutex_);
   calculateTransformsHelper(link_transforms, joint_transforms, q_in, it, parent_frame);  // NOLINT
 }
-
+/// DONE ///
 void KDLStateSolver::calculateTransforms(tesseract_common::TransformMap& link_transforms,
                                          const KDL::JntArray& q_in,
                                          const KDL::SegmentMap::const_iterator& it,
