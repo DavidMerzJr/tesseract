@@ -149,9 +149,6 @@ void OFKTStateSolver::cloneHelper(OFKTStateSolver& cloned, const OFKTNode* node)
     {
       throw std::runtime_error("Unsupported OFKTNode type!");  // LCOV_EXCL_LINE
     }
-
-    if ()
-
     cloneHelper(cloned, child);
   }
 }
@@ -343,7 +340,7 @@ SceneState OFKTStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& jo
   {
     double base_joint_value = state.joints.at(mimic_info.second->joint_name);
     double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
-    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+    state.mimic_joints[mimic_info.first] = mimic_joint_value;
   }
 
   update(state, root_.get(), parent_frame, false);
@@ -369,7 +366,7 @@ SceneState OFKTStateSolver::getState(const std::unordered_map<std::string, doubl
   {
     double base_joint_value = state.joints.at(mimic_info.second->joint_name);
     double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
-    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+    state.mimic_joints[mimic_info.first] = mimic_joint_value;
   }
 
   update(state, root_.get(), parent_frame, false);
@@ -397,7 +394,7 @@ SceneState OFKTStateSolver::getState(const std::vector<std::string>& joint_names
   {
     double base_joint_value = state.joints.at(mimic_info.second->joint_name);
     double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
-    state.mimic_joints[mimic_info.first]->storeJointValue(mimic_joint_value);
+    state.mimic_joints[mimic_info.first] = mimic_joint_value;
   }
 
   update(state, root_.get(), parent_frame, false);
@@ -545,7 +542,7 @@ Eigen::MatrixXd OFKTStateSolver::calcJacobianHelper(const std::unordered_map<std
       // become part of the driving joint's contribution
       Eigen::Isometry3d local_tf = node->computeLocalTransformation(mimic_joint_value);
       total_tf = local_tf * total_tf;
-      Eigen::VectorXd twist = node->getLocalTwist() * std::copysign(1.0, mimic_info->multiplier);
+      Eigen::VectorXd twist = node->getLocalTwist() * mimic_info->multiplier;
       tesseract_common::twistChangeRefPoint(twist, total_tf.translation() - local_tf.translation());
       tesseract_common::twistChangeBase(twist, total_tf.inverse());
 
@@ -556,7 +553,7 @@ Eigen::MatrixXd OFKTStateSolver::calcJacobianHelper(const std::unordered_map<std
                         std::find(active_joint_names_.begin(), active_joint_names_.end(), mimic_info->joint_name));
 
       // Change the contribution to be in the overall frame, then store it with its driving joint
-      jacobian.col(idx) = (jacobian.col(idx) + twist).normalized();
+      jacobian.col(idx) = jacobian.col(idx) + twist;
     }
     else
     {
@@ -1138,7 +1135,7 @@ void OFKTStateSolver::update(SceneState& state,
 {
   Eigen::Isometry3d updated_parent_world_tf{ Eigen::Isometry3d::Identity() };
   const bool local_update_required =
-      updateRequired(updated_parent_world_tf, state.joints, state.floating_joints, node, parent_world_tf);
+      updateRequired(updated_parent_world_tf, state.joints, state.floating_joints, mimic_infos_, node, parent_world_tf);
   update_required = static_cast<bool>(update_required | local_update_required);  // NOLINT
   if (update_required)
   {
@@ -1247,7 +1244,7 @@ void OFKTStateSolver::replaceJointHelper(std::vector<std::shared_ptr<const Joint
 
   // Only use this function if the joint is the same type and same parent. If the old or new joint
   // is a mimic, use the move function instead.
-  if (n->getType() == joint.type && n->getParent()->getLinkName() == joint.parent_link_name && joint.mimic == nullptr && !mimic_infos_.find(joint.getName()))
+  if (n->getType() == joint.type && n->getParent()->getLinkName() == joint.parent_link_name && joint.mimic == nullptr && !mimic_infos_.count(joint.getName()))
   {
     n->getParent()->removeChild(n.get());
     n->setStaticTransformation(joint.parent_to_joint_origin_transform);

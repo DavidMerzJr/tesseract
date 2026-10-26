@@ -41,6 +41,7 @@ TESSERACT_COMMON_IGNORE_WARNINGS_POP
 
 #include <tesseract_state_solver/mutable_state_solver.h>
 #include <tesseract_state_solver/ofkt/ofkt_node.h>
+#include <tesseract_scene_graph/joint.h>
 #include <tesseract_scene_graph/scene_state.h>
 #include <tesseract_common/kinematic_limits.h>
 
