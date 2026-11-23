@@ -78,7 +78,7 @@ KDLStateSolver& KDLStateSolver::operator=(const KDLStateSolver& other)
   jac_solver_ = std::make_unique<KDL::TreeJntToJacSolver>(data_.tree);
   return *this;
 }
-
+/// DONE ///
 void KDLStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                               const tesseract_common::TransformMap& /*floating_joint_values*/)
 {
@@ -90,12 +90,7 @@ void KDLStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_val
   }
 
   // Update any mimic joints in the SceneState, setJointValuesHelper updated them in kdl_jnt_array_
-  for (const auto& mimic_info : data_.mimic_infos)
-  {
-    double base_joint_value = current_state_.joints.at(mimic_info.second->joint_name);
-    double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
-    current_state_.mimic_joints[mimic_info.first] = mimic_joint_value;
-  }
+  calculateMimicJointsHelper(current_state_);
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
@@ -106,7 +101,7 @@ void KDLStateSolver::setState(const Eigen::Ref<const Eigen::VectorXd>& joint_val
                       data_.tree.getRootSegment(),
                       parent_frame);
 }
-
+/// DONE ///
 void KDLStateSolver::setState(const std::unordered_map<std::string, double>& joint_values,
                               const tesseract_common::TransformMap& /*floating_joint_values*/)
 {
@@ -116,6 +111,9 @@ void KDLStateSolver::setState(const std::unordered_map<std::string, double>& joi
       current_state_.joints[joint.first] = joint.second;
   }
 
+  // Update any mimic joints in the SceneState, setJointValuesHelper updated them in kdl_jnt_array_
+  calculateMimicJointsHelper(current_state_);
+
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
   // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
@@ -125,7 +123,7 @@ void KDLStateSolver::setState(const std::unordered_map<std::string, double>& joi
                       data_.tree.getRootSegment(),
                       parent_frame);
 }
-
+/// DONE ///
 void KDLStateSolver::setState(const std::vector<std::string>& joint_names,
                               const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                               const tesseract_common::TransformMap& /*floating_joint_values*/)
@@ -136,6 +134,8 @@ void KDLStateSolver::setState(const std::vector<std::string>& joint_names,
     if (setJointValuesHelper(kdl_jnt_array_, joint_names[i], joint_values[i]))
       current_state_.joints[joint_names[i]] = joint_values[i];
   }
+
+  calculateMimicJointsHelper(current_state_);
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
@@ -151,7 +151,7 @@ void KDLStateSolver::setState(const tesseract_common::TransformMap& /*floating_j
 {
   throw std::runtime_error("KDLStateSolver, not supported!");
 }
-
+/// DONE ///
 SceneState KDLStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                     const tesseract_common::TransformMap& /*floating_joint_values*/) const
 {
@@ -164,9 +164,14 @@ SceneState KDLStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& joi
 
   for (auto i = 0U; i < data_.active_joint_names.size(); ++i)
   {
+    // Mimic Joints will automatically be updated in the kdl_joints_cache by setJointValuesHelper
     if (setJointValuesHelper(kdl_joints_cache, data_.active_joint_names[i], joint_values[i]))
       state.joints[data_.active_joint_names[i]] = joint_values[i];
   }
+
+  // calculateTransforms uses only the kdl data to calculate frames,
+  // But since the state is returned, we need to calculate mimic positions again
+  calculateMimicJointsHelper(state);
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
@@ -175,7 +180,7 @@ SceneState KDLStateSolver::getState(const Eigen::Ref<const Eigen::VectorXd>& joi
       state.link_transforms, state.joint_transforms, kdl_joints_cache, data_.tree.getRootSegment(), parent_frame);
   return state;
 }
-
+/// DONE ///
 SceneState KDLStateSolver::getState(const std::unordered_map<std::string, double>& joint_values,
                                     const tesseract_common::TransformMap& /*floating_joint_values*/) const
 {
@@ -188,9 +193,14 @@ SceneState KDLStateSolver::getState(const std::unordered_map<std::string, double
 
   for (const auto& joint : joint_values)
   {
+    // Mimic Joints will automatically be updated in the kdl_joints_cache by setJointValuesHelper
     if (setJointValuesHelper(kdl_joints_cache, joint.first, joint.second))
       state.joints[joint.first] = joint.second;
   }
+
+  // calculateTransforms uses only the kdl data to calculate frames,
+  // But since the state is returned, we need to calculate mimic positions again
+  calculateMimicJointsHelper(state);
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
@@ -208,7 +218,7 @@ void KDLStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_tran
 {
   getLinkTransforms(link_transforms, joint_names, joint_values);
 }
-
+/// DONE ///
 void KDLStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_transforms,
                                        const std::vector<std::string>& joint_names,
                                        const Eigen::Ref<const Eigen::VectorXd>& joint_values) const
@@ -222,11 +232,12 @@ void KDLStateSolver::getLinkTransforms(tesseract_common::TransformMap& link_tran
 
   for (auto i = 0U; i < joint_names.size(); ++i)
     setJointValuesHelper(kdl_joints_cache, joint_names[i], joint_values[i]);
+    // No need to update mimic joints here, setJointValuesHelper will do that
 
   // NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult)
   calculateTransforms(link_transforms, kdl_joints_cache, data_.tree.getRootSegment(), parent_frame);
 }
-
+/// DONE ///
 SceneState KDLStateSolver::getState(const std::vector<std::string>& joint_names,
                                     const Eigen::Ref<const Eigen::VectorXd>& joint_values,
                                     const tesseract_common::TransformMap& /*floating_joint_values*/) const
@@ -243,6 +254,10 @@ SceneState KDLStateSolver::getState(const std::vector<std::string>& joint_names,
     if (setJointValuesHelper(kdl_joints_cache, joint_names[i], joint_values[i]))
       state.joints[joint_names[i]] = joint_values[i];
   }
+
+  // setJointValuesHelper calculated the mimic joint values into the kdl_joints_cache for
+  // calculating transforms, but we still need to fill them in the state.
+  calculateMimicJointsHelper(state);
 
   static const Eigen::Isometry3d parent_frame{ Eigen::Isometry3d::Identity() };
 
@@ -330,7 +345,7 @@ bool KDLStateSolver::hasLinkName(const std::string& link_name) const
 {
   return (std::find(data_.link_names.begin(), data_.link_names.end(), link_name) != data_.link_names.end());
 }
-
+/// DONE ///
 tesseract_common::VectorIsometry3d KDLStateSolver::getLinkTransforms() const
 {
   tesseract_common::VectorIsometry3d link_tfs;
@@ -340,20 +355,21 @@ tesseract_common::VectorIsometry3d KDLStateSolver::getLinkTransforms() const
 
   return link_tfs;
 }
-
+/// DONE ///
 Eigen::Isometry3d KDLStateSolver::getLinkTransform(const std::string& link_name) const
 {
   return current_state_.link_transforms.at(link_name);
 }
-
+/// DONE ///
 Eigen::Isometry3d KDLStateSolver::getRelativeLinkTransform(const std::string& from_link_name,
                                                            const std::string& to_link_name) const
 {
   return current_state_.link_transforms.at(from_link_name).inverse() * current_state_.link_transforms.at(to_link_name);
 }
-
+/// DONE ///
 tesseract_common::KinematicLimits KDLStateSolver::getLimits() const { return limits_; }
 
+/// TODO ///
 bool KDLStateSolver::processKDLData(const tesseract_scene_graph::SceneGraph& scene_graph)
 {
   current_state_ = SceneState();
@@ -409,7 +425,7 @@ bool KDLStateSolver::setJointValuesHelper(KDL::JntArray& q,
 {
   if (data_.mimic_infos.count(joint_name))
   {
-    CONSOLE_BRIDGE_logError("Tried to set joint name %s which is a mimic joint, set its reference joint `%s` instead.", joint_name.c_str(), mimic_infos_.at(joint_name)->joint_name);
+    CONSOLE_BRIDGE_logError("Tried to set joint name %s which is a mimic joint, set its reference joint `%s` instead.", joint_name.c_str(), data_.mimic_infos.at(joint_name)->joint_name.c_str());
     return false;
   }
 
@@ -436,6 +452,29 @@ bool KDLStateSolver::setJointValuesHelper(KDL::JntArray& q,
 
   CONSOLE_BRIDGE_logError("Tried to set joint name %s which does not exist!", joint_name.c_str());
   return false;
+}
+/// DONE ///
+bool KDLStateSolver::calculateMimicJointsHelper(SceneState& state) const
+{
+  // Update any mimic joints in the SceneState, setJointValuesHelper updated them in kdl_jnt_array_
+  for (const auto& mimic_info : data_.mimic_infos)
+  {
+    if (state.mimic_joints.count(mimic_info.first) && state.joints.count(mimic_info.second->joint_name))
+    {
+      double base_joint_value = state.joints.at(mimic_info.second->joint_name);
+      double mimic_joint_value = base_joint_value * mimic_info.second->multiplier + mimic_info.second->offset;
+      state.mimic_joints[mimic_info.first] = mimic_joint_value;
+    }
+    else
+    {
+      std::string message = "Failed to calculate mimic joints, state does ";
+      message = message + (state.mimic_joints.count(mimic_info.first) ? "" : "not ") + "contain " + mimic_info.first + ", and does ";
+      message = message + std::string(state.joints.count(mimic_info.second->joint_name) ? "" : "not ") + "contain " + mimic_info.second->joint_name;
+
+      CONSOLE_BRIDGE_logError(message.c_str());
+    }
+  }
+  return true;
 }
 /// DONE ///
 void KDLStateSolver::calculateTransformsHelper(tesseract_common::TransformMap& link_transforms,
@@ -509,6 +548,7 @@ void KDLStateSolver::calculateTransforms(tesseract_common::TransformMap& link_tr
   calculateTransformsHelper(link_transforms, q_in, it, parent_frame);  // NOLINT
 }
 
+/// TODO ///
 bool KDLStateSolver::calcJacobianHelper(KDL::Jacobian& jacobian,
                                         const KDL::JntArray& kdl_joints,
                                         const std::string& link_name) const
@@ -522,7 +562,7 @@ bool KDLStateSolver::calcJacobianHelper(KDL::Jacobian& jacobian,
 
   return true;
 }
-
+/// DONE ///
 KDL::JntArray KDLStateSolver::getKDLJntArray(const std::vector<std::string>& joint_names,
                                              const Eigen::Ref<const Eigen::VectorXd>& joint_values) const
 {
@@ -530,18 +570,41 @@ KDL::JntArray KDLStateSolver::getKDLJntArray(const std::vector<std::string>& joi
 
   KDL::JntArray kdl_joints(kdl_jnt_array_);
   for (unsigned i = 0; i < joint_names.size(); ++i)
+  {
     kdl_joints.data(joint_to_qnr_.at(joint_names[i])) = joint_values[i];
+
+    // If this joint is the reference joint for a mimic joint, update that mimic joint
+    for (const auto& mimic_info : data_.mimic_infos)
+    {
+      if (mimic_info.second->joint_name == joint_names[i])
+      {
+        kdl_joints.data(mimic_joint_to_qnr_.at(mimic_info.first)) = mimic_info.second->multiplier * joint_values[i] + mimic_info.second->offset;
+      }
+    }
+  }
 
   return kdl_joints;
 }
 
+/// DONE ///
 KDL::JntArray KDLStateSolver::getKDLJntArray(const std::unordered_map<std::string, double>& joint_values) const
 {
   assert(data_.active_joint_names.size() == static_cast<unsigned>(joint_values.size()));
 
   KDL::JntArray kdl_joints(kdl_jnt_array_);
   for (const auto& joint : joint_values)
+  {
     kdl_joints.data(joint_to_qnr_.at(joint.first)) = joint.second;
+
+    // If this joint is the reference joint for a mimic joint, update that mimic joint
+    for (const auto& mimic_info : data_.mimic_infos)
+    {
+      if (mimic_info.second->joint_name == joint.first)
+      {
+        kdl_joints.data(mimic_joint_to_qnr_.at(mimic_info.first)) = mimic_info.second->multiplier * joint.second + mimic_info.second->offset;
+      }
+    }
+  }
 
   return kdl_joints;
 }

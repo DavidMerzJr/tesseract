@@ -169,6 +169,8 @@ private:
 
   bool setJointValuesHelper(KDL::JntArray& q, const std::string& joint_name, const double& joint_value) const;
 
+  bool calculateMimicJointsHelper(SceneState& state) const;
+
   bool calcJacobianHelper(KDL::Jacobian& jacobian, const KDL::JntArray& kdl_joints, const std::string& link_name) const;
 
   /** @brief Get an updated kdl joint array */

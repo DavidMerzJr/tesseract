@@ -1373,11 +1373,11 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
       link_names_.push_back(n->getLinkName());
+      joint_names_.push_back(joint_name);
 
       if (joint.mimic == nullptr)
       {
         current_state_.joints[joint_name] = 0;
-        joint_names_.push_back(joint_name);
         active_joint_names_.push_back(joint_name);
         new_joint_limits.push_back(joint.limits);
       }
@@ -1405,11 +1405,11 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
       link_names_.push_back(n->getLinkName());
+      joint_names_.push_back(joint_name);
 
       if (joint.mimic == nullptr)
       {
         current_state_.joints[joint_name] = 0;
-        joint_names_.push_back(joint_name);
         active_joint_names_.push_back(joint_name);
         new_joint_limits.push_back(joint.limits);
       }
@@ -1437,11 +1437,11 @@ void OFKTStateSolver::addNode(const tesseract_scene_graph::Joint& joint,
       link_map_[child_link_name] = n.get();
       parent_node->addChild(n.get());
       link_names_.push_back(n->getLinkName());
+      joint_names_.push_back(joint_name);
 
       if (joint.mimic == nullptr)
       {
         current_state_.joints[joint_name] = 0;
-        joint_names_.push_back(joint_name);
         active_joint_names_.push_back(joint_name);
         new_joint_limits.push_back(joint.limits);
       }
